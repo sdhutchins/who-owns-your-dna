@@ -5,7 +5,7 @@ import "@fontsource/roboto/700.css";
 import "../styles/global.css";
 
 import { getNhgriManifest } from "../lib/records";
-import { formatDate, REPOSITORY_URL, SITE_NAME, SITE_SUBTITLE, withBase } from "../lib/site";
+import { formatDate, SITE_NAME, SITE_SUBTITLE, withBase } from "../lib/site";
 
 interface Props {
   title?: string;
@@ -164,7 +164,6 @@ const isAboutPage = [
       <div class="page-shell footer-grid">
         <div>
           <p class="footer-title">{SITE_NAME}</p>
-          <p>{SITE_SUBTITLE}</p>
           <p class="footer-note">Informational summaries only. This site does not provide legal advice.</p>
           <p class="footer-note">
             Includes records retrieved from NHGRI on {formatDate(nhgriManifest.snapshot_fetched_at.slice(0, 10))}.
@@ -177,19 +176,7 @@ const isAboutPage = [
             <li><a href={withBase("/data/")}>Data and downloads</a></li>
             <li><a href={withBase("/methodology/")}>Methodology</a></li>
             <li><a href={withBase("/cite/")}>How to cite</a></li>
-            <li><a href={withBase("/records/")}>All records</a></li>
-            <li><a href={withBase("/sources/nhgri/")}>NHGRI source archive</a></li>
             <li><a href="https://www.ashg.org/advocacy/public-policy-positions/">ASHG public policy positions</a></li>
-          </ul>
-        </nav>
-        <nav aria-label="Explore links">
-          <p class="footer-heading">Explore</p>
-          <ul>
-            <li><a href={withBase("/states/")}>States</a></li>
-            <li><a href={withBase("/federal/")}>Federal</a></li>
-            <li><a href={withBase("/topics/")}>Topics</a></li>
-            <li><a href={withBase("/about/")}>About the project</a></li>
-            <li><a href={REPOSITORY_URL}>GitHub repository</a></li>
           </ul>
         </nav>
       </div>

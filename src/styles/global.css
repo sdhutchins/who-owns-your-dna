@@ -445,15 +445,6 @@ main.page-shell {
   padding-top: 0.25rem;
 }
 
-.source-note {
-  border-top: 1px solid var(--gray-lighter);
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  margin-top: 2.5rem;
-  max-width: var(--reading-width);
-  padding-top: 0.85rem;
-}
-
 .explore-grid,
 .resource-grid,
 .topic-grid {
@@ -885,7 +876,7 @@ details > div {
 .footer-grid {
   display: grid;
   gap: 2rem;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
 }
 
 .footer-title,

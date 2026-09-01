@@ -2,13 +2,12 @@
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import {
-  getNhgriManifest,
   getNhgriRecords,
   getRecords,
   getTopics,
   type Topic,
 } from "../../lib/records";
-import { formatDateTime, withBase } from "../../lib/site";
+import { withBase } from "../../lib/site";
 
 export async function getStaticPaths() {
   const [topics, projectRecords, nhgriRecords] = await Promise.all([
@@ -28,7 +27,6 @@ export async function getStaticPaths() {
       props: {
         topic,
         recordCount: projectRecordCount + nhgriRecordCount,
-        includesNhgriRecords: nhgriRecordCount > 0,
       },
     };
   });
@@ -37,11 +35,9 @@ export async function getStaticPaths() {
 interface Props {
   topic: Topic;
   recordCount: number;
-  includesNhgriRecords: boolean;
 }
 
-const { topic, recordCount, includesNhgriRecords } = Astro.props;
-const nhgriManifest = await getNhgriManifest();
+const { topic, recordCount } = Astro.props;
 const recordsUrl = `/records/?topic=${encodeURIComponent(`project:${topic.slug}`)}`;
 ---
 
@@ -53,8 +49,4 @@ const recordsUrl = `/records/?topic=${encodeURIComponent(`project:${topic.slug}`
 
   <p><a class="button-link" href={withBase(recordsUrl)}>View {topic.name.toLocaleLowerCase()} records</a></p>
   <p class="reading-width">Use the records directory to search within this topic and narrow results by jurisdiction, status, or year.</p>
-
-  {includesNhgriRecords && (
-    <p class="source-note">This topic includes mapped records retrieved from the National Human Genome Research Institute on {formatDateTime(nhgriManifest.snapshot_fetched_at)}. NHGRI’s original topic labels remain available on each record.</p>
-  )}
 </BaseLayout>
