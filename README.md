@@ -1,6 +1,6 @@
 # Who Owns Your DNA?
 
-Who Owns Your DNA? is a static public-reference website and versioned dataset for U.S. genetics and genomics law and policy. The initial prototype separates substantive policy records from presentation code, validates every record against a canonical schema, and produces downloadable CSV and JSON exports.
+Who Owns Your DNA? is a versioned public-interest reference for U.S. genetics and genomics law and policy. The static website connects searchable policy records with primary sources and downloadable data.
 
 The site provides informational summaries. It does not provide legal advice.
 
@@ -51,12 +51,6 @@ npm run build
 
 The build validates the YAML records, regenerates CSV, JSON, and changelog files, type-checks the Astro project, and writes the static site to `dist/`.
 
-For a GitHub Pages project site, provide the repository base path:
-
-```bash
-BASE_PATH="/who-owns-your-dna" npm run build
-```
-
 ## Repository structure
 
 ```text
@@ -74,6 +68,6 @@ docs/                 Contributor and data-model documentation
 
 ## Deployment
 
-The GitHub Pages workflow builds and deploys the static site after a push to `main`. In the GitHub repository settings, select GitHub Actions as the Pages source. Pull requests run the separate validation workflow without deploying.
+The GitHub Pages workflow builds and deploys the static site to [whoownsyourdna.org](https://whoownsyourdna.org/) after a push to `main`. In the GitHub repository settings, select GitHub Actions as the Pages source. Pull requests run the separate validation workflow without deploying.
 
 The repository is configured for `sdhutchins/who-owns-your-dna`. No license or DOI is asserted in this prototype. Add those values only after the project has selected them.

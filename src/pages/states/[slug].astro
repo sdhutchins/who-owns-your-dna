@@ -49,7 +49,7 @@ const recordsUrl = `/records/?jurisdiction=${encodeURIComponent(jurisdiction.nam
   <Breadcrumbs items={[{ label: "States", href: "/states/" }, { label: jurisdiction.name }]} />
   <p class="section-kicker">Jurisdiction records</p>
   <h1>{jurisdiction.name}</h1>
-  <p class="page-intro">{recordCount.toLocaleString()} genetics and genomics policy {recordCount === 1 ? "record" : "records"} in the combined directory.</p>
+  <p class="page-intro">{recordCount.toLocaleString()} genetics and genomics policy {recordCount === 1 ? "record" : "records"}.</p>
 
   <p><a class="button-link" href={withBase(recordsUrl)}>View {jurisdiction.name} records</a></p>
   <p class="reading-width">Use the records directory to search within this jurisdiction and narrow results by topic, status, or year.</p>

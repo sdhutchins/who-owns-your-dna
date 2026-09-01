@@ -49,7 +49,7 @@ const recordsUrl = `/records/?topic=${encodeURIComponent(`project:${topic.slug}`
   <Breadcrumbs items={[{ label: "Topics", href: "/topics/" }, { label: topic.name }]} />
   <p class="section-kicker">Policy topic</p>
   <h1>{topic.name}</h1>
-  <p class="page-intro">{recordCount.toLocaleString()} state and federal {recordCount === 1 ? "record" : "records"} in the combined directory.</p>
+  <p class="page-intro">{recordCount.toLocaleString()} state and federal {recordCount === 1 ? "record" : "records"}.</p>
 
   <p><a class="button-link" href={withBase(recordsUrl)}>View {topic.name.toLocaleLowerCase()} records</a></p>
   <p class="reading-width">Use the records directory to search within this topic and narrow results by jurisdiction, status, or year.</p>

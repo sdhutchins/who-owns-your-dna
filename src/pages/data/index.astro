@@ -36,7 +36,7 @@ const totalRecordCount = records.length + nhgriManifest.record_count;
 
   <section class="section-block">
     <h2>NHGRI provenance downloads</h2>
-    <p class="reading-width">These files reproduce records retrieved from NHGRI. The manifest identifies the source URL, retrieval timestamp, source-page date, and checksums. All records appear in the combined Policy Records directory.</p>
+    <p class="reading-width">These files reproduce records retrieved from NHGRI. The manifest identifies the source URL, retrieval timestamp, source-page date, and checksums. These records are also available through Policy Records.</p>
     <div class="action-row">
       <a class="button-link" href={withBase("/data/nhgri-source-records.csv")} download>Download NHGRI source CSV</a>
       <a class="button-link button-link--secondary" href={withBase("/data/nhgri-source-records.json")} download>Download NHGRI source JSON</a>
@@ -49,6 +49,6 @@ const totalRecordCount = records.length + nhgriManifest.record_count;
     <h2>Data model</h2>
     <p>Each record has a stable identifier, jurisdiction, record type, legal status, review date, record version, controlled topic tags, factual and plain-language summaries, primary sources, and record history. Optional fields support statutes, regulations, court decisions, bills, archived sources, checksums, and review metadata.</p>
     <p>Presentation code does not contain the substantive legal records. A schema validator checks the source files before the site builds.</p>
-    <p>Records retrieved from NHGRI retain a separate source schema so their original wording and provenance remain intact. The public directory combines both schemas and uses one shared status vocabulary.</p>
+    <p>Records retrieved from NHGRI retain a separate source schema so their original wording and provenance remain intact. Policy Records presents both schemas through one shared status vocabulary.</p>
   </section>
 </BaseLayout>
