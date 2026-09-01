@@ -1,6 +1,6 @@
 # Who Owns Your DNA?
 
-Who Owns Your DNA? is a versioned public-interest reference for U.S. genetics and genomics law and policy. The static website connects searchable policy records with primary sources and downloadable data.
+Who Owns Your DNA? is a searchable public reference for U.S. genetics and genomics law and policy. The static website connects policy records with primary sources and downloadable data.
 
 The site provides informational summaries. It does not provide legal advice.
 
