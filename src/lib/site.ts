@@ -1,7 +1,7 @@
 export const SITE_NAME = "Who Owns Your DNA?";
 export const SITE_SUBTITLE = "U.S. Genetics & Genomics Law and Policy Tracker";
 export const REVIEW_DATE = "2026-08-31";
-export const PUBLIC_SITE_URL = "https://sdhutchins.github.io/who-owns-your-dna";
+export const PUBLIC_SITE_URL = "https://whoownsyourdna.org";
 export const REPOSITORY_URL = "https://github.com/sdhutchins/who-owns-your-dna";
 
 export function withBase(path: string): string {

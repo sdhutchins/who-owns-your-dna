@@ -35,8 +35,6 @@ jobs:
         run: npm run lint && npm run check
 
       - name: Build site and data exports
-        env:
-          BASE_PATH: /who-owns-your-dna
         run: npm run build
 
       - name: Check generated links

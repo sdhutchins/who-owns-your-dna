@@ -32,8 +32,6 @@ jobs:
         run: npm ci
 
       - name: Build static site
-        env:
-          BASE_PATH: /who-owns-your-dna
         run: npm run build
 
       - name: Configure Pages
