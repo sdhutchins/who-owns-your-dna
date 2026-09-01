@@ -1,0 +1,338 @@
+[
+  {
+    "date": "2026-08-31",
+    "event": "Record created from the enrolled public law.",
+    "source": "Project review",
+    "record_id": "federal-gina-2008",
+    "record_title": "Genetic Information Nondiscrimination Act of 2008",
+    "jurisdiction": "United States"
+  },
+  {
+    "date": "2026-08-31",
+    "event": "Record created from the final rule.",
+    "source": "Project review",
+    "record_id": "federal-hipaa-genetic-information-2013",
+    "record_title": "HIPAA Privacy Rule treatment of genetic information",
+    "jurisdiction": "United States"
+  },
+  {
+    "date": "2026-08-31",
+    "event": "Record created from the official policy notice.",
+    "source": "Project review",
+    "record_id": "federal-nih-gds-policy-2014",
+    "record_title": "NIH Genomic Data Sharing Policy",
+    "jurisdiction": "United States"
+  },
+  {
+    "date": "2026-08-31",
+    "event": "Record created from the enrolled act, current code, and legislative history.",
+    "source": "Project review",
+    "record_id": "al-hb-21-2024",
+    "record_title": "Alabama Genetic Data Privacy Act",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-08-31",
+    "event": "Record created from the engrossed bill and legislative history.",
+    "source": "Project review",
+    "record_id": "al-hb-263-2026",
+    "record_title": "Biological and neural data in health and fitness apps",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-08-31",
+    "event": "Record created from the introduced bill and legislative history.",
+    "source": "Project review",
+    "record_id": "al-hb-265-2026",
+    "record_title": "Unlawful use of DNA",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-08-31",
+    "event": "Record created from the enrolled act, current code, and legislative history.",
+    "source": "Project review",
+    "record_id": "al-hb-351-2026",
+    "record_title": "Alabama Personal Data Protection Act",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-08-31",
+    "event": "Record created from the introduced bill and legislative history.",
+    "source": "Project review",
+    "record_id": "al-hb-436-2025",
+    "record_title": "Biological and neural data protections",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-08-31",
+    "event": "Record created from the engrossed bill and legislative history.",
+    "source": "Project review",
+    "record_id": "al-hb-449-2025",
+    "record_title": "Unlawful use of DNA",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-08-31",
+    "event": "Record created from the introduced bill and legislative history.",
+    "source": "Project review",
+    "record_id": "al-sb-58-2024",
+    "record_title": "Genetic privacy and insurance protections",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-08-31",
+    "event": "Record created from the chaptered bill text.",
+    "source": "Project review",
+    "record_id": "ca-sb-41-2021",
+    "record_title": "Genetic Information Privacy Act",
+    "jurisdiction": "California"
+  },
+  {
+    "date": "2026-08-31",
+    "event": "Record created from the current consolidated law page.",
+    "source": "Project review",
+    "record_id": "ny-cvr-79-l",
+    "record_title": "Confidentiality of records of genetic tests",
+    "jurisdiction": "New York"
+  },
+  {
+    "date": "2026-04-17",
+    "event": "Enacted as Act 2026-552.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-351-2026",
+    "record_title": "Alabama Personal Data Protection Act",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-04-09",
+    "event": "Bill died when the 2026 regular session adjourned without final passage.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-263-2026",
+    "record_title": "Biological and neural data in health and fitness apps",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-04-09",
+    "event": "Bill died when the 2026 regular session adjourned without final passage.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-265-2026",
+    "record_title": "Unlawful use of DNA",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-04-07",
+    "event": "Senate passed the bill as amended and the House concurred.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-351-2026",
+    "record_title": "Alabama Personal Data Protection Act",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-03-11",
+    "event": "Senate committee reported the bill and placed it on the calendar.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-263-2026",
+    "record_title": "Biological and neural data in health and fitness apps",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-02-26",
+    "event": "House passed the bill as amended.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-263-2026",
+    "record_title": "Biological and neural data in health and fitness apps",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-02-24",
+    "event": "House passed the bill as amended.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-351-2026",
+    "record_title": "Alabama Personal Data Protection Act",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-02-05",
+    "event": "Bill read a second time and placed on the House calendar.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-265-2026",
+    "record_title": "Unlawful use of DNA",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-01-29",
+    "event": "Bill introduced and referred to the House Commerce and Small Business Committee.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-351-2026",
+    "record_title": "Alabama Personal Data Protection Act",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-01-15",
+    "event": "Bill introduced and referred to the House Judiciary Committee.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-263-2026",
+    "record_title": "Biological and neural data in health and fitness apps",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-01-15",
+    "event": "Bill introduced and referred to the House Judiciary Committee.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-265-2026",
+    "record_title": "Unlawful use of DNA",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2025-05-14",
+    "event": "Bill died when the 2025 regular session adjourned without further action.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-436-2025",
+    "record_title": "Biological and neural data protections",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2025-05-14",
+    "event": "Bill died when the 2025 regular session adjourned without final passage.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-449-2025",
+    "record_title": "Unlawful use of DNA",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2025-05-06",
+    "event": "Senate committee reported the bill and placed it on the calendar.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-449-2025",
+    "record_title": "Unlawful use of DNA",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2025-04-29",
+    "event": "House passed the bill as amended.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-449-2025",
+    "record_title": "Unlawful use of DNA",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2025-03-18",
+    "event": "Bill introduced and referred to the House Insurance Committee.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-436-2025",
+    "record_title": "Biological and neural data protections",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2025-03-18",
+    "event": "Bill introduced and referred to the House Judiciary Committee.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-449-2025",
+    "record_title": "Unlawful use of DNA",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2024-10-01",
+    "event": "Act became effective.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-21-2024",
+    "record_title": "Alabama Genetic Data Privacy Act",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2024-05-16",
+    "event": "Enacted as Act 2024-384.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-21-2024",
+    "record_title": "Alabama Genetic Data Privacy Act",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2024-05-09",
+    "event": "Bill died when the 2024 regular session adjourned without further action.",
+    "source": "Alabama Legislature",
+    "record_id": "al-sb-58-2024",
+    "record_title": "Genetic privacy and insurance protections",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2024-05-08",
+    "event": "Senate passed the bill as amended.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-21-2024",
+    "record_title": "Alabama Genetic Data Privacy Act",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2024-02-20",
+    "event": "House passed the bill.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-21-2024",
+    "record_title": "Alabama Genetic Data Privacy Act",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2024-02-06",
+    "event": "Bill introduced and referred to the House Judiciary Committee.",
+    "source": "Alabama Legislature",
+    "record_id": "al-hb-21-2024",
+    "record_title": "Alabama Genetic Data Privacy Act",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2024-02-06",
+    "event": "Bill introduced and referred to the Senate Banking and Insurance Committee.",
+    "source": "Alabama Legislature",
+    "record_id": "al-sb-58-2024",
+    "record_title": "Genetic privacy and insurance protections",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2021-10-06",
+    "event": "Approved by the Governor and chaptered.",
+    "source": "California Legislative Information",
+    "record_id": "ca-sb-41-2021",
+    "record_title": "Genetic Information Privacy Act",
+    "jurisdiction": "California"
+  },
+  {
+    "date": "2020-12-07",
+    "event": "Bill introduced.",
+    "source": "California Legislative Information",
+    "record_id": "ca-sb-41-2021",
+    "record_title": "Genetic Information Privacy Act",
+    "jurisdiction": "California"
+  },
+  {
+    "date": "2015-01-25",
+    "event": "Policy became effective for covered applications and proposals.",
+    "source": "NOT-OD-14-124",
+    "record_id": "federal-nih-gds-policy-2014",
+    "record_title": "NIH Genomic Data Sharing Policy",
+    "jurisdiction": "United States"
+  },
+  {
+    "date": "2014-08-27",
+    "event": "Final policy announced.",
+    "source": "NOT-OD-14-124",
+    "record_id": "federal-nih-gds-policy-2014",
+    "record_title": "NIH Genomic Data Sharing Policy",
+    "jurisdiction": "United States"
+  },
+  {
+    "date": "2013-01-25",
+    "event": "Final rule published in the Federal Register.",
+    "source": "78 FR 5566",
+    "record_id": "federal-hipaa-genetic-information-2013",
+    "record_title": "HIPAA Privacy Rule treatment of genetic information",
+    "jurisdiction": "United States"
+  },
+  {
+    "date": "2008-05-21",
+    "event": "Signed into law.",
+    "source": "Public Law 110-233",
+    "record_id": "federal-gina-2008",
+    "record_title": "Genetic Information Nondiscrimination Act of 2008",
+    "jurisdiction": "United States"
+  }
+]
