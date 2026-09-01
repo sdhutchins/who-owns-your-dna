@@ -1,0 +1,197 @@
+---
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import "../styles/global.css";
+
+import { getNhgriManifest } from "../lib/records";
+import { formatDate, REPOSITORY_URL, SITE_NAME, SITE_SUBTITLE, withBase } from "../lib/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  wide?: boolean;
+}
+
+const {
+  title,
+  description = "A versioned public-interest reference for U.S. genetics and genomics law and policy.",
+  wide = false,
+} = Astro.props;
+const pageTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} | ${SITE_SUBTITLE}`;
+const nhgriManifest = await getNhgriManifest();
+const pathname = Astro.url.pathname;
+const isHomePage = pathname === withBase("/");
+const primaryLinks = [
+  {
+    label: "Records",
+    href: "/records/",
+    activePaths: ["/records/", "/source-records/"],
+  },
+  {
+    label: "States",
+    href: "/states/",
+    activePaths: ["/states/", "/alabama/"],
+  },
+  {
+    label: "Federal",
+    href: "/federal/",
+    activePaths: ["/federal/", "/records/federal-"],
+  },
+  {
+    label: "Topics",
+    href: "/topics/",
+    activePaths: ["/topics/"],
+  },
+];
+const aboutLinks = [
+  { label: "About the project", href: "/about/" },
+  { label: "Methodology", href: "/methodology/" },
+  { label: "Data and downloads", href: "/data/" },
+  { label: "NHGRI source archive", href: "/sources/nhgri/" },
+  { label: "Updates", href: "/changes/" },
+  { label: "How to cite", href: "/cite/" },
+  { label: "Contribute a source", href: "/about/#contribute" },
+];
+const isAboutPage = [
+  "/about/",
+  "/methodology/",
+  "/data/",
+  "/cite/",
+  "/changes/",
+  "/sources/nhgri/",
+].some((path) => pathname.includes(path));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#326295" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+      <div class="site-header__identity page-shell">
+        <a class="project-name" href={withBase("/")}>{SITE_NAME}</a>
+        <p>{SITE_SUBTITLE}</p>
+      </div>
+      <div class="site-header__navigation">
+        <details class="primary-navigation page-shell" data-primary-navigation>
+          <summary class="mobile-nav-toggle">Menu</summary>
+          <div class="navigation-row">
+            <nav class="primary-nav" aria-label="Primary navigation">
+              <ul>
+                {
+                  primaryLinks.map((link) => {
+                    const isActive = link.activePaths.some((path) => pathname.includes(path));
+                    return (
+                      <li>
+                        <a
+                          class="primary-nav__link"
+                          href={withBase(link.href)}
+                          aria-current={isActive ? "page" : undefined}
+                        >{link.label}</a>
+                      </li>
+                    );
+                  })
+                }
+                <li>
+                  <details class="nav-group" data-nav-group>
+                    <summary
+                      class:list={["nav-group__summary", { "is-current": isAboutPage }]}
+                      aria-current={isAboutPage ? "page" : undefined}
+                    >About</summary>
+                    <ul id="about-navigation" class="nav-group__submenu nav-group__submenu--right">
+                      {aboutLinks.map((link) => (
+                        <li><a href={withBase(link.href)}>{link.label}</a></li>
+                      ))}
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+            </nav>
+            {!isHomePage && (
+              <form class="header-search" action={withBase("/records/")} method="get" role="search">
+                <label class="sr-only" for="header-search">Search policy records</label>
+                <input id="header-search" name="q" type="search" placeholder="Search policy records" />
+                <button type="submit">Search</button>
+              </form>
+            )}
+          </div>
+        </details>
+      </div>
+    </header>
+
+    <script>
+      const navigationGroups = [...document.querySelectorAll<HTMLDetailsElement>("[data-nav-group]")];
+
+      for (const group of navigationGroups) {
+        group.addEventListener("toggle", () => {
+          if (!group.open) return;
+          for (const otherGroup of navigationGroups) {
+            if (otherGroup !== group) otherGroup.open = false;
+          }
+        });
+      }
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        const openGroup = navigationGroups.find((group) => group.open);
+        if (!openGroup) return;
+        openGroup.open = false;
+        openGroup.querySelector<HTMLElement>("summary")?.focus();
+      });
+
+      document.addEventListener("click", (event) => {
+        const clickTarget = event.target;
+        if (!(clickTarget instanceof Node)) return;
+        for (const group of navigationGroups) {
+          if (group.open && !group.contains(clickTarget)) group.open = false;
+        }
+      });
+    </script>
+
+    <main id="main-content" class:list={["page-shell", { "page-shell--wide": wide }]}>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="page-shell footer-grid">
+        <div>
+          <p class="footer-title">{SITE_NAME}</p>
+          <p>{SITE_SUBTITLE}</p>
+          <p class="footer-note">Informational summaries only. This site does not provide legal advice.</p>
+          <p class="footer-note">
+            Includes records retrieved from NHGRI on {formatDate(nhgriManifest.snapshot_fetched_at.slice(0, 10))}.
+            {" "}<a href={withBase("/sources/nhgri/")}>Review source and coverage details</a>.
+          </p>
+        </div>
+        <nav aria-label="Reference links">
+          <p class="footer-heading">Reference</p>
+          <ul>
+            <li><a href={withBase("/data/")}>Data and downloads</a></li>
+            <li><a href={withBase("/methodology/")}>Methodology</a></li>
+            <li><a href={withBase("/cite/")}>How to cite</a></li>
+            <li><a href={withBase("/records/")}>All records</a></li>
+            <li><a href={withBase("/sources/nhgri/")}>NHGRI source archive</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Explore links">
+          <p class="footer-heading">Explore</p>
+          <ul>
+            <li><a href={withBase("/states/")}>States</a></li>
+            <li><a href={withBase("/federal/")}>Federal</a></li>
+            <li><a href={withBase("/topics/")}>Topics</a></li>
+            <li><a href={withBase("/about/")}>About the project</a></li>
+            <li><a href={REPOSITORY_URL}>GitHub repository</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

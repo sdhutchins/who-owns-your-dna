@@ -1,0 +1,37 @@
+---
+import type { LegalRecord, Topic } from "../lib/records";
+import { formatDate, withBase } from "../lib/site";
+import StatusLabel from "./StatusLabel.astro";
+
+interface Props {
+  record: LegalRecord;
+  topics: Topic[];
+}
+
+const { record, topics } = Astro.props;
+const topicNames = new Map(topics.map((topic) => [topic.slug, topic.name]));
+---
+
+<article class="record-summary">
+  <div class="record-summary__heading">
+    <div>
+      <p class="record-summary__eyebrow">
+        {record.jurisdiction} · {record.identifier}
+      </p>
+      <h3><a href={withBase(`/records/${record.id}/`)}>{record.title}</a></h3>
+    </div>
+    <StatusLabel status={record.status} />
+  </div>
+  <p class="topic-line">
+    {record.topics.map((topic) => topicNames.get(topic) ?? topic).join(" · ")}
+  </p>
+  <p>{record.summary}</p>
+  <p class="record-summary__meta">
+    Last reviewed {formatDate(record.last_reviewed)} · Version {record.record_version}
+  </p>
+  <div class="inline-links">
+    {record.primary_sources[0] && <a href={record.primary_sources[0].url}>Primary source</a>}
+    <a href={withBase(`/records/${record.id}/`)}>Record details</a>
+    <a href={withBase(`/records/${record.id}/#cite`)}>Cite</a>
+  </div>
+</article>

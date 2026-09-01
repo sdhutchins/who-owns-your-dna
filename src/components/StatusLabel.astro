@@ -1,0 +1,11 @@
+---
+import { humanizeStatus } from "../lib/site";
+
+interface Props {
+  status: string;
+}
+
+const { status } = Astro.props;
+---
+
+<span class={`status status--${status}`}>{humanizeStatus(status)}</span>
