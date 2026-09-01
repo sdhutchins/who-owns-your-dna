@@ -1,0 +1,61 @@
+---
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Methodology">
+  <Breadcrumbs items={[{ label: "About", href: "/about/" }, { label: "Methodology" }]} />
+  <h1>Methodology</h1>
+  <p class="page-intro">How the tracker finds, evaluates, summarizes, reviews, and versions U.S. genetics and genomics law and policy.</p>
+
+  <section class="reading-width">
+    <h2>Project scope</h2>
+    <p>The project tracks U.S. federal, state, district, and future territorial law and policy concerning genetic information, genomic data, biological samples, genetic testing, and related uses. Coverage is not comprehensive and expands through source review.</p>
+
+    <h2>Inclusion criteria</h2>
+    <p>A record must have an identifiable jurisdiction, authoritative source, record type, legal or policy status, and a direct connection to a controlled genetics or genomics topic. Candidate records remain outside the verified dataset until a human reviewer checks the primary source.</p>
+
+    <h2>Exclusion criteria</h2>
+    <p>The tracker excludes unsupported claims, duplicate records, secondary summaries presented as legal authority, and candidate changes that have not completed review. General privacy or health laws may be excluded until their application to genetic information is documented.</p>
+
+    <h2>Source hierarchy</h2>
+    <ol>
+      <li>Enacted statutory text</li>
+      <li>Legislature or government bill page</li>
+      <li>Official regulation</li>
+      <li>Official agency guidance</li>
+      <li>Court opinion</li>
+      <li>Official government archive</li>
+      <li>Credible legal or policy secondary source</li>
+      <li>News reporting when necessary for context</li>
+    </ol>
+
+    <h2>NHGRI provenance</h2>
+    <p>The complete NHGRI Genome Statute and Legislation Database is included in the combined Policy Records directory. Its original state, primary link, topic, status, and summary are preserved. Local topic mappings support search and do not establish legal equivalence.</p>
+    <p>These entries identify NHGRI as their source and display the retrieval timestamp. NHGRI’s source page was last updated February 8, 2024. Current legal decisions should always use the linked primary source.</p>
+
+    <h2>Status vocabulary</h2>
+    <p>All records use the NHGRI status vocabulary: Approved, Died, Enacted, Passed House, Passed Senate, Statute, Pending, and Introduced. Record type remains separate so statutes, regulations, policies, and legislation retain their substantive form.</p>
+
+    <h2>Research and review process</h2>
+    <ol>
+      <li>Locate an official government source.</li>
+      <li>Determine the jurisdiction, record type, status, dates, and scope.</li>
+      <li>Draft a factual summary separately from plain-language interpretation.</li>
+      <li>Assign controlled topic tags and document uncertainty.</li>
+      <li>Run schema and controlled-vocabulary validation.</li>
+      <li>Complete human source and summary review before publication.</li>
+    </ol>
+
+    <h2>Uncertainty and absence</h2>
+    <p>“No specific law identified” describes a dataset finding, not a definitive conclusion that no law exists. Legal coverage can depend on definitions, exceptions, effective dates, preemption, enforcement, and the facts of a particular situation.</p>
+
+    <h2>Corrections and versioning</h2>
+    <p>Corrections create a record-history entry and increment the record version when the substantive public record changes. Dataset releases will receive stable version identifiers. Future releases may be archived with checksums and a DOI.</p>
+
+    <h2>Automation boundary</h2>
+    <p>Future monitors may identify candidate changes from Congress.gov, the Federal Register, state legislatures, state codes, and agency notices. Automated systems must not rewrite legal summaries or publish legal conclusions without human review.</p>
+  </section>
+
+  <aside class="notice"><p><strong>Legal information disclaimer:</strong> This site provides informational summaries and does not provide legal advice. Consult the primary source and qualified counsel for legal decisions.</p></aside>
+</BaseLayout>

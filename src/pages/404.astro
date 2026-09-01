@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/site";
+---
+
+<BaseLayout title="Page not found">
+  <h1>Page not found</h1>
+  <p class="page-intro">The requested page is not part of the current policy tracker.</p>
+  <p><a href={withBase("/")}>Return to the homepage</a></p>
+</BaseLayout>

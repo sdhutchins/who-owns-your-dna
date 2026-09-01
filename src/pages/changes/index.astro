@@ -1,0 +1,30 @@
+---
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getRecords } from "../../lib/records";
+import { formatDate, withBase } from "../../lib/site";
+
+const records = await getRecords();
+const changes = records
+  .flatMap((record) => record.history.map((change) => ({ ...change, record })))
+  .sort((left, right) => right.date.localeCompare(left.date));
+---
+
+<BaseLayout title="Updates">
+  <Breadcrumbs items={[{ label: "Updates" }]} />
+  <h1>Dataset changes</h1>
+  <p class="page-intro">A chronological account of newly added records, reviewed sources, status changes, and corrections.</p>
+
+  <ol class="change-list">
+    {
+      changes.map((change) => (
+        <li class="record-summary">
+          <p class="record-summary__eyebrow">{formatDate(change.date)} · {change.record.jurisdiction}</p>
+          <h2><a href={withBase(`/records/${change.record.id}/`)}>{change.record.identifier}: {change.record.title}</a></h2>
+          <p>{change.event}</p>
+          {change.source && <p class="metadata">Source: {change.source}</p>}
+        </li>
+      ))
+    }
+  </ol>
+</BaseLayout>

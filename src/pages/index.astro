@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getNhgriRecords, getRecords } from "../lib/records";
+import { withBase } from "../lib/site";
+
+const [records, nhgriRecords] = await Promise.all([
+  getRecords(),
+  getNhgriRecords(),
+]);
+const totalRecordCount = records.length + nhgriRecords.length;
+---
+
+<BaseLayout>
+  <section class="intro-band">
+    <h1>Who Owns Your DNA?</h1>
+    <p class="page-intro">Tracking genetics and genomics law across the United States.</p>
+    <p class="reading-width">
+      Laws governing genetic information vary by jurisdiction, context, and type of use.
+      Explore documented protections, policy developments, and the primary sources behind
+      each record.
+    </p>
+    <form class="homepage-record-search" action={withBase("/records/")} method="get" role="search">
+      <label for="homepage-record-query">Search all policy records</label>
+      <div class="homepage-record-search__controls">
+        <input id="homepage-record-query" name="q" type="search" placeholder="Search bills, laws, topics, or summaries" />
+        <button type="submit">Search records</button>
+      </div>
+    </form>
+    <p><a href={withBase("/records/")}>Browse all {totalRecordCount.toLocaleString()} policy records</a></p>
+  </section>
+
+  <section aria-labelledby="browse-policy">
+    <h2 id="browse-policy">Browse policy</h2>
+    <div class="explore-grid">
+      <section>
+        <h3><a href={withBase("/states/")}>States</a></h3>
+        <p>Choose a jurisdiction and open its records in the combined directory.</p>
+      </section>
+      <section>
+        <h3><a href={withBase("/federal/")}>Federal</a></h3>
+        <p>Find nationwide statutes, regulations, guidance, and research policies.</p>
+      </section>
+      <section>
+        <h3><a href={withBase("/topics/")}>Topics</a></h3>
+        <p>Follow privacy, discrimination, research, testing, insurance, and data use.</p>
+      </section>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,25 @@
+---
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { PUBLIC_SITE_URL } from "../../lib/site";
+---
+
+<BaseLayout title="Cite">
+  <Breadcrumbs items={[{ label: "About", href: "/about/" }, { label: "Cite" }]} />
+  <h1>How to cite this resource</h1>
+  <p class="page-intro">Citations should identify the specific record version and access date whenever possible.</p>
+
+  <section class="reading-width">
+    <h2>Individual record</h2>
+    <p class="citation">Who Owns Your DNA? [Record identifier]: [Record title]. U.S. Genetics & Genomics Law and Policy Tracker. Record version [version]. Accessed [Month Day, Year].</p>
+
+    <h2>Website</h2>
+    <p class="citation">Who Owns Your DNA? U.S. Genetics & Genomics Law and Policy Tracker. {PUBLIC_SITE_URL}/. Accessed [Month Day, Year].</p>
+
+    <h2>Dataset release</h2>
+    <p class="citation">Who Owns Your DNA? U.S. Genetics & Genomics Law and Policy Tracker. Version [release]. Zenodo. DOI: [future DOI].</p>
+
+    <h2>Future formats</h2>
+    <p>Planned citation exports include plain text, BibTeX, RIS, APA, and Chicago. These formats will be generated from the same record metadata shown on each page.</p>
+  </section>
+</BaseLayout>
