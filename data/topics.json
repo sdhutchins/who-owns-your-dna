@@ -1,0 +1,23 @@
+[
+  { "slug": "genetic-privacy", "name": "Genetic privacy" },
+  { "slug": "genetic-discrimination", "name": "Genetic discrimination" },
+  { "slug": "employment", "name": "Employment" },
+  { "slug": "health-insurance", "name": "Health insurance" },
+  { "slug": "life-insurance", "name": "Life insurance" },
+  { "slug": "disability-insurance", "name": "Disability insurance" },
+  { "slug": "long-term-care-insurance", "name": "Long-term care insurance" },
+  { "slug": "direct-to-consumer-testing", "name": "Direct-to-consumer genetic testing" },
+  { "slug": "research", "name": "Research" },
+  { "slug": "biobanks", "name": "Biobanks" },
+  { "slug": "consent", "name": "Consent" },
+  { "slug": "data-sharing", "name": "Data sharing" },
+  { "slug": "data-sale", "name": "Data sale" },
+  { "slug": "data-deletion", "name": "Data deletion" },
+  { "slug": "sample-destruction", "name": "Sample destruction" },
+  { "slug": "law-enforcement", "name": "Law enforcement" },
+  { "slug": "forensic-genetic-genealogy", "name": "Forensic investigative genetic genealogy" },
+  { "slug": "newborn-screening", "name": "Newborn screening" },
+  { "slug": "reproductive-genetics", "name": "Reproductive genetics" },
+  { "slug": "minors", "name": "Minors" },
+  { "slug": "ai-and-genomics", "name": "AI and genomics" }
+]

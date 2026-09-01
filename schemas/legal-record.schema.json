@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:who-owns-your-dna:legal-record",
+  "title": "Who Owns Your DNA legal record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "jurisdiction", "jurisdiction_code", "jurisdiction_type",
+    "record_type", "title", "identifier", "status", "last_reviewed",
+    "record_version", "verification_status", "topics", "summary",
+    "legal_effects", "plain_language", "primary_sources", "history"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "jurisdiction": { "type": "string", "minLength": 2 },
+    "jurisdiction_code": { "type": "string", "pattern": "^(US|[A-Z]{2})$" },
+    "jurisdiction_type": { "enum": ["federal", "state", "district", "territory"] },
+    "record_type": { "enum": ["legislation", "statute", "regulation", "guidance", "policy", "court-decision", "agency-action"] },
+    "title": { "type": "string", "minLength": 3 },
+    "subtitle": { "type": "string" },
+    "identifier": { "type": "string", "minLength": 2 },
+    "bill_number": { "type": "string" },
+    "session": { "oneOf": [{ "type": "string" }, { "type": "number" }] },
+    "statute_citation": { "type": "string" },
+    "regulatory_citation": { "type": "string" },
+    "status": { "enum": ["approved", "died", "enacted", "passed-house", "passed-senate", "statute", "pending", "introduced"] },
+    "introduced_date": { "$ref": "#/$defs/dateOrNull" },
+    "passed_date": { "$ref": "#/$defs/dateOrNull" },
+    "signed_date": { "$ref": "#/$defs/dateOrNull" },
+    "effective_date": { "$ref": "#/$defs/dateOrNull" },
+    "last_action_date": { "$ref": "#/$defs/dateOrNull" },
+    "last_reviewed": { "$ref": "#/$defs/date" },
+    "record_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "verification_status": { "enum": ["verified-primary", "review-in-progress", "mock"] },
+    "topics": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string" } },
+    "summary": { "type": "string", "minLength": 20 },
+    "legal_effects": { "type": "string", "minLength": 20 },
+    "plain_language": { "type": "string", "minLength": 20 },
+    "advocacy_context": { "type": "string" },
+    "limitations": { "type": "string" },
+    "primary_sources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/source" }
+    },
+    "secondary_sources": { "type": "array", "items": { "$ref": "#/$defs/source" } },
+    "related_records": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["record_id", "relationship"],
+        "properties": {
+          "record_id": { "$ref": "#/$defs/recordId" },
+          "relationship": { "type": "string", "minLength": 3 }
+        }
+      }
+    },
+    "history": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["date", "event"],
+        "properties": {
+          "date": { "$ref": "#/$defs/date" },
+          "event": { "type": "string", "minLength": 3 },
+          "source": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "recordId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "date": { "type": "string", "format": "date" },
+    "dateOrNull": { "oneOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "url", "publisher", "accessed_date"],
+      "properties": {
+        "title": { "type": "string", "minLength": 3 },
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "publisher": { "type": "string", "minLength": 2 },
+        "accessed_date": { "$ref": "#/$defs/date" },
+        "archived_url": { "type": "string", "format": "uri" },
+        "checksum": { "type": "string" }
+      }
+    }
+  }
+}

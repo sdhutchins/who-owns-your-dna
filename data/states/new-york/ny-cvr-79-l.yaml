@@ -1,0 +1,45 @@
+id: ny-cvr-79-l
+jurisdiction: New York
+jurisdiction_code: NY
+jurisdiction_type: state
+record_type: statute
+title: Confidentiality of records of genetic tests
+subtitle: Consent, confidentiality, and biological-sample requirements
+identifier: New York Civil Rights Law § 79-l
+statute_citation: N.Y. Civil Rights Law § 79-l
+status: statute
+last_reviewed: 2026-08-31
+record_version: "1.0"
+verification_status: verified-primary
+topics:
+  - genetic-privacy
+  - consent
+  - research
+  - sample-destruction
+summary: >-
+  New York Civil Rights Law section 79-l establishes written informed-consent
+  requirements for genetic testing, treats genetic-test records and results as
+  confidential, and sets rules for disclosure, research uses, retention, and
+  destruction of biological samples, subject to stated exceptions.
+legal_effects: >-
+  The section generally requires written informed consent before genetic
+  testing and disclosure, deems test records and results confidential, and
+  establishes rules for research use, retention, and sample destruction.
+plain_language: >-
+  A person generally must give specific written consent before a genetic test
+  is performed or results are disclosed. The law also addresses how samples
+  may be retained or used for research.
+limitations: >-
+  The section includes exceptions for court orders, specified public-health
+  programs, research, insurers, and other circumstances. This summary does not
+  resolve whether an exception applies.
+primary_sources:
+  - title: New York Civil Rights Law § 79-l
+    url: https://www.nysenate.gov/legislation/laws/CVR/79-L
+    publisher: New York State Senate
+    accessed_date: 2026-08-31
+secondary_sources: []
+history:
+  - date: 2026-08-31
+    event: Record created from the current consolidated law page.
+    source: Project review

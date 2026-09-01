@@ -1,0 +1,58 @@
+id: ca-sb-41-2021
+jurisdiction: California
+jurisdiction_code: CA
+jurisdiction_type: state
+record_type: legislation
+title: Genetic Information Privacy Act
+subtitle: Privacy requirements for direct-to-consumer genetic testing companies
+identifier: SB 41 (2021)
+bill_number: SB 41
+session: 2021-2022
+statute_citation: California Civil Code §§ 56.18-56.186
+status: enacted
+introduced_date: 2020-12-07
+signed_date: 2021-10-06
+effective_date: 2022-01-01
+last_reviewed: 2026-08-31
+record_version: "1.0"
+verification_status: verified-primary
+topics:
+  - genetic-privacy
+  - direct-to-consumer-testing
+  - consent
+  - data-deletion
+  - sample-destruction
+summary: >-
+  California SB 41 established requirements for covered direct-to-consumer
+  genetic testing companies, including privacy notices, express consent for
+  specified uses and disclosures, security practices, access and deletion
+  procedures, and biological-sample destruction following consent revocation.
+legal_effects: >-
+  The act requires covered companies to publish specified notices, obtain
+  separate express consent for listed uses and disclosures, provide access and
+  deletion mechanisms, maintain reasonable security practices, and honor
+  qualifying consent revocations.
+plain_language: >-
+  Covered companies must explain their genetic-data practices and obtain
+  specific consent for several uses. Consumers can revoke consent and request
+  account or data deletion and sample destruction, subject to the law's scope
+  and exceptions.
+limitations: >-
+  The act contains definitions and exclusions. Whether a company, service,
+  sample, or use is covered requires review of the current statutory text.
+primary_sources:
+  - title: SB 41 bill text, chaptered version
+    url: https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202120220SB41
+    publisher: California Legislative Information
+    accessed_date: 2026-08-31
+secondary_sources: []
+history:
+  - date: 2020-12-07
+    event: Bill introduced.
+    source: California Legislative Information
+  - date: 2021-10-06
+    event: Approved by the Governor and chaptered.
+    source: California Legislative Information
+  - date: 2026-08-31
+    event: Record created from the chaptered bill text.
+    source: Project review

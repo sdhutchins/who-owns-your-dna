@@ -1,0 +1,10 @@
+[
+  { "slug": "approved", "name": "Approved" },
+  { "slug": "died", "name": "Died" },
+  { "slug": "enacted", "name": "Enacted" },
+  { "slug": "passed-house", "name": "Passed House" },
+  { "slug": "passed-senate", "name": "Passed Senate" },
+  { "slug": "statute", "name": "Statute" },
+  { "slug": "pending", "name": "Pending" },
+  { "slug": "introduced", "name": "Introduced" }
+]

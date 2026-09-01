@@ -1,0 +1,45 @@
+id: federal-hipaa-genetic-information-2013
+jurisdiction: United States
+jurisdiction_code: US
+jurisdiction_type: federal
+record_type: regulation
+title: HIPAA Privacy Rule treatment of genetic information
+subtitle: Genetic information as protected health information
+identifier: 78 FR 5566
+regulatory_citation: 45 C.F.R. Parts 160 and 164
+status: approved
+effective_date: 2013-03-26
+last_reviewed: 2026-08-31
+record_version: "1.0"
+verification_status: verified-primary
+topics:
+  - genetic-privacy
+  - health-insurance
+summary: >-
+  The 2013 HIPAA final rule implemented GINA-related changes by treating
+  genetic information as health information and restricting covered health
+  plans from using or disclosing genetic information for underwriting.
+legal_effects: >-
+  The final rule revised HIPAA definitions and privacy provisions so genetic
+  information is treated as health information and covered health plans may not
+  use or disclose it for underwriting purposes.
+plain_language: >-
+  Genetic information held by a HIPAA-covered entity can be protected health
+  information. HIPAA does not cover every company or every consumer genetic
+  testing service.
+limitations: >-
+  HIPAA coverage depends on whether the organization and information fall
+  within the rule. The compliance date followed the rule's effective date.
+primary_sources:
+  - title: Modifications to the HIPAA Privacy, Security, Enforcement, and Breach Notification Rules
+    url: https://www.federalregister.gov/documents/2013/01/25/2013-01073/modifications-to-the-hipaa-privacy-security-enforcement-and-breach-notification-rules-under-the
+    publisher: Office of the Federal Register
+    accessed_date: 2026-08-31
+secondary_sources: []
+history:
+  - date: 2013-01-25
+    event: Final rule published in the Federal Register.
+    source: 78 FR 5566
+  - date: 2026-08-31
+    event: Record created from the final rule.
+    source: Project review

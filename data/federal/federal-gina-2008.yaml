@@ -1,0 +1,49 @@
+id: federal-gina-2008
+jurisdiction: United States
+jurisdiction_code: US
+jurisdiction_type: federal
+record_type: statute
+title: Genetic Information Nondiscrimination Act of 2008
+subtitle: Federal protections in health coverage and employment
+identifier: Public Law 110-233
+statute_citation: 122 Stat. 881
+status: statute
+signed_date: 2008-05-21
+effective_date:
+last_reviewed: 2026-08-31
+record_version: "1.0"
+verification_status: verified-primary
+topics:
+  - genetic-discrimination
+  - employment
+  - health-insurance
+summary: >-
+  GINA restricts the use of genetic information in health coverage and
+  employment. Its health-coverage and employment provisions have different
+  effective timelines and contain definitions, exceptions, and enforcement
+  provisions that should be reviewed in the statutory text.
+legal_effects: >-
+  Title I amends federal health-coverage laws to restrict genetic-information
+  requests and uses by covered plans and issuers. Title II restricts covered
+  employers and other employment entities from acquiring or using genetic
+  information, subject to statutory exceptions.
+plain_language: >-
+  The federal law generally bars covered health insurers and employers from
+  using genetic information in specified decisions. It does not create the
+  same protections for life, disability, or long-term care insurance.
+limitations: >-
+  This record is a high-level summary. Coverage depends on the actor, benefit,
+  employment context, and statutory exception involved.
+primary_sources:
+  - title: Genetic Information Nondiscrimination Act of 2008, Public Law 110-233
+    url: https://www.govinfo.gov/content/pkg/PLAW-110publ233/pdf/PLAW-110publ233.pdf
+    publisher: U.S. Government Publishing Office
+    accessed_date: 2026-08-31
+secondary_sources: []
+history:
+  - date: 2008-05-21
+    event: Signed into law.
+    source: Public Law 110-233
+  - date: 2026-08-31
+    event: Record created from the enrolled public law.
+    source: Project review
