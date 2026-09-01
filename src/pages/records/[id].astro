@@ -1,0 +1,123 @@
+---
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import StatusLabel from "../../components/StatusLabel.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getRecords, getTopics, type LegalRecord } from "../../lib/records";
+import { formatDate, PUBLIC_SITE_URL, REPOSITORY_URL, withBase } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const records = await getRecords();
+  return records.map((record) => ({ params: { id: record.id }, props: { record } }));
+}
+
+interface Props {
+  record: LegalRecord;
+}
+
+const { record } = Astro.props;
+const [topics, records] = await Promise.all([getTopics(), getRecords()]);
+const topicNames = new Map(topics.map((topic) => [topic.slug, topic.name]));
+const recordsById = new Map(records.map((candidate) => [candidate.id, candidate]));
+const relatedRecords = (record.related_records ?? []).flatMap((relationship) => {
+  const relatedRecord = recordsById.get(relationship.record_id);
+  return relatedRecord ? [{ ...relationship, record: relatedRecord }] : [];
+});
+const citation = `Who Owns Your DNA? ${record.identifier}: ${record.title}. U.S. Genetics & Genomics Law and Policy Tracker. Record version ${record.record_version}. Accessed [date].`;
+const permanentUrl = `${PUBLIC_SITE_URL}/records/${record.id}/`;
+const sourceFileUrl = `${REPOSITORY_URL}/blob/main/${record.source_path}`;
+---
+
+<BaseLayout title={`${record.identifier}: ${record.title}`} description={record.summary}>
+  <Breadcrumbs items={[
+    { label: "Policy records", href: "/records/" },
+    { label: record.jurisdiction, href: record.jurisdiction_type === "federal" ? "/federal/" : "/states/" },
+    { label: record.identifier },
+  ]} />
+
+  <header class="record-header">
+    <p class="section-kicker">{record.jurisdiction} · {record.record_type.replaceAll("-", " ")}</p>
+    <h1>{record.identifier}</h1>
+    <p class="record-subtitle">{record.title}</p>
+    <StatusLabel status={record.status} />
+  </header>
+
+  <dl class="metadata-list">
+    <dt>Jurisdiction</dt><dd>{record.jurisdiction}</dd>
+    <dt>Record type</dt><dd>{record.record_type.replaceAll("-", " ")}</dd>
+    {record.session && <><dt>Session</dt><dd>{record.session}</dd></>}
+    {record.statute_citation && <><dt>Statute citation</dt><dd>{record.statute_citation}</dd></>}
+    {record.regulatory_citation && <><dt>Regulatory citation</dt><dd>{record.regulatory_citation}</dd></>}
+    {record.introduced_date && <><dt>Introduced</dt><dd>{formatDate(record.introduced_date)}</dd></>}
+    {record.passed_date && <><dt>Passed</dt><dd>{formatDate(record.passed_date)}</dd></>}
+    {record.signed_date && <><dt>Signed</dt><dd>{formatDate(record.signed_date)}</dd></>}
+    {record.effective_date && <><dt>Effective</dt><dd>{formatDate(record.effective_date)}</dd></>}
+    {record.last_action_date && <><dt>Last legislative action</dt><dd>{formatDate(record.last_action_date)}</dd></>}
+    <dt>Last reviewed</dt><dd>{formatDate(record.last_reviewed)}</dd>
+    <dt>Record version</dt><dd>{record.record_version}</dd>
+    <dt>Verification</dt><dd>{record.verification_status.replaceAll("-", " ")}</dd>
+    <dt>Permanent URL</dt><dd><a href={permanentUrl}>{permanentUrl}</a></dd>
+  </dl>
+
+  <p class="topic-line"><strong>Topics:</strong> {record.topics.map((topic) => topicNames.get(topic) ?? topic).join(" · ")}</p>
+
+  {relatedRecords.length > 0 && (
+    <section class="reading-width">
+      <h2>Related records</h2>
+      <ul>
+        {relatedRecords.map((relationship) => (
+          <li>
+            {relationship.relationship}: <a href={withBase(`/records/${relationship.record.id}/`)}>
+              {relationship.record.identifier}, {relationship.record.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section class="reading-width">
+    <h2>Summary</h2>
+    <p>{record.summary}</p>
+    <h2>What the law or policy does</h2>
+    <p>{record.legal_effects}</p>
+    <h2>What this means</h2>
+    <p>{record.plain_language}</p>
+    {record.advocacy_context && <><h2>Why advocates are watching</h2><p>{record.advocacy_context}</p></>}
+    {record.limitations && <aside class="notice"><p><strong>Scope note:</strong> {record.limitations}</p></aside>}
+  </section>
+
+  <section>
+    <h2>Primary sources</h2>
+    <ul>
+      {record.primary_sources.map((source) => (
+        <li><a href={source.url}>{source.title}</a>. {source.publisher}. Accessed {formatDate(source.accessed_date)}.</li>
+      ))}
+    </ul>
+  </section>
+
+  <section>
+    <h2>Record details</h2>
+    <details>
+      <summary>Record history</summary>
+      <div>
+        <ol>
+          {record.history.map((event) => <li><strong>{formatDate(event.date)}:</strong> {event.event} {event.source && <span class="muted">Source: {event.source}.</span>}</li>)}
+        </ol>
+      </div>
+    </details>
+    <details>
+      <summary>Technical metadata</summary>
+      <div>
+        <p><strong>Record ID:</strong> <code>{record.id}</code></p>
+        <p><strong>Topics:</strong> <code>{record.topics.join(", ")}</code></p>
+        <p><strong>Canonical source file:</strong> <a href={sourceFileUrl}><code>{record.source_path}</code></a></p>
+      </div>
+    </details>
+  </section>
+
+  <section id="cite">
+    <h2>Cite this record</h2>
+    <p class="citation">{citation}</p>
+    <p><a href={withBase("/cite/")}>Read the complete citation guidance</a></p>
+  </section>
+</BaseLayout>

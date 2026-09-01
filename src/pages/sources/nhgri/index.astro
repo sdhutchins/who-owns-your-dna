@@ -1,0 +1,167 @@
+---
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getNhgriManifest, getNhgriRecords } from "../../../lib/records";
+import { formatDate, formatDateTime, withBase } from "../../../lib/site";
+
+const [records, manifest] = await Promise.all([
+  getNhgriRecords(),
+  getNhgriManifest(),
+]);
+const jurisdictions = [...new Set(records.map((record) => record.jurisdiction))].sort();
+const topics = [...new Set(records.flatMap((record) => record.source_topics))].sort();
+const statuses = [...new Set(records.map((record) => record.source_status))].sort();
+const years = [...new Set(records.map((record) => record.inferred_year).filter(Boolean))]
+  .sort((left, right) => Number(right) - Number(left));
+
+function normalizeSearch(values: string[]): string {
+  return values.join(" ").toLocaleLowerCase();
+}
+---
+
+<BaseLayout title="NHGRI source archive" wide>
+  <Breadcrumbs items={[{ label: "About", href: "/about/" }, { label: "NHGRI source archive" }]} />
+  <p class="section-kicker">NHGRI source snapshot</p>
+  <h1>Genome Statute and Legislation Database archive</h1>
+  <p class="page-intro">All {manifest.record_count.toLocaleString()} rows retrieved from the National Human Genome Research Institute database and included in the combined Policy Records directory.</p>
+
+  <aside class="source-layer-banner">
+    <p><strong>Retrieved from NHGRI on {formatDateTime(manifest.snapshot_fetched_at)}.</strong> NHGRI last updated the source page on {formatDate(manifest.source_page_last_updated)}. Consult the linked primary source for current legal text.</p>
+  </aside>
+
+  <div class="action-row">
+    <a class="button-link" href={withBase("/data/nhgri-source-records.csv")} download>Download source CSV</a>
+    <a class="button-link button-link--secondary" href={withBase("/data/nhgri-source-records.json")} download>Download source JSON</a>
+    <a href={manifest.source_page}>View the NHGRI source page</a>
+  </div>
+
+  <form class="filters" id="nhgri-filters" aria-label="Filter NHGRI source records">
+    <div class="filter-field">
+      <label for="source-search">Search</label>
+      <input id="source-search" name="q" type="search" placeholder="Bill, summary, state, or topic" />
+    </div>
+    <div class="filter-field">
+      <label for="source-state">State</label>
+      <select id="source-state" name="state">
+        <option value="">All states</option>
+        {jurisdictions.map((jurisdiction) => <option value={jurisdiction}>{jurisdiction}</option>)}
+      </select>
+    </div>
+    <div class="filter-field">
+      <label for="source-topic">NHGRI topic</label>
+      <select id="source-topic" name="topic">
+        <option value="">All topics</option>
+        {topics.map((topic) => <option value={topic}>{topic}</option>)}
+      </select>
+    </div>
+    <div class="filter-field">
+      <label for="source-status">Source status</label>
+      <select id="source-status" name="status">
+        <option value="">All statuses</option>
+        {statuses.map((status) => <option value={status}>{status}</option>)}
+      </select>
+    </div>
+    <div class="filter-field">
+      <label for="source-year">Year or session</label>
+      <select id="source-year" name="year">
+        <option value="">All years</option>
+        {years.map((year) => <option value={String(year)}>{year}</option>)}
+      </select>
+    </div>
+  </form>
+
+  <p class="result-count" aria-live="polite"><span id="source-result-count">{records.length.toLocaleString()}</span> source records</p>
+  <p id="mapped-topic-note" class="metadata" hidden></p>
+
+  <div class="table-wrap">
+    <table class="policy-record-table">
+      <thead>
+        <tr>
+          <th scope="col">State</th>
+          <th scope="col">Primary Link</th>
+          <th scope="col">Topic(s)</th>
+          <th scope="col">Bill Status</th>
+          <th scope="col">Summary</th>
+        </tr>
+      </thead>
+      <tbody id="source-records">
+        {records.map((record) => (
+          <tr
+            data-source-record
+            data-search={normalizeSearch([record.jurisdiction, record.source_record_label, record.source_summary, ...record.source_topics])}
+            data-state={record.jurisdiction}
+            data-topics={JSON.stringify(record.source_topics)}
+            data-mapped-topics={JSON.stringify(record.mapped_topics)}
+            data-status={record.source_status}
+            data-year={record.inferred_year ?? ""}
+          >
+            <th scope="row">{record.jurisdiction}</th>
+            <td class="policy-record-table__primary">
+              <a href={record.primary_url}>{record.source_record_label}</a>
+              <span class="policy-record-table__date">{record.inferred_year ? `${record.inferred_year} legislative session` : "Date not stated in source label"}</span>
+              <span class="policy-record-table__review">Retrieved from NHGRI on {formatDateTime(manifest.snapshot_fetched_at)}</span>
+              <a class="policy-record-table__details" href={withBase(`/source-records/nhgri/${record.id}/`)}>Record details</a>
+            </td>
+            <td>{record.source_topics.join(", ")}</td>
+            <td>{record.source_status}</td>
+            <td>{record.source_summary}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <noscript><p class="notice">Filtering requires JavaScript. All source records remain visible without it.</p></noscript>
+
+  <script>
+  const form = document.querySelector<HTMLFormElement>("#nhgri-filters");
+  const rows = [...document.querySelectorAll<HTMLTableRowElement>("[data-source-record]")];
+  const count = document.querySelector<HTMLElement>("#source-result-count");
+  const mappedTopicNote = document.querySelector<HTMLElement>("#mapped-topic-note");
+
+  if (form && count) {
+    const searchInput = form.elements.namedItem("q") as HTMLInputElement;
+    const stateInput = form.elements.namedItem("state") as HTMLSelectElement;
+    const topicInput = form.elements.namedItem("topic") as HTMLSelectElement;
+    const statusInput = form.elements.namedItem("status") as HTMLSelectElement;
+    const yearInput = form.elements.namedItem("year") as HTMLSelectElement;
+    const parameters = new URLSearchParams(window.location.search);
+    const mappedTopic = parameters.get("mapped_topic") ?? "";
+
+    searchInput.value = parameters.get("q") ?? "";
+    stateInput.value = parameters.get("state") ?? "";
+    topicInput.value = parameters.get("topic") ?? "";
+    statusInput.value = parameters.get("status") ?? "";
+    yearInput.value = parameters.get("year") ?? "";
+
+    if (mappedTopic && mappedTopicNote) {
+      mappedTopicNote.hidden = false;
+      mappedTopicNote.textContent = `Showing records mapped to the local topic “${mappedTopic}”. NHGRI’s original topic labels remain in the table.`;
+    }
+
+    const applyFilters = () => {
+      const query = searchInput.value.trim().toLocaleLowerCase();
+      let visibleCount = 0;
+      for (const row of rows) {
+        const sourceTopics = JSON.parse(row.dataset.topics ?? "[]") as string[];
+        const mappedTopics = JSON.parse(row.dataset.mappedTopics ?? "[]") as string[];
+        const visible =
+          (!query || row.dataset.search?.includes(query))
+          && (!stateInput.value || row.dataset.state === stateInput.value)
+          && (!topicInput.value || sourceTopics.includes(topicInput.value))
+          && (!statusInput.value || row.dataset.status === statusInput.value)
+          && (!yearInput.value || row.dataset.year === yearInput.value)
+          && (!mappedTopic || mappedTopics.includes(mappedTopic));
+        row.hidden = !visible;
+        if (visible) visibleCount += 1;
+      }
+      count.textContent = visibleCount.toLocaleString();
+    };
+
+    form.addEventListener("input", applyFilters);
+    form.addEventListener("change", applyFilters);
+    form.addEventListener("submit", (event) => event.preventDefault());
+    applyFilters();
+  }
+  </script>
+</BaseLayout>

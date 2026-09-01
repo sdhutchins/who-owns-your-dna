@@ -1,0 +1,80 @@
+---
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import {
+  getNhgriManifest,
+  getNhgriRecords,
+  type NhgriManifest,
+  type NhgriSourceRecord,
+} from "../../../lib/records";
+import { formatDate, formatDateTime, humanizeStatus, withBase } from "../../../lib/site";
+
+export async function getStaticPaths() {
+  const [records, manifest] = await Promise.all([
+    getNhgriRecords(),
+    getNhgriManifest(),
+  ]);
+  return records.map((record) => ({
+    params: { id: record.id },
+    props: { record, manifest },
+  }));
+}
+
+interface Props {
+  record: NhgriSourceRecord;
+  manifest: NhgriManifest;
+}
+
+const { record, manifest } = Astro.props;
+---
+
+<BaseLayout title={record.source_record_label}>
+  <Breadcrumbs items={[
+    { label: "NHGRI source archive", href: "/sources/nhgri/" },
+    { label: record.source_record_label },
+  ]} />
+
+  <header class="record-header">
+    <p class="section-kicker">NHGRI source snapshot</p>
+    <h1>{record.source_record_label}</h1>
+    <p class="record-subtitle">{record.jurisdiction}</p>
+    <p><span class="source-verification-label">Retrieved from NHGRI</span></p>
+  </header>
+
+  <aside class="source-layer-banner">
+    <p><strong>Retrieval date:</strong> This record was retrieved from NHGRI on {formatDateTime(manifest.snapshot_fetched_at)}. NHGRI last updated its source database on {formatDate(manifest.source_page_last_updated)}. Consult the current primary source before relying on its legal status.</p>
+  </aside>
+
+  <dl class="metadata-list">
+    <dt>Jurisdiction</dt><dd>{record.jurisdiction}</dd>
+    <dt>Status</dt><dd>{humanizeStatus(record.base_status)}</dd>
+    <dt>NHGRI topic(s)</dt><dd>{record.source_topics.join(", ")}</dd>
+    <dt>Record year or session</dt><dd>{record.inferred_year ?? "Date not stated in source label"}</dd>
+    <dt>NHGRI database updated</dt><dd>{formatDate(manifest.source_page_last_updated)}</dd>
+    <dt>Snapshot retrieved</dt><dd>{formatDateTime(manifest.snapshot_fetched_at)}</dd>
+    <dt>Source row</dt><dd>{record.source_row_number}</dd>
+    <dt>Stable source ID</dt><dd><code>{record.id}</code></dd>
+  </dl>
+
+  <section class="reading-width">
+    <h2>NHGRI summary</h2>
+    <p>{record.source_summary}</p>
+  </section>
+
+  <section class="section-block reading-width">
+    <h2>Source links</h2>
+    <ul>
+      <li><a href={record.primary_url}>Open the primary link recorded by NHGRI</a></li>
+      <li><a href={record.source_page}>View the NHGRI Genome Statute and Legislation Database</a></li>
+      <li><a href={withBase(`/sources/nhgri/?state=${encodeURIComponent(record.jurisdiction)}`)}>Browse other {record.jurisdiction} source records</a></li>
+    </ul>
+    {record.primary_url.startsWith("http://") && <p class="notice"><strong>Legacy link:</strong> NHGRI recorded this destination using unencrypted HTTP. The link may be stale or unavailable.</p>}
+  </section>
+
+  <section class="section-block reading-width">
+    <h2>Provenance</h2>
+    <p>{manifest.attribution}. This source layer preserves the state, primary link, topic, bill status, and summary retrieved from NHGRI.</p>
+  </section>
+
+  <aside class="notice"><p><strong>Legal information disclaimer:</strong> This page provides public-reference information and does not provide legal advice.</p></aside>
+</BaseLayout>

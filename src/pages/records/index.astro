@@ -1,0 +1,254 @@
+---
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  getNhgriManifest,
+  getNhgriRecords,
+  getRecords,
+  getStatuses,
+  getTopics,
+  type LegalRecord,
+} from "../../lib/records";
+import { formatDate, formatDateTime, humanizeStatus, withBase } from "../../lib/site";
+
+const [projectRecords, nhgriRecords, topics, statuses, nhgriManifest] = await Promise.all([
+  getRecords(),
+  getNhgriRecords(),
+  getTopics(),
+  getStatuses(),
+  getNhgriManifest(),
+]);
+const totalRecordCount = projectRecords.length + nhgriRecords.length;
+const topicNames = new Map(topics.map((topic) => [topic.slug, topic.name]));
+const jurisdictions = [
+  ...new Set([
+    ...projectRecords.map((record) => record.jurisdiction),
+    ...nhgriRecords.map((record) => record.jurisdiction),
+  ]),
+].sort();
+const nhgriTopics = [...new Set(nhgriRecords.flatMap((record) => record.source_topics))].sort();
+const years = [
+  ...new Set([
+    ...projectRecords.flatMap((record) => {
+      const year = getProjectRecordDate(record).value?.slice(0, 4);
+      return year ? [year] : [];
+    }),
+    ...nhgriRecords.flatMap((record) =>
+      record.inferred_year ? [String(record.inferred_year)] : [],
+    ),
+  ]),
+].sort().reverse();
+
+function getProjectRecordDate(record: LegalRecord): {
+  label: string;
+  value: string | null;
+} {
+  if (record.effective_date) {
+    return { label: "Effective", value: record.effective_date };
+  }
+  if (record.signed_date) {
+    return { label: "Signed", value: record.signed_date };
+  }
+  if (record.last_action_date) {
+    return { label: "Last action", value: record.last_action_date };
+  }
+  if (record.introduced_date) {
+    return { label: "Introduced", value: record.introduced_date };
+  }
+  return { label: "Last reviewed", value: record.last_reviewed };
+}
+
+function searchText(values: Array<string | undefined>): string {
+  return values.filter(Boolean).join(" ").toLocaleLowerCase();
+}
+---
+
+<BaseLayout title="Policy records" wide>
+  <Breadcrumbs items={[{ label: "Policy records" }]} />
+  <h1>Policy records</h1>
+  <p class="page-intro">Search one combined collection of {totalRecordCount.toLocaleString()} U.S. genetics and genomics policy records.</p>
+
+  <p class="source-note">Records retrieved from NHGRI preserve the source database wording and identify their retrieval date. NHGRI last updated its source page on {formatDate(nhgriManifest.source_page_last_updated)}. Always consult the linked primary source for current legal text.</p>
+
+  <form class="filters policy-record-filters" id="record-filters" aria-label="Filter policy records">
+    <div class="filter-field">
+      <label for="record-query">Search</label>
+      <input id="record-query" name="q" type="search" placeholder="Bill, summary, state, or topic" />
+    </div>
+    <div class="filter-field">
+      <label for="jurisdiction-filter">Jurisdiction</label>
+      <select id="jurisdiction-filter" name="jurisdiction">
+        <option value="">All jurisdictions</option>
+        {jurisdictions.map((jurisdiction) => <option value={jurisdiction}>{jurisdiction}</option>)}
+      </select>
+    </div>
+    <div class="filter-field">
+      <label for="topic-filter">Topic</label>
+      <select id="topic-filter" name="topic">
+        <option value="">All topics</option>
+        <optgroup label="Project topics">
+          {topics.map((topic) => <option value={`project:${topic.slug}`}>{topic.name}</option>)}
+        </optgroup>
+        <optgroup label="NHGRI topics">
+          {nhgriTopics.map((topic) => <option value={`nhgri:${topic}`}>{topic}</option>)}
+        </optgroup>
+      </select>
+    </div>
+    <div class="filter-field">
+      <label for="status-filter">Status</label>
+      <select id="status-filter" name="status">
+        <option value="">All statuses</option>
+        {statuses.map((status) => <option value={status.slug}>{status.name}</option>)}
+      </select>
+    </div>
+    <div class="filter-field">
+      <label for="year-filter">Year or session</label>
+      <select id="year-filter" name="year">
+        <option value="">All years</option>
+        {years.map((year) => <option value={year}>{year}</option>)}
+        <option value="not-stated">Date not stated</option>
+      </select>
+    </div>
+    <div class="filter-actions">
+      <button type="reset">Clear filters</button>
+    </div>
+  </form>
+
+  <p class="result-count" aria-live="polite"><span id="result-count">{totalRecordCount.toLocaleString()}</span> records</p>
+
+  <div class="table-wrap policy-record-table-wrap">
+    <table class="policy-record-table">
+      <thead>
+        <tr>
+          <th scope="col">State</th>
+          <th scope="col">Primary Link</th>
+          <th scope="col">Topic(s)</th>
+          <th scope="col">Bill Status</th>
+          <th scope="col">Summary</th>
+        </tr>
+      </thead>
+      <tbody id="record-results">
+        {projectRecords.map((record) => {
+          const date = getProjectRecordDate(record);
+          const year = date.value?.slice(0, 4) ?? "not-stated";
+          const primarySource = record.primary_sources[0];
+          const displayTopics = record.topics.map(
+            (topic) => topicNames.get(topic) ?? topic,
+          );
+          return (
+            <tr
+              data-policy-record
+              data-search={searchText([
+                record.jurisdiction,
+                record.title,
+                record.identifier,
+                record.summary,
+                ...displayTopics,
+              ])}
+              data-jurisdiction={record.jurisdiction}
+              data-topics={JSON.stringify(record.topics.map((topic) => `project:${topic}`))}
+              data-status={record.status}
+              data-year={year}
+            >
+              <th scope="row">{record.jurisdiction}</th>
+              <td class="policy-record-table__primary">
+                <a href={primarySource.url}>{record.title}</a>
+                <span class="policy-record-table__date">{date.label}: {formatDate(date.value)}</span>
+                <a class="policy-record-table__details" href={withBase(`/records/${record.id}/`)}>Record details</a>
+              </td>
+              <td>{displayTopics.join(", ")}</td>
+              <td>{humanizeStatus(record.status)}</td>
+              <td>{record.summary}</td>
+            </tr>
+          );
+        })}
+        {nhgriRecords.map((record) => (
+          <tr
+            data-policy-record
+            data-search={searchText([
+              record.jurisdiction,
+              record.source_record_label,
+              record.source_summary,
+              ...record.source_topics,
+            ])}
+            data-jurisdiction={record.jurisdiction}
+            data-topics={JSON.stringify([
+              ...record.source_topics.map((topic) => `nhgri:${topic}`),
+              ...record.mapped_topics.map((topic) => `project:${topic}`),
+            ])}
+            data-status={record.base_status}
+            data-year={record.inferred_year ?? "not-stated"}
+          >
+            <th scope="row">{record.jurisdiction}</th>
+            <td class="policy-record-table__primary">
+              <a href={record.primary_url}>{record.source_record_label}</a>
+              <span class="policy-record-table__date">{record.inferred_year ? `${record.inferred_year} legislative session` : "Date not stated in source label"}</span>
+              <span class="policy-record-table__review">Retrieved from NHGRI on {formatDateTime(nhgriManifest.snapshot_fetched_at)}</span>
+              <a class="policy-record-table__details" href={withBase(`/source-records/nhgri/${record.id}/`)}>Record details</a>
+            </td>
+            <td>{record.source_topics.join(", ")}</td>
+            <td>{humanizeStatus(record.base_status)}</td>
+            <td>{record.source_summary}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p id="no-results" class="notice" hidden>No records match all selected filters.</p>
+
+  <noscript><p class="notice">Filtering requires JavaScript. All records remain visible without it.</p></noscript>
+
+  <script>
+    const form = document.querySelector<HTMLFormElement>("#record-filters");
+    const resultCount = document.querySelector<HTMLElement>("#result-count");
+    const noResults = document.querySelector<HTMLElement>("#no-results");
+    const records = [
+      ...document.querySelectorAll<HTMLTableRowElement>("[data-policy-record]"),
+    ];
+
+    if (form) {
+      const parameters = new URLSearchParams(window.location.search);
+      for (const fieldName of ["q", "jurisdiction", "topic", "status", "year"]) {
+        const field = form.elements.namedItem(fieldName) as HTMLInputElement | HTMLSelectElement;
+        const value = parameters.get(fieldName);
+        if (field && value) field.value = value;
+      }
+
+      const applyFilters = (): void => {
+        const values = new FormData(form);
+        const query = String(values.get("q") ?? "").trim().toLocaleLowerCase();
+        const jurisdiction = String(values.get("jurisdiction") ?? "");
+        const topic = String(values.get("topic") ?? "");
+        const status = String(values.get("status") ?? "");
+        const year = String(values.get("year") ?? "");
+        let visibleCount = 0;
+
+        for (const record of records) {
+          const recordTopics = JSON.parse(record.dataset.topics ?? "[]") as string[];
+          const visible =
+            (!query || record.dataset.search?.includes(query))
+            && (!jurisdiction || record.dataset.jurisdiction === jurisdiction)
+            && (!topic || recordTopics.includes(topic))
+            && (!status || record.dataset.status === status)
+            && (!year || record.dataset.year === year);
+          record.hidden = !visible;
+          if (visible) visibleCount += 1;
+        }
+
+        if (resultCount) resultCount.textContent = visibleCount.toLocaleString();
+        if (noResults) noResults.hidden = visibleCount !== 0;
+      };
+
+      form.addEventListener("input", applyFilters);
+      form.addEventListener("change", applyFilters);
+      form.addEventListener("submit", (event) => event.preventDefault());
+      form.addEventListener("reset", () => {
+        window.requestAnimationFrame(() => {
+          window.history.replaceState({}, "", window.location.pathname);
+          applyFilters();
+        });
+      });
+      applyFilters();
+    }
+  </script>
+</BaseLayout>
