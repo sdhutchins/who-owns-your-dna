@@ -1,0 +1,51 @@
+name: Validate and build
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate structured records
+        run: npm run validate:data
+
+      - name: Run tests
+        run: npm test
+
+      - name: Lint and type-check
+        run: npm run lint && npm run check
+
+      - name: Build site and data exports
+        env:
+          BASE_PATH: /who-owns-your-dna
+        run: npm run build
+
+      - name: Check generated links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --max-retries 2
+            --accept 200,206,429
+            --exclude '^https://example.org'
+            'dist/**/*.html'
+          fail: true
