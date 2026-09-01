@@ -1,0 +1,101 @@
+{
+  "dataset": "NHGRI Genome Statute and Legislation Database",
+  "source_page": "https://www.genome.gov/about-genomics/policy-issues/Genome-Statute-Legislation-Database",
+  "source_query": "https://www.genome.gov/about-genomics/policy-issues/Genome-Statute-Legislation-Database?items_per_page=All",
+  "source_page_last_updated": "2024-02-08",
+  "snapshot_fetched_at": "2026-09-01T02:32:44.049Z",
+  "stated_coverage": "State statutes and bills introduced during 2002-2024 U.S. state legislative sessions.",
+  "stated_exclusions": [
+    "Federal statutes and bills",
+    "Regulations",
+    "State laws related to genetic counseling"
+  ],
+  "attribution": "Courtesy: National Human Genome Research Institute",
+  "record_count": 1175,
+  "jurisdiction_count": 51,
+  "declared_topics": [
+    "AI and Genomic Data",
+    "Biomarker Testing",
+    "Consumer Personal Data Privacy",
+    "Genetic data storage/privacy/sharing (medicine)",
+    "Coverage and reimbursement",
+    "Employment Nondiscrimination",
+    "Gene Patents",
+    "Genetic Data & Law Enforcement",
+    "Genetic data storage/privacy/sharing (industry)",
+    "Genetic discrimination",
+    "Health Insurance Coverage",
+    "Health Insurance Nondiscrimination",
+    "Lab Developed Tests",
+    "Neonatal sequencing",
+    "Other Lines of Insurance Nondiscrimination",
+    "Other Topics",
+    "Parentage law",
+    "Pharmacogenomics",
+    "Privacy",
+    "Research",
+    "Use of Residual Newborn Screening Specimens"
+  ],
+  "observed_topics": [
+    "Consumer Personal Data Privacy",
+    "Coverage and reimbursement",
+    "Employment Nondiscrimination",
+    "Genetic Data & Law Enforcement",
+    "Genetic data storage/privacy/sharing (industry)",
+    "Genetic data storage/privacy/sharing (medicine)",
+    "Genetic discrimination",
+    "Health Insurance Coverage",
+    "Health Insurance Nondiscrimination",
+    "Lab Developed Tests",
+    "Neonatal sequencing",
+    "Other Lines of Insurance Nondiscrimination",
+    "Other Topics",
+    "Parentage law",
+    "Privacy",
+    "Research",
+    "Use of Residual Newborn Screening Specimens"
+  ],
+  "declared_statuses": [
+    "Approved",
+    "Died",
+    "Enacted",
+    "Passed House",
+    "Passed Senate",
+    "Statute",
+    "Pending",
+    "Introduced"
+  ],
+  "observed_statuses": [
+    "Approved",
+    "Died",
+    "Enacted",
+    "Introduced",
+    "Passed House",
+    "Passed Senate",
+    "Pending",
+    "Statute"
+  ],
+  "http_primary_link_count": 620,
+  "duplicate_urls": {
+    "group_count": 27,
+    "record_count": 75,
+    "max_multiplicity": 6
+  },
+  "duplicate_labels": {
+    "group_count": 5,
+    "record_count": 11,
+    "max_multiplicity": 3
+  },
+  "duplicate_state_label_url_keys": {
+    "group_count": 3,
+    "record_count": 7,
+    "max_multiplicity": 3
+  },
+  "exact_duplicates": {
+    "group_count": 2,
+    "record_count": 4,
+    "max_multiplicity": 2
+  },
+  "source_html_sha256": "525aa2702db624732922ba0ed0eb3e39ecc22f6467cd7ac1d1ab57ef184c3964",
+  "records_sha256": "e465a126f5fb0fb8c6eee319b0374546c2951a40de7d9b387bbd74a92498f4ad"
+}

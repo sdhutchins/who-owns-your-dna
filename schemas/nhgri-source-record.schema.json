@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://whoownsyourdna.org/schemas/nhgri-source-record.schema.json",
+  "title": "NHGRI imported source record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "source_dataset",
+    "jurisdiction",
+    "source_record_label",
+    "primary_url",
+    "source_topics",
+    "source_status",
+    "base_status",
+    "source_summary",
+    "mapped_topics",
+    "inferred_year",
+    "verification_status",
+    "source_page",
+    "source_row_number"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^nhgri-[a-f0-9]{20}(?:-[2-9][0-9]*)?$" },
+    "source_dataset": { "const": "NHGRI Genome Statute and Legislation Database" },
+    "jurisdiction": { "type": "string", "minLength": 1 },
+    "source_record_label": { "type": "string", "minLength": 1 },
+    "primary_url": { "type": "string", "format": "uri", "pattern": "^https?://" },
+    "source_topics": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "source_status": { "type": "string", "minLength": 1 },
+    "base_status": { "enum": ["approved", "died", "enacted", "passed-house", "passed-senate", "statute", "pending", "introduced"] },
+    "source_summary": { "type": "string", "minLength": 1 },
+    "mapped_topics": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "inferred_year": {
+      "oneOf": [
+        { "type": "integer", "minimum": 2002, "maximum": 2024 },
+        { "type": "null" }
+      ]
+    },
+    "verification_status": { "const": "reviewed-nhgri" },
+    "source_page": { "type": "string", "format": "uri" },
+    "source_row_number": { "type": "integer", "minimum": 1 }
+  }
+}
