@@ -1,0 +1,34 @@
+{
+  "name": "who-owns-your-dna",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "npm run data:prepare && astro check && astro build",
+    "check": "astro check",
+    "test": "vitest run",
+    "lint": "eslint .",
+    "import:nhgri": "node scripts/import-nhgri.mjs",
+    "validate:data": "node scripts/validate-data.mjs",
+    "export:data": "node scripts/export-data.mjs",
+    "build:changelog": "node scripts/build-changelog.mjs",
+    "data:prepare": "npm run validate:data && npm run export:data && npm run build:changelog"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@astrojs/check": "0.9.10",
+    "@fontsource/roboto": "5.3.0",
+    "@types/node": "^26.4.0",
+    "ajv": "8.20.0",
+    "astro": "7.2.10",
+    "cheerio": "1.2.0",
+    "eslint": "10.9.1",
+    "eslint-plugin-astro": "1.7.0",
+    "globals": "17.11.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.69.0",
+    "vitest": "4.1.11",
+    "yaml": "2.9.0"
+  }
+}
