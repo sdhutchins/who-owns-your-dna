@@ -43,6 +43,10 @@ npm run export:data
 
 Review the changed manifest, record count, source-page date, duplicate metrics, and checksums before accepting a refresh. See `docs/nhgri-source-import.md` for provenance and known source conditions.
 
+## Citation
+
+Please cite this resource when using its data or project-authored summaries in research, reporting, analysis, or other published work. Identify the dataset version or access date whenever possible. See the [citation guidance](https://whoownsyourdna.org/cite/) for suggested formats.
+
 ## Production build
 
 ```bash
