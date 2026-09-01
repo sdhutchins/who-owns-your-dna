@@ -1,0 +1,62 @@
+id: al-hb-436-2025
+jurisdiction: Alabama
+jurisdiction_code: AL
+jurisdiction_type: state
+record_type: legislation
+title: Biological and neural data protections
+subtitle: Proposed consent requirements for covered entities
+identifier: HB 436 (2025)
+bill_number: HB 436
+session: 2025 Regular Session
+status: died
+introduced_date: 2025-03-18
+last_action_date: 2025-03-18
+last_reviewed: 2026-08-31
+record_version: "1.0"
+verification_status: verified-primary
+topics:
+  - genetic-privacy
+  - consent
+  - data-sharing
+summary: >-
+  Alabama HB 436 proposed restrictions on covered entities that maintain
+  biological or neural data. Its biological-data definition included data
+  generated through processing or analysis of genetic and other biological
+  properties.
+legal_effects: >-
+  The bill would have required express consent for specified transfers,
+  disclosures, secondary uses, and marketing based on biological or neural
+  data. It would have authorized Attorney General enforcement and civil
+  penalties of up to $3,000 per violation after an opportunity to cure.
+plain_language: >-
+  Covered businesses would have needed permission before sharing biological or
+  neural data or using it beyond the service requested by a consumer. The bill
+  remained in committee and did not become law.
+limitations: >-
+  The bill contained exemptions for specified health information, research,
+  insurance activities, legal obligations, security practices, and other uses.
+  Whether an entity or data practice would have been covered depended on the
+  bill's definitions and exceptions.
+primary_sources:
+  - title: HB 436 introduced bill
+    url: https://alison.legislature.state.al.us/files/pdf/SearchableInstruments/2025RS/HB436-int.pdf
+    publisher: Alabama Legislature
+    accessed_date: 2026-08-31
+secondary_sources:
+  - title: Alabama HB 436 legislative history
+    url: https://legiscan.com/AL/bill/HB436/2025
+    publisher: LegiScan
+    accessed_date: 2026-08-31
+related_records:
+  - record_id: al-hb-263-2026
+    relationship: Succeeded by a narrower 2026 proposal
+history:
+  - date: 2025-03-18
+    event: Bill introduced and referred to the House Insurance Committee.
+    source: Alabama Legislature
+  - date: 2025-05-14
+    event: Bill died when the 2025 regular session adjourned without further action.
+    source: Alabama Legislature
+  - date: 2026-08-31
+    event: Record created from the introduced bill and legislative history.
+    source: Project review

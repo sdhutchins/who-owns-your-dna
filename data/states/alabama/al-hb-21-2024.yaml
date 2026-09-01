@@ -1,0 +1,79 @@
+id: al-hb-21-2024
+jurisdiction: Alabama
+jurisdiction_code: AL
+jurisdiction_type: state
+record_type: legislation
+title: Alabama Genetic Data Privacy Act
+subtitle: Privacy requirements for direct-to-consumer genetic testing companies
+identifier: HB 21 (2024)
+bill_number: HB 21
+session: 2024 Regular Session
+statute_citation: Ala. Code §§ 8-43-1 to 8-43-6
+status: enacted
+introduced_date: 2024-02-06
+signed_date: 2024-05-16
+effective_date: 2024-10-01
+last_action_date: 2024-05-16
+last_reviewed: 2026-08-31
+record_version: "1.0"
+verification_status: verified-primary
+topics:
+  - genetic-privacy
+  - direct-to-consumer-testing
+  - consent
+  - data-sharing
+  - data-deletion
+  - sample-destruction
+summary: >-
+  Alabama HB 21 enacted the Alabama Genetic Data Privacy Act, which regulates
+  covered direct-to-consumer genetic testing companies and their contractors.
+  The act requires privacy notices, consent for specified uses and disclosures,
+  and procedures for accessing or deleting genetic data and destroying samples.
+legal_effects: >-
+  Covered companies must obtain express consent for specified data collection,
+  use, retention, and disclosure practices. The act also requires informed
+  consent for certain research, reasonable security practices, deletion and
+  sample-destruction procedures, and confidentiality protections. The Attorney
+  General may seek civil remedies for violations.
+plain_language: >-
+  A covered consumer genetic testing company must explain how it uses genetic
+  information and obtain specific permission for several uses. Consumers may
+  access their data, revoke consent, and request deletion or sample destruction
+  within the act's stated procedures.
+limitations: >-
+  The act is limited to entities meeting its definition of a genetic testing
+  company and contains exclusions for health care providers, covered clinical
+  activities, research, and other specified circumstances.
+primary_sources:
+  - title: HB 21 enrolled act
+    url: https://alison.legislature.state.al.us/files/pdf/SearchableInstruments/2024RS/HB21-enr.pdf
+    publisher: Alabama Legislature
+    accessed_date: 2026-08-31
+  - title: Alabama Code § 8-43-2
+    url: https://alison.legislature.state.al.us/code-of-alabama?section=8-43-2
+    publisher: Alabama Legislature
+    accessed_date: 2026-08-31
+secondary_sources:
+  - title: Alabama HB 21 legislative history
+    url: https://legiscan.com/AL/bill/HB21/2024
+    publisher: LegiScan
+    accessed_date: 2026-08-31
+history:
+  - date: 2024-02-06
+    event: Bill introduced and referred to the House Judiciary Committee.
+    source: Alabama Legislature
+  - date: 2024-02-20
+    event: House passed the bill.
+    source: Alabama Legislature
+  - date: 2024-05-08
+    event: Senate passed the bill as amended.
+    source: Alabama Legislature
+  - date: 2024-05-16
+    event: Enacted as Act 2024-384.
+    source: Alabama Legislature
+  - date: 2024-10-01
+    event: Act became effective.
+    source: Alabama Legislature
+  - date: 2026-08-31
+    event: Record created from the enrolled act, current code, and legislative history.
+    source: Project review

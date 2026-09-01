@@ -1,0 +1,66 @@
+id: al-hb-265-2026
+jurisdiction: Alabama
+jurisdiction_code: AL
+jurisdiction_type: state
+record_type: legislation
+title: Unlawful use of DNA
+subtitle: Renewed proposal for criminal offenses involving nonconsensual DNA use
+identifier: HB 265 (2026)
+bill_number: HB 265
+session: 2026 Regular Session
+status: died
+introduced_date: 2026-01-15
+last_action_date: 2026-02-05
+last_reviewed: 2026-08-31
+record_version: "1.0"
+verification_status: verified-primary
+topics:
+  - genetic-privacy
+  - consent
+  - data-sharing
+  - data-sale
+  - law-enforcement
+summary: >-
+  Alabama HB 265 renewed a proposal to create first-, second-, and third-degree
+  offenses for specified intentional collection, retention, testing,
+  disclosure, sale, or transfer of another person's DNA sample or genetic data
+  without express consent.
+legal_effects: >-
+  The bill would have assigned different criminal penalties to unauthorized DNA
+  sale or transfer, genetic testing or disclosure, and specified collection or
+  retention. It used definitions from Alabama's Genetic Data Privacy Act and
+  included stated exceptions.
+plain_language: >-
+  This 2026 proposal revisited the criminal DNA-use protections considered in
+  2025. It reached the House calendar but did not receive a House floor vote and
+  did not become law.
+limitations: >-
+  The bill included exceptions for legal process, law enforcement and forensic
+  databases, and genetic testing companies complying with state law. Its
+  proposed October 1, 2026 effective date never became operative.
+primary_sources:
+  - title: HB 265 introduced bill
+    url: https://alison.legislature.state.al.us/files/pdf/SearchableInstruments/2026RS/HB265-int.pdf
+    publisher: Alabama Legislature
+    accessed_date: 2026-08-31
+secondary_sources:
+  - title: Alabama HB 265 legislative history
+    url: https://legiscan.com/AL/bill/HB265/2026
+    publisher: LegiScan
+    accessed_date: 2026-08-31
+related_records:
+  - record_id: al-hb-449-2025
+    relationship: Reintroduction of the 2025 proposal
+history:
+  - date: 2026-01-15
+    event: Bill introduced and referred to the House Judiciary Committee.
+    source: Alabama Legislature
+  - date: 2026-02-05
+    event: Bill read a second time and placed on the House calendar.
+    source: Alabama Legislature
+  - date: 2026-04-09
+    event: Bill died when the 2026 regular session adjourned without final passage.
+    source: Alabama Legislature
+  - date: 2026-08-31
+    event: Record created from the introduced bill and legislative history.
+    source: Project review

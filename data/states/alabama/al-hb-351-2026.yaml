@@ -1,0 +1,75 @@
+id: al-hb-351-2026
+jurisdiction: Alabama
+jurisdiction_code: AL
+jurisdiction_type: state
+record_type: legislation
+title: Alabama Personal Data Protection Act
+subtitle: Comprehensive consumer-data protections that include genetic data
+identifier: HB 351 (2026)
+bill_number: HB 351
+session: 2026 Regular Session
+statute_citation: Ala. Code Title 8, Chapter 44
+status: enacted
+introduced_date: 2026-01-29
+signed_date: 2026-04-17
+effective_date: 2027-05-01
+last_action_date: 2026-04-17
+last_reviewed: 2026-08-31
+record_version: "1.0"
+verification_status: verified-primary
+topics:
+  - genetic-privacy
+  - consent
+  - data-sharing
+  - data-sale
+  - data-deletion
+summary: >-
+  Alabama HB 351 enacted the Alabama Personal Data Protection Act. The act
+  classifies genetic or biometric data processed to uniquely identify a person
+  as sensitive data and establishes broader consumer rights and controller
+  obligations for covered businesses.
+legal_effects: >-
+  Covered controllers must obtain consent before processing sensitive data and
+  must comply with duties concerning transparency, data minimization, security,
+  consumer requests, targeted advertising, personal-data sales, and certain
+  profiling. The Attorney General has exclusive enforcement authority.
+plain_language: >-
+  Beginning May 1, 2027, qualifying businesses will have to follow statewide
+  rules for personal data. Genetic identifying data receives the act's
+  sensitive-data protections, including a general consent requirement for its
+  processing.
+limitations: >-
+  The act applies only when its business and processing thresholds are met and
+  contains entity-level and data-level exemptions, including several involving
+  health care and federally regulated information. It was enacted in 2026 but
+  is not effective until May 1, 2027.
+primary_sources:
+  - title: HB 351 enrolled act
+    url: https://alison.legislature.state.al.us/files/pdf/SearchableInstruments/2026RS/HB351-enr.pdf
+    publisher: Alabama Legislature
+    accessed_date: 2026-08-31
+  - title: Alabama Code § 8-44-1
+    url: https://alison.legislature.state.al.us/code-of-alabama?section=8-44-1
+    publisher: Alabama Legislature
+    accessed_date: 2026-08-31
+secondary_sources:
+  - title: Alabama HB 351 legislative history
+    url: https://legiscan.com/AL/bill/HB351/2026
+    publisher: LegiScan
+    accessed_date: 2026-08-31
+history:
+  - date: 2026-01-29
+    event: Bill introduced and referred to the House Commerce and Small Business Committee.
+    source: Alabama Legislature
+  - date: 2026-02-24
+    event: House passed the bill as amended.
+    source: Alabama Legislature
+  - date: 2026-04-07
+    event: Senate passed the bill as amended and the House concurred.
+    source: Alabama Legislature
+  - date: 2026-04-17
+    event: Enacted as Act 2026-552.
+    source: Alabama Legislature
+  - date: 2026-08-31
+    event: Record created from the enrolled act, current code, and legislative history.
+    source: Project review

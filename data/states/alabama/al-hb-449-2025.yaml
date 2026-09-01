@@ -1,0 +1,69 @@
+id: al-hb-449-2025
+jurisdiction: Alabama
+jurisdiction_code: AL
+jurisdiction_type: state
+record_type: legislation
+title: Unlawful use of DNA
+subtitle: Proposed criminal offenses for nonconsensual DNA collection and use
+identifier: HB 449 (2025)
+bill_number: HB 449
+session: 2025 Regular Session
+status: died
+introduced_date: 2025-03-18
+last_action_date: 2025-05-06
+last_reviewed: 2026-08-31
+record_version: "1.0"
+verification_status: verified-primary
+topics:
+  - genetic-privacy
+  - consent
+  - data-sharing
+  - data-sale
+  - law-enforcement
+summary: >-
+  Alabama HB 449 proposed first-, second-, and third-degree offenses for
+  specified intentional collection, retention, testing, disclosure, sale, or
+  transfer of another person's DNA sample or genetic data without express
+  consent.
+legal_effects: >-
+  The engrossed bill would have assigned different criminal penalties to the
+  sale or transfer of DNA, unauthorized genetic testing or disclosure, and
+  specified collection or retention of DNA samples. It defined genetic data and
+  genetic testing by reference to Alabama's Genetic Data Privacy Act.
+plain_language: >-
+  The proposal would have made several kinds of intentional, nonconsensual DNA
+  collection and use criminal offenses. It passed the House but did not receive
+  a final Senate vote and did not become law.
+limitations: >-
+  The engrossed bill included exceptions for legal process, law enforcement and
+  forensic databases, specified health care activities, and genetic testing
+  companies complying with state law. Its provisions never took effect.
+primary_sources:
+  - title: HB 449 engrossed bill
+    url: https://alison.legislature.state.al.us/files/pdf/SearchableInstruments/2025RS/HB449-eng.pdf
+    publisher: Alabama Legislature
+    accessed_date: 2026-08-31
+secondary_sources:
+  - title: Alabama HB 449 legislative history
+    url: https://legiscan.com/AL/bill/HB449/2025
+    publisher: LegiScan
+    accessed_date: 2026-08-31
+related_records:
+  - record_id: al-hb-265-2026
+    relationship: Reintroduced as a 2026 proposal
+history:
+  - date: 2025-03-18
+    event: Bill introduced and referred to the House Judiciary Committee.
+    source: Alabama Legislature
+  - date: 2025-04-29
+    event: House passed the bill as amended.
+    source: Alabama Legislature
+  - date: 2025-05-06
+    event: Senate committee reported the bill and placed it on the calendar.
+    source: Alabama Legislature
+  - date: 2025-05-14
+    event: Bill died when the 2025 regular session adjourned without final passage.
+    source: Alabama Legislature
+  - date: 2026-08-31
+    event: Record created from the engrossed bill and legislative history.
+    source: Project review

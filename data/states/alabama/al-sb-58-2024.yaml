@@ -1,0 +1,64 @@
+id: al-sb-58-2024
+jurisdiction: Alabama
+jurisdiction_code: AL
+jurisdiction_type: state
+record_type: legislation
+title: Genetic privacy and insurance protections
+subtitle: Proposed consent, confidentiality, ownership, and insurance restrictions
+identifier: SB 58 (2024)
+bill_number: SB 58
+session: 2024 Regular Session
+status: died
+introduced_date: 2024-02-06
+last_action_date: 2024-02-06
+last_reviewed: 2026-08-31
+record_version: "1.0"
+verification_status: verified-primary
+topics:
+  - genetic-privacy
+  - genetic-discrimination
+  - consent
+  - data-sharing
+  - health-insurance
+  - life-insurance
+  - long-term-care-insurance
+summary: >-
+  Alabama SB 58 proposed express-consent requirements for collecting, analyzing,
+  using, retaining, or transferring DNA. It also proposed confidentiality and
+  ownership protections for DNA-analysis results and restrictions on insurer
+  use of genetic information.
+legal_effects: >-
+  The bill would have established criminal penalties for specified DNA
+  collection, analysis, disclosure, and transfer without express consent. It
+  also would have restricted health, life, and long-term care insurers from
+  requiring or using genetic information for specified coverage and premium
+  decisions.
+plain_language: >-
+  The proposal would have given individuals greater control over DNA samples
+  and test results and would have limited how several kinds of insurers could
+  use genetic information. It did not become law.
+limitations: >-
+  The bill contained exceptions for criminal investigations, court orders,
+  medical care, regulated research, paternity matters, and other specified
+  uses. It remained in the Senate Banking and Insurance Committee and died at
+  the end of the 2024 session.
+primary_sources:
+  - title: SB 58 introduced bill
+    url: https://alison.legislature.state.al.us/files/pdf/SearchableInstruments/2024RS/SB58-int.pdf
+    publisher: Alabama Legislature
+    accessed_date: 2026-08-31
+secondary_sources:
+  - title: Alabama SB 58 legislative history
+    url: https://legiscan.com/AL/bill/SB58/2024
+    publisher: LegiScan
+    accessed_date: 2026-08-31
+history:
+  - date: 2024-02-06
+    event: Bill introduced and referred to the Senate Banking and Insurance Committee.
+    source: Alabama Legislature
+  - date: 2024-05-09
+    event: Bill died when the 2024 regular session adjourned without further action.
+    source: Alabama Legislature
+  - date: 2026-08-31
+    event: Record created from the introduced bill and legislative history.
+    source: Project review
