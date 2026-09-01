@@ -1,0 +1,61 @@
+---
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getJurisdictions, getNhgriRecords, getRecords } from "../../lib/records";
+import { withBase } from "../../lib/site";
+
+const [jurisdictions, projectRecords, nhgriRecords] = await Promise.all([
+  getJurisdictions(),
+  getRecords(),
+  getNhgriRecords(),
+]);
+
+function countJurisdictionRecords(code: string, name: string): number {
+  const projectRecordCount = projectRecords.filter(
+    (record) => record.jurisdiction_code === code,
+  ).length;
+  const nhgriRecordCount = nhgriRecords.filter(
+    (record) => record.jurisdiction === name,
+  ).length;
+  return projectRecordCount + nhgriRecordCount;
+}
+---
+
+<BaseLayout title="States">
+  <Breadcrumbs items={[{ label: "States" }]} />
+  <h1>State directory</h1>
+  <p class="page-intro">Choose a state or the District of Columbia to browse its genetics and genomics policy records.</p>
+
+  <div class="table-wrap section-block">
+    <table class="directory-table">
+      <thead>
+        <tr>
+          <th scope="col">Jurisdiction</th>
+          <th scope="col">Records</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          jurisdictions.map((jurisdiction) => {
+            const recordCount = countJurisdictionRecords(
+              jurisdiction.code,
+              jurisdiction.name,
+            );
+            return (
+              <tr>
+                <th scope="row">
+                  <a href={withBase(`/states/${jurisdiction.slug}/`)}>{jurisdiction.name}</a>
+                </th>
+                <td>
+                  <a href={withBase(`/records/?jurisdiction=${encodeURIComponent(jurisdiction.name)}`)}>
+                    {recordCount.toLocaleString()}
+                  </a>
+                </td>
+              </tr>
+            );
+          })
+        }
+      </tbody>
+    </table>
+  </div>
+</BaseLayout>

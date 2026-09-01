@@ -1,0 +1,62 @@
+---
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  getJurisdictions,
+  getNhgriManifest,
+  getNhgriRecords,
+  getRecords,
+  type Jurisdiction,
+} from "../../lib/records";
+import { formatDateTime, withBase } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const [jurisdictions, projectRecords, nhgriRecords] = await Promise.all([
+    getJurisdictions(),
+    getRecords(),
+    getNhgriRecords(),
+  ]);
+  return jurisdictions.map((jurisdiction) => {
+    const projectRecordCount = projectRecords.filter(
+      (record) => record.jurisdiction_code === jurisdiction.code,
+    ).length;
+    const nhgriRecordCount = nhgriRecords.filter(
+      (record) => record.jurisdiction === jurisdiction.name,
+    ).length;
+    return {
+      params: { slug: jurisdiction.slug },
+      props: {
+        jurisdiction,
+        recordCount: projectRecordCount + nhgriRecordCount,
+        includesNhgriRecords: nhgriRecordCount > 0,
+      },
+    };
+  });
+}
+
+interface Props {
+  jurisdiction: Jurisdiction;
+  recordCount: number;
+  includesNhgriRecords: boolean;
+}
+
+const { jurisdiction, recordCount, includesNhgriRecords } = Astro.props;
+const nhgriManifest = await getNhgriManifest();
+const recordsUrl = `/records/?jurisdiction=${encodeURIComponent(jurisdiction.name)}`;
+---
+
+<BaseLayout title={jurisdiction.name}>
+  <Breadcrumbs items={[{ label: "States", href: "/states/" }, { label: jurisdiction.name }]} />
+  <p class="section-kicker">Jurisdiction records</p>
+  <h1>{jurisdiction.name}</h1>
+  <p class="page-intro">{recordCount.toLocaleString()} genetics and genomics policy {recordCount === 1 ? "record" : "records"} in the combined directory.</p>
+
+  <p><a class="button-link" href={withBase(recordsUrl)}>View {jurisdiction.name} records</a></p>
+  <p class="reading-width">Use the records directory to search within this jurisdiction and narrow results by topic, status, or year.</p>
+
+  {includesNhgriRecords && (
+    <p class="source-note">This view includes records retrieved from the National Human Genome Research Institute on {formatDateTime(nhgriManifest.snapshot_fetched_at)}. Each record preserves its source and retrieval provenance.</p>
+  )}
+
+  <p class="section-block"><a href={withBase("/federal/")}>Review federal law and policy</a></p>
+</BaseLayout>

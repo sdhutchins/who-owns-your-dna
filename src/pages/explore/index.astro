@@ -1,0 +1,19 @@
+---
+import { withBase } from "../../lib/site";
+
+const destination = withBase("/records/");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content={`0;url=${destination}`} />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={destination} />
+    <title>Explore policy records</title>
+  </head>
+  <body>
+    <p><a href={destination}>Continue to the policy records directory</a></p>
+  </body>
+</html>

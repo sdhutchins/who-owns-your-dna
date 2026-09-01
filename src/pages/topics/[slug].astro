@@ -1,0 +1,60 @@
+---
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  getNhgriManifest,
+  getNhgriRecords,
+  getRecords,
+  getTopics,
+  type Topic,
+} from "../../lib/records";
+import { formatDateTime, withBase } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const [topics, projectRecords, nhgriRecords] = await Promise.all([
+    getTopics(),
+    getRecords(),
+    getNhgriRecords(),
+  ]);
+  return topics.map((topic) => {
+    const projectRecordCount = projectRecords.filter(
+      (record) => record.topics.includes(topic.slug),
+    ).length;
+    const nhgriRecordCount = nhgriRecords.filter(
+      (record) => record.mapped_topics.includes(topic.slug),
+    ).length;
+    return {
+      params: { slug: topic.slug },
+      props: {
+        topic,
+        recordCount: projectRecordCount + nhgriRecordCount,
+        includesNhgriRecords: nhgriRecordCount > 0,
+      },
+    };
+  });
+}
+
+interface Props {
+  topic: Topic;
+  recordCount: number;
+  includesNhgriRecords: boolean;
+}
+
+const { topic, recordCount, includesNhgriRecords } = Astro.props;
+const nhgriManifest = await getNhgriManifest();
+const recordsUrl = `/records/?topic=${encodeURIComponent(`project:${topic.slug}`)}`;
+---
+
+<BaseLayout title={topic.name}>
+  <Breadcrumbs items={[{ label: "Topics", href: "/topics/" }, { label: topic.name }]} />
+  <p class="section-kicker">Policy topic</p>
+  <h1>{topic.name}</h1>
+  <p class="page-intro">{recordCount.toLocaleString()} state and federal {recordCount === 1 ? "record" : "records"} in the combined directory.</p>
+
+  <p><a class="button-link" href={withBase(recordsUrl)}>View {topic.name.toLocaleLowerCase()} records</a></p>
+  <p class="reading-width">Use the records directory to search within this topic and narrow results by jurisdiction, status, or year.</p>
+
+  {includesNhgriRecords && (
+    <p class="source-note">This topic includes mapped records retrieved from the National Human Genome Research Institute on {formatDateTime(nhgriManifest.snapshot_fetched_at)}. NHGRI’s original topic labels remain available on each record.</p>
+  )}
+</BaseLayout>

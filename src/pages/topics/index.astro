@@ -1,0 +1,42 @@
+---
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getNhgriRecords, getRecords, getTopics } from "../../lib/records";
+import { withBase } from "../../lib/site";
+
+const [projectRecords, nhgriRecords, topics] = await Promise.all([
+  getRecords(),
+  getNhgriRecords(),
+  getTopics(),
+]);
+
+function countTopicRecords(topicSlug: string): number {
+  const projectRecordCount = projectRecords.filter(
+    (record) => record.topics.includes(topicSlug),
+  ).length;
+  const nhgriRecordCount = nhgriRecords.filter(
+    (record) => record.mapped_topics.includes(topicSlug),
+  ).length;
+  return projectRecordCount + nhgriRecordCount;
+}
+---
+
+<BaseLayout title="Topics">
+  <Breadcrumbs items={[{ label: "Topics" }]} />
+  <h1>Policy topics</h1>
+  <p class="page-intro">Browse state and federal records through a consistent genetics and genomics policy vocabulary.</p>
+
+  <ul class="topic-grid section-block">
+    {
+      topics.map((topic) => {
+        const recordCount = countTopicRecords(topic.slug);
+        return (
+          <li>
+            <a href={withBase(`/topics/${topic.slug}/`)}>{topic.name}</a><br />
+            <span class="metadata">{recordCount.toLocaleString()} {recordCount === 1 ? "record" : "records"}</span>
+          </li>
+        );
+      })
+    }
+  </ul>
+</BaseLayout>

@@ -1,0 +1,20 @@
+---
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getRecords } from "../../lib/records";
+import { withBase } from "../../lib/site";
+
+const federalRecords = (await getRecords()).filter(
+  (record) => record.jurisdiction_type === "federal",
+);
+const recordsUrl = `/records/?jurisdiction=${encodeURIComponent("United States")}`;
+---
+
+<BaseLayout title="Federal policy">
+  <Breadcrumbs items={[{ label: "Federal" }]} />
+  <h1>Federal law and policy</h1>
+  <p class="page-intro">{federalRecords.length.toLocaleString()} nationwide genetics and genomics policy {federalRecords.length === 1 ? "record" : "records"} in the combined directory.</p>
+
+  <p><a class="button-link" href={withBase(recordsUrl)}>View federal records</a></p>
+  <p class="reading-width">Use the records directory to distinguish statutes, regulations, guidance, and research policies, then narrow results by topic, status, or year.</p>
+</BaseLayout>
