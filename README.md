@@ -1,24 +1,92 @@
 # Who Owns Your DNA?
 
-Who Owns Your DNA? is a searchable public reference for U.S. genetics and genomics law and policy. The static website connects policy records with primary sources and downloadable data.
+[![Validate and Build](https://github.com/sdhutchins/who-owns-your-dna/actions/workflows/validate.yml/badge.svg)](https://github.com/sdhutchins/who-owns-your-dna/actions/workflows/validate.yml)
+[![Deploy to GitHub Pages](https://github.com/sdhutchins/who-owns-your-dna/actions/workflows/pages.yml/badge.svg)](https://github.com/sdhutchins/who-owns-your-dna/actions/workflows/pages.yml)
+
+Who Owns Your DNA? is a searchable public reference for U.S. genetics and
+genomics law and policy. The [website](https://whoownsyourdna.org/) connects
+policy records with primary sources and downloadable data.
 
 The site provides informational summaries. It does not provide legal advice.
 
-## Requirements
+## Table of Contents
+
+- [Project Background](#project-background)
+- [Data and Provenance](#data-and-provenance)
+- [Install & Setup](#install--setup)
+- [Usage](#usage)
+- [Validation](#validation)
+- [Refresh the NHGRI Snapshot](#refresh-the-nhgri-snapshot)
+- [Repository Structure](#repository-structure)
+- [Contributing](#contributing)
+- [Citation](#citation)
+- [Deployment](#deployment)
+
+## Project Background
+
+The project makes U.S. genetics and genomics policy records easier to search by
+jurisdiction, topic, status, and year. Its static architecture keeps the public
+site reproducible while connecting each summary to its source and review
+history.
+
+Factual legal descriptions, plain-language interpretations, and advocacy
+context are stored as separate content layers. Coverage gaps are reported as
+"No specific law identified" unless the research method supports a broader
+conclusion. See the [research and review method](docs/research-method.md) for the
+project's source and correction practices.
+
+## Data and Provenance
+
+Project-authored records are maintained as YAML files under `data/federal/` and
+`data/states/`. Their structure, provenance fields, interpretation layers, and
+status rules are documented in the [policy record data
+model](docs/data-model.md).
+
+The repository also includes a checked-in snapshot of 1,175 rows retrieved
+from the NHGRI Genome Statute and Legislation Database. Imported records retain
+NHGRI's original wording, source attribution, and snapshot retrieval timestamp.
+The ordinary build uses this local snapshot and does not depend on the NHGRI
+website.
+
+Generated data products are available in `public/data/` as CSV and JSON files.
+The production build regenerates these exports and the project changelog from
+the checked-in source records.
+
+## Install & Setup
+
+### Requirements
 
 - Node.js 22 or later
 - npm 10 or later
 
-## Local setup
+Install the locked dependencies:
 
 ```bash
 npm ci
+```
+
+## Usage
+
+Start the Astro development server:
+
+```bash
 npm run dev
 ```
 
-Astro prints the local URL after the development server starts.
+Astro prints the local URL after the server starts.
 
-## Validation and tests
+Build the production site:
+
+```bash
+npm run build
+```
+
+The build validates the records, regenerates the CSV, JSON, and changelog
+files, type-checks the Astro project, and writes the static site to `dist/`.
+
+## Validation
+
+Run the focused project checks:
 
 ```bash
 npm run validate:data
@@ -27,13 +95,21 @@ npm run lint
 npm run check
 ```
 
-The data validator checks project-authored YAML records and records retrieved from NHGRI. It also enforces the shared NHGRI status vocabulary. Validation fails when required fields are missing, dates are malformed, jurisdiction codes, topic values, or statuses are unknown, record identifiers are duplicated, or a verified record lacks a primary source. Missing effective dates generate warnings because some authoritative sources do not provide one unambiguous date.
+The data validator checks project-authored YAML records and records retrieved
+from NHGRI. It enforces the shared NHGRI status vocabulary and fails when:
 
-## NHGRI source snapshot
+- Required fields are missing.
+- Dates are malformed.
+- Jurisdiction codes, topics, or statuses are unknown.
+- Record identifiers are duplicated.
+- A verified record lacks a primary source.
 
-The repository includes all 1,175 rows retrieved from the NHGRI Genome Statute and Legislation Database. They appear in the combined Policy Records directory. Each imported record identifies NHGRI as its source and displays the snapshot retrieval timestamp. The source data remains separately structured so its original wording and provenance are preserved. The ordinary build uses the checked-in snapshot and does not depend on the NHGRI website.
+Missing effective dates generate warnings because some authoritative sources
+do not provide one unambiguous date.
 
-To intentionally refresh the snapshot:
+## Refresh the NHGRI Snapshot
+
+Refresh the snapshot only when intentionally reviewing a new retrieval:
 
 ```bash
 npm run import:nhgri
@@ -41,21 +117,12 @@ npm run validate:data
 npm run export:data
 ```
 
-Review the changed manifest, record count, source-page date, duplicate metrics, and checksums before accepting a refresh. See `docs/nhgri-source-import.md` for provenance and known source conditions.
+Before accepting a refresh, review the changed manifest, record count,
+source-page date, duplicate metrics, and checksums. The [NHGRI source snapshot
+documentation](docs/nhgri-source-import.md) describes the provenance, refresh
+process, and known source conditions.
 
-## Citation
-
-Please cite this resource when using its data or project-authored summaries in research, reporting, analysis, or other published work. Identify the dataset version or access date whenever possible. See the [citation guidance](https://whoownsyourdna.org/cite/) for suggested formats.
-
-## Production build
-
-```bash
-npm run build
-```
-
-The build validates the YAML records, regenerates CSV, JSON, and changelog files, type-checks the Astro project, and writes the static site to `dist/`.
-
-## Repository structure
+## Repository Structure
 
 ```text
 data/                 Canonical records, vocabularies, and imported source snapshot
@@ -67,11 +134,27 @@ src/pages/            Static routes and generated record pages
 src/styles/           Global reference-site styling
 tests/                Focused data-validation tests
 public/data/          Reproducible CSV, JSON, and changelog outputs
-docs/                 Contributor and data-model documentation
+docs/                 Data model, research method, and import documentation
 ```
+
+## Contributing
+
+Contributions should improve the source record without overstating what the
+source establishes. Read the [contribution guidelines](CONTRIBUTING.md) before
+adding or updating a policy record.
+
+All candidate records and automated monitoring results require human review of
+the source, legal status, scope, and summary before publication.
+
+## Citation
+
+Please cite this resource when using its data or project-authored summaries in
+research, reporting, analysis, or other published work. Identify the dataset
+version or access date whenever possible. The website provides [suggested
+citation formats](https://whoownsyourdna.org/cite/).
+
 
 ## Deployment
 
-The GitHub Pages workflow builds and deploys the static site to [whoownsyourdna.org](https://whoownsyourdna.org/) after a push to `main`. In the GitHub repository settings, select GitHub Actions as the Pages source. Pull requests run the separate validation workflow without deploying.
-
-The repository is configured for `sdhutchins/who-owns-your-dna`. No license or DOI is asserted in this prototype. Add those values only after the project has selected them.
+The GitHub Pages workflow builds and deploys the static site to
+[whoownsyourdna.org](https://whoownsyourdna.org/) after a push to `main`.
