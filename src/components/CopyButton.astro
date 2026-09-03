@@ -1,0 +1,52 @@
+---
+interface Props {
+  id: string;
+  value: string;
+  label: string;
+}
+
+const { id, value, label } = Astro.props;
+const statusId = `${id}-status`;
+---
+
+<span class="copy-control">
+  <button
+    class="copy-button"
+    type="button"
+    data-copy-button
+    data-copy-value={value}
+    aria-describedby={statusId}
+  >
+    {label}
+  </button>
+  <span class="copy-control__status" id={statusId} data-copy-status aria-live="polite"></span>
+</span>
+
+<script>
+  const copyText = async (value: string): Promise<void> => {
+    if (!navigator.clipboard?.writeText) {
+      throw new Error("The Clipboard API is not available.");
+    }
+    await navigator.clipboard.writeText(value);
+  };
+
+  const copyButtons = document.querySelectorAll<HTMLButtonElement>(
+    "[data-copy-button]:not([data-copy-ready])",
+  );
+
+  for (const button of copyButtons) {
+    button.dataset.copyReady = "true";
+    button.addEventListener("click", async () => {
+      const value = button.dataset.copyValue ?? "";
+      const status = button.parentElement?.querySelector<HTMLElement>(
+        "[data-copy-status]",
+      );
+      try {
+        await copyText(value);
+        if (status) status.textContent = "Copied.";
+      } catch {
+        if (status) status.textContent = "Copy failed. Select and copy the text manually.";
+      }
+    });
+  }
+</script>

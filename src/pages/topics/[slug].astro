@@ -1,52 +1,98 @@
 ---
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import CopyButton from "../../components/CopyButton.astro";
+import PolicyRecordTable from "../../components/PolicyRecordTable.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import {
+  getNhgriManifest,
   getNhgriRecords,
   getRecords,
   getTopics,
+  type LegalRecord,
+  type NhgriManifest,
+  type NhgriSourceRecord,
   type Topic,
 } from "../../lib/records";
-import { withBase } from "../../lib/site";
+import { formatDate, PUBLIC_SITE_URL, withBase } from "../../lib/site";
 
 export async function getStaticPaths() {
-  const [topics, projectRecords, nhgriRecords] = await Promise.all([
+  const [topics, projectRecords, nhgriRecords, manifest] = await Promise.all([
     getTopics(),
     getRecords(),
     getNhgriRecords(),
+    getNhgriManifest(),
   ]);
-  return topics.map((topic) => {
-    const projectRecordCount = projectRecords.filter(
-      (record) => record.topics.includes(topic.slug),
-    ).length;
-    const nhgriRecordCount = nhgriRecords.filter(
-      (record) => record.mapped_topics.includes(topic.slug),
-    ).length;
-    return {
-      params: { slug: topic.slug },
-      props: {
-        topic,
-        recordCount: projectRecordCount + nhgriRecordCount,
-      },
-    };
-  });
+  return topics.map((topic) => ({
+    params: { slug: topic.slug },
+    props: {
+      topic,
+      projectRecords: projectRecords.filter(
+        (record) => record.topics.includes(topic.slug),
+      ),
+      nhgriRecords: nhgriRecords.filter(
+        (record) => record.mapped_topics.includes(topic.slug),
+      ),
+      topics,
+      manifest,
+    },
+  }));
 }
 
 interface Props {
   topic: Topic;
-  recordCount: number;
+  projectRecords: LegalRecord[];
+  nhgriRecords: NhgriSourceRecord[];
+  topics: Topic[];
+  manifest: NhgriManifest;
 }
 
-const { topic, recordCount } = Astro.props;
+const { topic, projectRecords, nhgriRecords, topics, manifest } = Astro.props;
+const recordCount = projectRecords.length + nhgriRecords.length;
+const previewLimit = 20;
+const sortedProjectRecords = [...projectRecords].sort(
+  (left, right) => right.last_reviewed.localeCompare(left.last_reviewed),
+);
+const sortedNhgriRecords = [...nhgriRecords].sort(
+  (left, right) => (right.inferred_year ?? 0) - (left.inferred_year ?? 0),
+);
+const previewProjectRecords = sortedProjectRecords.slice(0, previewLimit);
+const previewNhgriRecords = sortedNhgriRecords.slice(
+  0,
+  Math.max(0, previewLimit - previewProjectRecords.length),
+);
+const previewCount = previewProjectRecords.length + previewNhgriRecords.length;
+const latestProjectReview = sortedProjectRecords[0]?.last_reviewed;
 const recordsUrl = `/records/?topic=${encodeURIComponent(`project:${topic.slug}`)}`;
+const permanentUrl = `${PUBLIC_SITE_URL}/topics/${topic.slug}/`;
 ---
 
-<BaseLayout title={topic.name}>
+<BaseLayout title={topic.name} wide>
   <Breadcrumbs items={[{ label: "Topics", href: "/topics/" }, { label: topic.name }]} />
-  <p class="section-kicker">Policy topic</p>
   <h1>{topic.name}</h1>
-  <p class="page-intro">{recordCount.toLocaleString()} state and federal {recordCount === 1 ? "record" : "records"}.</p>
+  <p class="page-intro">{topic.description}</p>
+  <p class="reading-width">
+    Topic tags group records by subject. A shared tag does not mean that records provide equivalent coverage, rights, restrictions, or legal protections.
+  </p>
 
-  <p><a class="button-link" href={withBase(recordsUrl)}>View {topic.name.toLocaleLowerCase()} records</a></p>
-  <p class="reading-width">Use the records directory to search within this topic and narrow results by jurisdiction, status, or year.</p>
+  <div class="coverage-summary reading-width">
+    <p><strong>Current coverage:</strong> {projectRecords.length.toLocaleString()} project-reviewed {projectRecords.length === 1 ? "record" : "records"} and {nhgriRecords.length.toLocaleString()} archived NHGRI {nhgriRecords.length === 1 ? "record" : "records"}.</p>
+    <p><strong>Latest project review:</strong> {latestProjectReview ? formatDate(latestProjectReview) : "No project-reviewed record is currently available."}</p>
+  </div>
+
+  <div class="page-actions">
+    <a href={withBase(recordsUrl)}>Filter all {recordCount.toLocaleString()} {topic.name.toLocaleLowerCase()} records</a>
+    <CopyButton id={`copy-${topic.slug}-link`} value={permanentUrl} label="Copy page link" />
+  </div>
+
+  <section class="section-block" aria-labelledby="topic-records">
+    <h2 id="topic-records">Records about {topic.name.toLocaleLowerCase()}</h2>
+    <p>Showing {previewCount.toLocaleString()} of {recordCount.toLocaleString()} records, with project-reviewed records first.</p>
+    <PolicyRecordTable
+      projectRecords={previewProjectRecords}
+      nhgriRecords={previewNhgriRecords}
+      topics={topics}
+      manifest={manifest}
+      label={`Selected policy records about ${topic.name.toLocaleLowerCase()}`}
+    />
+  </section>
 </BaseLayout>

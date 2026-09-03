@@ -1,5 +1,10 @@
 ---
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Callout from "../../components/Callout.astro";
+import DataStatus from "../../components/DataStatus.astro";
+import FilterPanel from "../../components/FilterPanel.astro";
+import Pagination from "../../components/Pagination.astro";
+import PolicyRecordTable from "../../components/PolicyRecordTable.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import {
   getNhgriManifest,
@@ -7,9 +12,8 @@ import {
   getRecords,
   getStatuses,
   getTopics,
-  type LegalRecord,
 } from "../../lib/records";
-import { formatDate, formatDateTime, humanizeStatus, withBase } from "../../lib/site";
+import { humanizeStatus, withBase } from "../../lib/site";
 
 const [projectRecords, nhgriRecords, topics, statuses, nhgriManifest] = await Promise.all([
   getRecords(),
@@ -19,7 +23,6 @@ const [projectRecords, nhgriRecords, topics, statuses, nhgriManifest] = await Pr
   getNhgriManifest(),
 ]);
 const totalRecordCount = projectRecords.length + nhgriRecords.length;
-const topicNames = new Map(topics.map((topic) => [topic.slug, topic.name]));
 const jurisdictions = [
   ...new Set([
     ...projectRecords.map((record) => record.jurisdiction),
@@ -27,51 +30,55 @@ const jurisdictions = [
   ]),
 ].sort();
 const nhgriTopics = [...new Set(nhgriRecords.flatMap((record) => record.source_topics))].sort();
+const recordTypes = [...new Set(projectRecords.map((record) => record.record_type))].sort();
 const years = [
   ...new Set([
     ...projectRecords.flatMap((record) => {
-      const year = getProjectRecordDate(record).value?.slice(0, 4);
-      return year ? [year] : [];
+      const date = record.effective_date
+        ?? record.signed_date
+        ?? record.last_action_date
+        ?? record.introduced_date
+        ?? record.last_reviewed;
+      return date ? [date.slice(0, 4)] : [];
     }),
     ...nhgriRecords.flatMap((record) =>
       record.inferred_year ? [String(record.inferred_year)] : [],
     ),
   ]),
 ].sort().reverse();
-
-function getProjectRecordDate(record: LegalRecord): {
-  label: string;
-  value: string | null;
-} {
-  if (record.effective_date) {
-    return { label: "Effective", value: record.effective_date };
-  }
-  if (record.signed_date) {
-    return { label: "Signed", value: record.signed_date };
-  }
-  if (record.last_action_date) {
-    return { label: "Last action", value: record.last_action_date };
-  }
-  if (record.introduced_date) {
-    return { label: "Introduced", value: record.introduced_date };
-  }
-  return { label: "Last reviewed", value: record.last_reviewed };
-}
-
-function searchText(values: Array<string | undefined>): string {
-  return values.filter(Boolean).join(" ").toLocaleLowerCase();
-}
 ---
 
 <BaseLayout title="Policy records" wide>
   <Breadcrumbs items={[{ label: "Policy records" }]} />
   <h1>Policy records</h1>
-  <p class="page-intro">Search {totalRecordCount.toLocaleString()} U.S. genetics and genomics policy records.</p>
+  <p class="page-intro">Find a law or policy by title, identifier, location, topic, status, or year.</p>
+  <p class="reading-width">
+    This directory combines {projectRecords.length.toLocaleString()} records reviewed by this project with {nhgriRecords.length.toLocaleString()} records preserved from the NHGRI Policy and Legislation Database. Each result identifies its source layer and links to an internal record page and the official source.
+    {" "}<a href={withBase("/glossary/#legal-status")}>Learn what the status labels mean.</a>
+  </p>
 
-  <form class="filters policy-record-filters" id="record-filters" aria-label="Filter policy records">
+  <DataStatus records={projectRecords} manifest={nhgriManifest} />
+
+  <FilterPanel id="record-filters" label="Filter policy records" layout="records">
+    <div class="filter-field filter-field--search">
+      <label for="record-query">Search records</label>
+      <input id="record-query" name="q" type="search" placeholder="Title, bill number, state, or topic" />
+    </div>
     <div class="filter-field">
-      <label for="record-query">Search</label>
-      <input id="record-query" name="q" type="search" placeholder="Bill, summary, state, or topic" />
+      <label for="source-filter">Source layer</label>
+      <select id="source-filter" name="source">
+        <option value="">All source layers</option>
+        <option value="project">Project reviewed</option>
+        <option value="nhgri">NHGRI archive</option>
+      </select>
+    </div>
+    <div class="filter-field">
+      <label for="record-type-filter">Record type</label>
+      <select id="record-type-filter" name="record_type">
+        <option value="">All record types</option>
+        {recordTypes.map((recordType) => <option value={recordType}>{humanizeStatus(recordType)}</option>)}
+        <option value="archived-source">Archived source record</option>
+      </select>
     </div>
     <div class="filter-field">
       <label for="jurisdiction-filter">Jurisdiction</label>
@@ -87,7 +94,7 @@ function searchText(values: Array<string | undefined>): string {
         <optgroup label="Project topics">
           {topics.map((topic) => <option value={`project:${topic.slug}`}>{topic.name}</option>)}
         </optgroup>
-        <optgroup label="NHGRI topics">
+        <optgroup label="NHGRI source topics">
           {nhgriTopics.map((topic) => <option value={`nhgri:${topic}`}>{topic}</option>)}
         </optgroup>
       </select>
@@ -107,146 +114,210 @@ function searchText(values: Array<string | undefined>): string {
         <option value="not-stated">Date not stated</option>
       </select>
     </div>
+    <div class="filter-field">
+      <label for="sort-filter">Sort</label>
+      <select id="sort-filter" name="sort">
+        <option value="relevance">Relevance</option>
+        <option value="newest">Newest review or retrieval</option>
+        <option value="jurisdiction">Jurisdiction</option>
+        <option value="title">Title</option>
+      </select>
+    </div>
     <div class="filter-actions">
       <button type="reset">Clear filters</button>
     </div>
-  </form>
+  </FilterPanel>
 
+  <p class="filter-share-note">Filters and sort order are saved in the page URL so the current view can be shared.</p>
   <p class="result-count" aria-live="polite"><span id="result-count">{totalRecordCount.toLocaleString()}</span> records</p>
 
-  <div class="table-wrap policy-record-table-wrap">
-    <table class="policy-record-table">
-      <thead>
-        <tr>
-          <th scope="col">State</th>
-          <th scope="col">Primary Link</th>
-          <th scope="col">Topic(s)</th>
-          <th scope="col">Bill Status</th>
-          <th scope="col">Summary</th>
-        </tr>
-      </thead>
-      <tbody id="record-results">
-        {projectRecords.map((record) => {
-          const date = getProjectRecordDate(record);
-          const year = date.value?.slice(0, 4) ?? "not-stated";
-          const primarySource = record.primary_sources[0];
-          const displayTopics = record.topics.map(
-            (topic) => topicNames.get(topic) ?? topic,
-          );
-          return (
-            <tr
-              data-policy-record
-              data-search={searchText([
-                record.jurisdiction,
-                record.title,
-                record.identifier,
-                record.summary,
-                ...displayTopics,
-              ])}
-              data-jurisdiction={record.jurisdiction}
-              data-topics={JSON.stringify(record.topics.map((topic) => `project:${topic}`))}
-              data-status={record.status}
-              data-year={year}
-            >
-              <th scope="row">{record.jurisdiction}</th>
-              <td class="policy-record-table__primary">
-                <a href={primarySource.url}>{record.title}</a>
-                <span class="policy-record-table__date">{date.label}: {formatDate(date.value)}</span>
-                <a class="policy-record-table__details" href={withBase(`/records/${record.id}/`)}>Record details</a>
-              </td>
-              <td>{displayTopics.join(", ")}</td>
-              <td>{humanizeStatus(record.status)}</td>
-              <td>{record.summary}</td>
-            </tr>
-          );
-        })}
-        {nhgriRecords.map((record) => (
-          <tr
-            data-policy-record
-            data-search={searchText([
-              record.jurisdiction,
-              record.source_record_label,
-              record.source_summary,
-              ...record.source_topics,
-            ])}
-            data-jurisdiction={record.jurisdiction}
-            data-topics={JSON.stringify([
-              ...record.source_topics.map((topic) => `nhgri:${topic}`),
-              ...record.mapped_topics.map((topic) => `project:${topic}`),
-            ])}
-            data-status={record.base_status}
-            data-year={record.inferred_year ?? "not-stated"}
-          >
-            <th scope="row">{record.jurisdiction}</th>
-            <td class="policy-record-table__primary">
-              <a href={record.primary_url}>{record.source_record_label}</a>
-              <span class="policy-record-table__date">{record.inferred_year ? `${record.inferred_year} legislative session` : "Date not stated in source label"}</span>
-              <span class="policy-record-table__review">Retrieved from NHGRI on {formatDateTime(nhgriManifest.snapshot_fetched_at)}</span>
-              <a class="policy-record-table__details" href={withBase(`/source-records/nhgri/${record.id}/`)}>Record details</a>
-            </td>
-            <td>{record.source_topics.join(", ")}</td>
-            <td>{humanizeStatus(record.base_status)}</td>
-            <td>{record.source_summary}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+  <PolicyRecordTable
+    projectRecords={projectRecords}
+    nhgriRecords={nhgriRecords}
+    topics={topics}
+    manifest={nhgriManifest}
+    bodyId="record-results"
+    label="Policy records matching the selected filters"
+  />
+  <div id="no-results" hidden>
+    <Callout><p>No records match all selected filters.</p></Callout>
   </div>
-  <p id="no-results" class="notice" hidden>No records match all selected filters.</p>
 
-  <noscript><p class="notice">Filtering requires JavaScript. All records remain visible without it.</p></noscript>
+  <Pagination totalCount={totalRecordCount} label="Policy record pages" />
+
+  <noscript><Callout><p>Filtering and pagination require JavaScript. All records remain visible without it.</p></Callout></noscript>
 
   <script>
     const form = document.querySelector<HTMLFormElement>("#record-filters");
     const resultCount = document.querySelector<HTMLElement>("#result-count");
     const noResults = document.querySelector<HTMLElement>("#no-results");
+    const pagination = document.querySelector<HTMLElement>("[data-pagination]");
+    const tableBody = document.querySelector<HTMLTableSectionElement>("#record-results");
     const records = [
       ...document.querySelectorAll<HTMLTableRowElement>("[data-policy-record]"),
     ];
 
-    if (form) {
+    if (form && pagination) {
+      const fieldNames = [
+        "q",
+        "source",
+        "record_type",
+        "jurisdiction",
+        "topic",
+        "status",
+        "year",
+        "sort",
+      ];
+      const originalPositions = new Map(records.map((record, index) => [record, index]));
       const parameters = new URLSearchParams(window.location.search);
-      for (const fieldName of ["q", "jurisdiction", "topic", "status", "year"]) {
+      const previousButton = pagination.querySelector<HTMLButtonElement>(
+        "[data-pagination-previous]",
+      );
+      const nextButton = pagination.querySelector<HTMLButtonElement>(
+        "[data-pagination-next]",
+      );
+      const summary = pagination.querySelector<HTMLElement>(
+        "[data-pagination-summary]",
+      );
+      const pageStatus = pagination.querySelector<HTMLElement>(
+        "[data-pagination-page]",
+      );
+      const pageSize = Number(pagination.dataset.pageSize ?? 50);
+      let currentPage = Number.parseInt(parameters.get("page") ?? "1", 10);
+      let filteredRecords = records;
+
+      if (!Number.isFinite(currentPage) || currentPage < 1) currentPage = 1;
+
+      for (const fieldName of fieldNames) {
         const field = form.elements.namedItem(fieldName) as HTMLInputElement | HTMLSelectElement;
         const value = parameters.get(fieldName);
         if (field && value) field.value = value;
       }
 
-      const applyFilters = (): void => {
+      const syncUrl = (): void => {
+        const url = new URL(window.location.href);
+        for (const fieldName of fieldNames) {
+          const field = form.elements.namedItem(fieldName) as HTMLInputElement | HTMLSelectElement;
+          const value = field?.value.trim() ?? "";
+          if (value && !(fieldName === "sort" && value === "relevance")) {
+            url.searchParams.set(fieldName, value);
+          } else {
+            url.searchParams.delete(fieldName);
+          }
+        }
+        if (currentPage > 1) {
+          url.searchParams.set("page", String(currentPage));
+        } else {
+          url.searchParams.delete("page");
+        }
+        window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+      };
+
+      const relevanceScore = (record: HTMLTableRowElement, terms: string[]): number =>
+        terms.reduce((score, term) => {
+          if (record.dataset.titleSearch?.includes(term)) score += 8;
+          if (record.dataset.identifierSearch?.includes(term)) score += 7;
+          if (record.dataset.topicSearch?.includes(term)) score += 4;
+          if (record.dataset.jurisdictionSearch?.includes(term)) score += 3;
+          if (record.dataset.summarySearch?.includes(term)) score += 1;
+          return score;
+        }, 0);
+
+      const sortRecords = (
+        matchingRecords: HTMLTableRowElement[],
+        sort: string,
+        terms: string[],
+      ): HTMLTableRowElement[] => {
+        const sortedRecords = [...matchingRecords];
+        sortedRecords.sort((left, right) => {
+          if (sort === "newest") {
+            return (right.dataset.sortDate ?? "").localeCompare(left.dataset.sortDate ?? "");
+          }
+          if (sort === "jurisdiction") {
+            return (left.dataset.sortJurisdiction ?? "").localeCompare(right.dataset.sortJurisdiction ?? "")
+              || (left.dataset.sortTitle ?? "").localeCompare(right.dataset.sortTitle ?? "");
+          }
+          if (sort === "title") {
+            return (left.dataset.sortTitle ?? "").localeCompare(right.dataset.sortTitle ?? "");
+          }
+          if (terms.length > 0) {
+            return relevanceScore(right, terms) - relevanceScore(left, terms)
+              || (originalPositions.get(left) ?? 0) - (originalPositions.get(right) ?? 0);
+          }
+          return (originalPositions.get(left) ?? 0) - (originalPositions.get(right) ?? 0);
+        });
+        return sortedRecords;
+      };
+
+      const renderPage = (): void => {
+        const pageCount = Math.max(1, Math.ceil(filteredRecords.length / pageSize));
+        currentPage = Math.min(currentPage, pageCount);
+        const startIndex = (currentPage - 1) * pageSize;
+        const pageRecords = new Set(
+          filteredRecords.slice(startIndex, startIndex + pageSize),
+        );
+
+        for (const record of records) record.hidden = !pageRecords.has(record);
+        tableBody?.append(...filteredRecords);
+
+        const firstRecord = filteredRecords.length === 0 ? 0 : startIndex + 1;
+        const lastRecord = Math.min(startIndex + pageSize, filteredRecords.length);
+        if (summary) {
+          summary.textContent = `Showing ${firstRecord} to ${lastRecord} of ${filteredRecords.length.toLocaleString()} records`;
+        }
+        if (pageStatus) pageStatus.textContent = `Page ${currentPage} of ${pageCount}`;
+        if (previousButton) previousButton.disabled = currentPage === 1;
+        if (nextButton) nextButton.disabled = currentPage === pageCount;
+        if (resultCount) resultCount.textContent = filteredRecords.length.toLocaleString();
+        if (noResults) noResults.hidden = filteredRecords.length !== 0;
+        syncUrl();
+      };
+
+      const applyFilters = (resetPage = true): void => {
         const values = new FormData(form);
         const query = String(values.get("q") ?? "").trim().toLocaleLowerCase();
+        const queryTerms = query.split(/\s+/).filter(Boolean);
+        const source = String(values.get("source") ?? "");
+        const recordType = String(values.get("record_type") ?? "");
         const jurisdiction = String(values.get("jurisdiction") ?? "");
         const topic = String(values.get("topic") ?? "");
         const status = String(values.get("status") ?? "");
         const year = String(values.get("year") ?? "");
-        let visibleCount = 0;
+        const sort = String(values.get("sort") ?? "relevance");
 
-        for (const record of records) {
+        const matchingRecords = records.filter((record) => {
           const recordTopics = JSON.parse(record.dataset.topics ?? "[]") as string[];
-          const visible =
-            (!query || record.dataset.search?.includes(query))
+          return (
+            (queryTerms.length === 0 || queryTerms.every((term) => record.dataset.search?.includes(term)))
+            && (!source || record.dataset.sourceLayer === source)
+            && (!recordType || record.dataset.recordType === recordType)
             && (!jurisdiction || record.dataset.jurisdiction === jurisdiction)
             && (!topic || recordTopics.includes(topic))
             && (!status || record.dataset.status === status)
-            && (!year || record.dataset.year === year);
-          record.hidden = !visible;
-          if (visible) visibleCount += 1;
-        }
+            && (!year || record.dataset.year === year)
+          );
+        });
+        filteredRecords = sortRecords(matchingRecords, sort, queryTerms);
 
-        if (resultCount) resultCount.textContent = visibleCount.toLocaleString();
-        if (noResults) noResults.hidden = visibleCount !== 0;
+        if (resetPage) currentPage = 1;
+        renderPage();
       };
 
-      form.addEventListener("input", applyFilters);
-      form.addEventListener("change", applyFilters);
+      form.addEventListener("input", () => applyFilters(true));
+      form.addEventListener("change", () => applyFilters(true));
       form.addEventListener("submit", (event) => event.preventDefault());
       form.addEventListener("reset", () => {
-        window.requestAnimationFrame(() => {
-          window.history.replaceState({}, "", window.location.pathname);
-          applyFilters();
-        });
+        window.requestAnimationFrame(() => applyFilters(true));
       });
-      applyFilters();
+      previousButton?.addEventListener("click", () => {
+        currentPage -= 1;
+        renderPage();
+      });
+      nextButton?.addEventListener("click", () => {
+        currentPage += 1;
+        renderPage();
+      });
+      applyFilters(false);
     }
   </script>
 </BaseLayout>

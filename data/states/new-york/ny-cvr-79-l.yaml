@@ -8,8 +8,8 @@ subtitle: Consent, confidentiality, and biological-sample requirements
 identifier: New York Civil Rights Law § 79-l
 statute_citation: N.Y. Civil Rights Law § 79-l
 status: statute
-last_reviewed: 2026-08-31
-record_version: "1.0"
+last_reviewed: 2026-09-02
+record_version: "1.1"
 verification_status: verified-primary
 topics:
   - genetic-privacy
@@ -17,29 +17,35 @@ topics:
   - research
   - sample-destruction
 summary: >-
-  New York Civil Rights Law section 79-l establishes written informed-consent
-  requirements for genetic testing, treats genetic-test records and results as
-  confidential, and sets rules for disclosure, research uses, retention, and
-  destruction of biological samples, subject to stated exceptions.
+  New York Civil Rights Law section 79-l generally requires written informed
+  consent before a genetic test is performed and before results are disclosed.
+  It also treats genetic-test records and results as confidential and regulates
+  the retention, research use, and destruction of biological samples.
 legal_effects: >-
-  The section generally requires written informed consent before genetic
-  testing and disclosure, deems test records and results confidential, and
-  establishes rules for research use, retention, and sample destruction.
+  The person or organization ordering a genetic test must obtain written
+  informed consent. Separate written consent is generally required to disclose
+  results. Unless the tested person authorizes longer retention, the biological
+  sample generally must be destroyed within 60 days after written results are
+  provided to the tested person.
 plain_language: >-
-  A person generally must give specific written consent before a genetic test
-  is performed or results are disclosed. The law also addresses how samples
-  may be retained or used for research.
+  In most covered situations, you must give written permission before a genetic
+  test is performed or its results are shared. The law also limits how long a
+  sample may be kept and when it may be used for research.
 limitations: >-
-  The section includes exceptions for court orders, specified public-health
-  programs, research, insurers, and other circumstances. This summary does not
-  resolve whether an exception applies.
+  The section contains exceptions and special rules for court orders, specified
+  public health programs, research, insurers, and other circumstances. Whether
+  the consent, confidentiality, or destruction rules apply depends on the
+  purpose of the test and the statutory exception at issue.
 primary_sources:
   - title: New York Civil Rights Law § 79-l
     url: https://www.nysenate.gov/legislation/laws/CVR/79-L
     publisher: New York State Senate
-    accessed_date: 2026-08-31
+    accessed_date: 2026-09-02
 secondary_sources: []
 history:
   - date: 2026-08-31
     event: Record created from the current consolidated law page.
+    source: Project review
+  - date: 2026-09-02
+    event: Project-authored analysis revised after primary-source review.
     source: Project review

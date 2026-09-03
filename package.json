@@ -10,6 +10,7 @@
     "test": "vitest run",
     "lint": "eslint .",
     "import:nhgri": "node scripts/import-nhgri.mjs",
+    "monitor:nhgri": "node scripts/monitor-nhgri.mjs",
     "validate:data": "node scripts/validate-data.mjs",
     "export:data": "node scripts/export-data.mjs",
     "build:changelog": "node scripts/build-changelog.mjs",

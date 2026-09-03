@@ -1,5 +1,101 @@
 [
   {
+    "date": "2026-09-02",
+    "event": "Project-authored language and scope note revised for clarity.",
+    "source": "Project editorial review",
+    "record_id": "federal-gina-2008",
+    "record_title": "Genetic Information Nondiscrimination Act of 2008",
+    "jurisdiction": "United States"
+  },
+  {
+    "date": "2026-09-02",
+    "event": "Project-authored analysis revised after primary-source review.",
+    "source": "Project review",
+    "record_id": "federal-hipaa-genetic-information-2013",
+    "record_title": "HIPAA Privacy Rule treatment of genetic information",
+    "jurisdiction": "United States"
+  },
+  {
+    "date": "2026-09-02",
+    "event": "Project-authored analysis revised after primary-source review.",
+    "source": "Project review",
+    "record_id": "federal-nih-gds-policy-2014",
+    "record_title": "NIH Genomic Data Sharing Policy",
+    "jurisdiction": "United States"
+  },
+  {
+    "date": "2026-09-02",
+    "event": "Project-authored analysis revised after primary-source review.",
+    "source": "Project review",
+    "record_id": "al-hb-21-2024",
+    "record_title": "Alabama Genetic Data Privacy Act",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-09-02",
+    "event": "Project-authored analysis revised after primary-source review.",
+    "source": "Project review",
+    "record_id": "al-hb-263-2026",
+    "record_title": "Biological and neural data in health and fitness apps",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-09-02",
+    "event": "Project-authored analysis revised after primary-source review.",
+    "source": "Project review",
+    "record_id": "al-hb-265-2026",
+    "record_title": "Unlawful use of DNA",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-09-02",
+    "event": "Project-authored analysis revised after primary-source review.",
+    "source": "Project review",
+    "record_id": "al-hb-351-2026",
+    "record_title": "Alabama Personal Data Protection Act",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-09-02",
+    "event": "Project-authored analysis revised and an unsupported limitations statement corrected after primary-source review.",
+    "source": "Project review",
+    "record_id": "al-hb-436-2025",
+    "record_title": "Biological and neural data protections",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-09-02",
+    "event": "Project-authored analysis revised after primary-source review.",
+    "source": "Project review",
+    "record_id": "al-hb-449-2025",
+    "record_title": "Unlawful use of DNA",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-09-02",
+    "event": "Project-authored analysis revised after primary-source review.",
+    "source": "Project review",
+    "record_id": "al-sb-58-2024",
+    "record_title": "Genetic privacy and insurance protections",
+    "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-09-02",
+    "event": "Project-authored analysis revised after primary-source review.",
+    "source": "Project review",
+    "record_id": "ca-sb-41-2021",
+    "record_title": "Genetic Information Privacy Act",
+    "jurisdiction": "California"
+  },
+  {
+    "date": "2026-09-02",
+    "event": "Project-authored analysis revised after primary-source review.",
+    "source": "Project review",
+    "record_id": "ny-cvr-79-l",
+    "record_title": "Confidentiality of records of genetic tests",
+    "jurisdiction": "New York"
+  },
+  {
     "date": "2026-08-31",
     "event": "Record created from the enrolled public law.",
     "source": "Project review",

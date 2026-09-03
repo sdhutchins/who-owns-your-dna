@@ -1,0 +1,46 @@
+name: Report a broken link
+description: Identify a source or website link that is unavailable, redirected, or incorrect.
+title: "[Broken link]: "
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page containing the link
+      placeholder: https://whoownsyourdna.org/...
+    validations:
+      required: true
+  - type: input
+    id: broken_url
+    attributes:
+      label: Broken or incorrect URL
+      placeholder: https://...
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: What happened?
+      options:
+        - Page not found
+        - Access denied
+        - Unexpected redirect
+        - Wrong destination
+        - Security warning
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: replacement_url
+    attributes:
+      label: Replacement official URL
+      description: Provide a current official source if you found one.
+      placeholder: https://...
+    validations:
+      required: false
+  - type: textarea
+    id: details
+    attributes:
+      label: Additional details
+      description: Include the error message or other context that may help reproduce the problem.
+    validations:
+      required: false

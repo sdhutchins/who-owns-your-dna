@@ -11,8 +11,8 @@ session: 2025 Regular Session
 status: died
 introduced_date: 2025-03-18
 last_action_date: 2025-05-06
-last_reviewed: 2026-08-31
-record_version: "1.0"
+last_reviewed: 2026-09-02
+record_version: "1.1"
 verification_status: verified-primary
 topics:
   - genetic-privacy
@@ -21,28 +21,29 @@ topics:
   - data-sale
   - law-enforcement
 summary: >-
-  Alabama HB 449 proposed first-, second-, and third-degree offenses for
-  specified intentional collection, retention, testing, disclosure, sale, or
-  transfer of another person's DNA sample or genetic data without express
-  consent.
+  Alabama HB 449 did not become law. It would have created first-, second-, and
+  third-degree offenses for intentionally collecting, retaining, testing,
+  disclosing, selling, or transferring another person's DNA sample or genetic
+  data without express consent in specified circumstances.
 legal_effects: >-
-  The engrossed bill would have assigned different criminal penalties to the
-  sale or transfer of DNA, unauthorized genetic testing or disclosure, and
-  specified collection or retention of DNA samples. It defined genetic data and
-  genetic testing by reference to Alabama's Genetic Data Privacy Act.
+  The engrossed bill would have assigned different criminal penalties to DNA
+  sale or transfer, unauthorized genetic testing or disclosure, and collection
+  or retention of DNA samples. It used definitions from Alabama's Genetic Data
+  Privacy Act.
 plain_language: >-
-  The proposal would have made several kinds of intentional, nonconsensual DNA
-  collection and use criminal offenses. It passed the House but did not receive
-  a final Senate vote and did not become law.
+  The proposal would have criminalized several intentional uses of another
+  person's DNA without permission. Because it died after passing the House, the
+  proposed offenses and penalties never took effect.
 limitations: >-
-  The engrossed bill included exceptions for legal process, law enforcement and
-  forensic databases, specified health care activities, and genetic testing
-  companies complying with state law. Its provisions never took effect.
+  Exceptions would have applied to specified legal process, law enforcement and
+  forensic databases, health care activities, and genetic testing companies
+  complying with state law. The Senate did not take a final vote before the
+  session ended.
 primary_sources:
   - title: HB 449 engrossed bill
     url: https://alison.legislature.state.al.us/files/pdf/SearchableInstruments/2025RS/HB449-eng.pdf
     publisher: Alabama Legislature
-    accessed_date: 2026-08-31
+    accessed_date: 2026-09-02
 secondary_sources:
   - title: Alabama HB 449 legislative history
     url: https://legiscan.com/AL/bill/HB449/2025
@@ -66,4 +67,7 @@ history:
     source: Alabama Legislature
   - date: 2026-08-31
     event: Record created from the engrossed bill and legislative history.
+    source: Project review
+  - date: 2026-09-02
+    event: Project-authored analysis revised after primary-source review.
     source: Project review

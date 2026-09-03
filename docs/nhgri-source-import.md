@@ -41,3 +41,15 @@ npm run export:data
 The ordinary build does not fetch NHGRI. It validates and exports the checked-in snapshot so that builds remain deterministic and do not depend on an external website.
 
 Before accepting a refreshed snapshot, review the record count, source-page date, declared topics and statuses, duplicate metrics, and checksums in the manifest. The provenance remains attached to each imported record even though the public directory combines all records.
+
+## Weekly monitoring
+
+The scheduled monitor runs every Monday and can also be started manually from GitHub Actions. It retrieves a candidate snapshot without changing the checked-in files first. The monitor compares the normalized record checksum, visible source-page date, and declared topic and status vocabularies.
+
+A new retrieval timestamp or a cosmetic HTML change does not create a pull request when the structured policy data is unchanged. When a structured change is detected, the monitor writes the candidate snapshot, runs validation and the production build, and opens or updates a draft pull request. The pull request reports the previous and candidate record counts, source-page dates, and candidate checksum.
+
+The monitoring workflow identifies candidates for review. A person must inspect the source, data differences, vocabulary changes, duplicate metrics, and provenance before merging. The workflow does not publish legal conclusions or automatically merge a snapshot.
+
+## Versioned data snapshots
+
+After a reviewed change is merged, a maintainer can run the manual data-release workflow. The workflow packages project records, NHGRI source records, the provenance manifest, the changelog, and SHA-256 checksums in a tagged GitHub Release. A repository license is required before the workflow will publish a release.

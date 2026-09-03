@@ -11,29 +11,33 @@ status: statute
 signed_date: 2008-05-21
 effective_date:
 last_reviewed: 2026-08-31
-record_version: "1.0"
+record_version: "1.1"
 verification_status: verified-primary
 topics:
   - genetic-discrimination
   - employment
   - health-insurance
 summary: >-
-  GINA restricts the use of genetic information in health coverage and
-  employment. Its health-coverage and employment provisions have different
-  effective timelines and contain definitions, exceptions, and enforcement
-  provisions that should be reviewed in the statutory text.
+  The Genetic Information Nondiscrimination Act of 2008, or GINA, is a federal
+  law that restricts how covered health insurers and employers may use genetic
+  information when making health-coverage or employment decisions. Separate
+  parts of the law govern health coverage and employment. Each part contains
+  its own definitions, exceptions, effective dates, and enforcement rules.
 legal_effects: >-
-  Title I amends federal health-coverage laws to restrict genetic-information
-  requests and uses by covered plans and issuers. Title II restricts covered
-  employers and other employment entities from acquiring or using genetic
-  information, subject to statutory exceptions.
+  Title I limits how covered health plans and insurers may request or use
+  genetic information. Title II limits how covered employers and other
+  employment entities may acquire, use, or disclose genetic information. Both
+  titles contain exceptions and enforcement provisions.
 plain_language: >-
-  The federal law generally bars covered health insurers and employers from
-  using genetic information in specified decisions. It does not create the
-  same protections for life, disability, or long-term care insurance.
+  GINA protects genetic information in two main settings: health coverage and
+  employment. It generally prevents covered health insurers and employers from
+  using that information in certain decisions. It does not provide the same
+  protections for life, disability, or long-term care insurance.
 limitations: >-
-  This record is a high-level summary. Coverage depends on the actor, benefit,
-  employment context, and statutory exception involved.
+  GINA does not apply to every organization, insurance product, or use of
+  genetic information. Whether it applies depends on the organization, the
+  decision being made, and any statutory exception. Review the current law or
+  seek legal advice for a specific situation.
 primary_sources:
   - title: Genetic Information Nondiscrimination Act of 2008, Public Law 110-233
     url: https://www.govinfo.gov/content/pkg/PLAW-110publ233/pdf/PLAW-110publ233.pdf
@@ -47,3 +51,6 @@ history:
   - date: 2026-08-31
     event: Record created from the enrolled public law.
     source: Project review
+  - date: 2026-09-02
+    event: Project-authored language and scope note revised for clarity.
+    source: Project editorial review

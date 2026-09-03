@@ -1,5 +1,7 @@
 ---
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import Callout from "../../../components/Callout.astro";
+import CopyButton from "../../../components/CopyButton.astro";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import {
   getNhgriManifest,
@@ -7,7 +9,7 @@ import {
   type NhgriManifest,
   type NhgriSourceRecord,
 } from "../../../lib/records";
-import { formatDate, formatDateTime, humanizeStatus, withBase } from "../../../lib/site";
+import { formatDate, formatDateTime, humanizeStatus, PUBLIC_SITE_URL, REPOSITORY_URL, withBase } from "../../../lib/site";
 
 export async function getStaticPaths() {
   const [records, manifest] = await Promise.all([
@@ -26,6 +28,9 @@ interface Props {
 }
 
 const { record, manifest } = Astro.props;
+const sourceIssueUrl = `${REPOSITORY_URL}/issues/new?template=02-record-correction.yml&title=${encodeURIComponent(`[Source record]: ${record.source_record_label}`)}`;
+const permanentUrl = `${PUBLIC_SITE_URL}/source-records/nhgri/${record.id}/`;
+const citation = `NHGRI Genome Statute and Legislation Database. ${record.source_record_label}. Archived by Who Owns Your DNA? Retrieved ${formatDate(manifest.snapshot_fetched_at.slice(0, 10))}. ${permanentUrl}`;
 ---
 
 <BaseLayout title={record.source_record_label}>
@@ -35,30 +40,46 @@ const { record, manifest } = Astro.props;
   ]} />
 
   <header class="record-header">
-    <p class="section-kicker">NHGRI source snapshot</p>
+    <p class="record-context">Archived NHGRI record</p>
     <h1>{record.source_record_label}</h1>
     <p class="record-subtitle">{record.jurisdiction}</p>
-    <p><span class="source-verification-label">Retrieved from NHGRI</span></p>
+    <p class="official-source-link"><a href={record.primary_url}>View the official source recorded by NHGRI</a></p>
   </header>
 
-  <aside class="source-layer-banner">
-    <p><strong>Retrieval date:</strong> This record was retrieved from NHGRI on {formatDateTime(manifest.snapshot_fetched_at)}. NHGRI last updated its source database on {formatDate(manifest.source_page_last_updated)}. Consult the current primary source before relying on its legal status.</p>
-  </aside>
-
-  <dl class="metadata-list">
-    <dt>Jurisdiction</dt><dd>{record.jurisdiction}</dd>
-    <dt>Status</dt><dd>{humanizeStatus(record.base_status)}</dd>
-    <dt>NHGRI topic(s)</dt><dd>{record.source_topics.join(", ")}</dd>
-    <dt>Record year or session</dt><dd>{record.inferred_year ?? "Date not stated in source label"}</dd>
-    <dt>NHGRI database updated</dt><dd>{formatDate(manifest.source_page_last_updated)}</dd>
-    <dt>Snapshot retrieved</dt><dd>{formatDateTime(manifest.snapshot_fetched_at)}</dd>
-    <dt>Source row</dt><dd>{record.source_row_number}</dd>
-    <dt>Stable source ID</dt><dd><code>{record.id}</code></dd>
+  <dl class="record-facts" aria-label="Record facts">
+    <div><dt>Status</dt><dd>{humanizeStatus(record.base_status)}</dd></div>
+    <div><dt>Source layer</dt><dd>NHGRI archive</dd></div>
+    <div><dt>Source database updated</dt><dd>{formatDate(manifest.source_page_last_updated)}</dd></div>
+    <div><dt>Snapshot retrieved</dt><dd>{formatDate(manifest.snapshot_fetched_at.slice(0, 10))}</dd></div>
   </dl>
 
+  <Callout variant="source">
+    <p><strong>Archived source wording:</strong> This record was retrieved from NHGRI on {formatDateTime(manifest.snapshot_fetched_at)}. NHGRI last updated its source database on {formatDate(manifest.source_page_last_updated)}. The summary may not reflect later legal changes. Consult the current primary source before relying on its legal status.</p>
+  </Callout>
+
   <section class="reading-width">
-    <h2>NHGRI summary</h2>
+    <h2>Summary</h2>
     <p>{record.source_summary}</p>
+  </section>
+
+  <section class="section-block">
+    <h2>Record details</h2>
+    <details>
+      <summary>Archived source metadata</summary>
+      <div>
+        <dl class="metadata-list">
+          <dt>Jurisdiction</dt><dd>{record.jurisdiction}</dd>
+          <dt>Status</dt><dd>{humanizeStatus(record.base_status)}</dd>
+          <dt>NHGRI topic(s)</dt><dd>{record.source_topics.join(", ")}</dd>
+          <dt>Record year or session</dt><dd>{record.inferred_year ?? "Date not stated in source label"}</dd>
+          <dt>NHGRI database updated</dt><dd>{formatDate(manifest.source_page_last_updated)}</dd>
+          <dt>Snapshot retrieved</dt><dd>{formatDateTime(manifest.snapshot_fetched_at)}</dd>
+          <dt>Source row</dt><dd>{record.source_row_number}</dd>
+          <dt>Stable source ID</dt><dd><code>{record.id}</code></dd>
+          <dt>Permanent URL</dt><dd><a href={permanentUrl}>{permanentUrl}</a></dd>
+        </dl>
+      </div>
+    </details>
   </section>
 
   <section class="section-block reading-width">
@@ -68,12 +89,24 @@ const { record, manifest } = Astro.props;
       <li><a href={record.source_page}>View the NHGRI Genome Statute and Legislation Database</a></li>
       <li><a href={withBase(`/sources/nhgri/?state=${encodeURIComponent(record.jurisdiction)}`)}>Browse other {record.jurisdiction} source records</a></li>
     </ul>
-    {record.primary_url.startsWith("http://") && <p class="notice"><strong>Legacy link:</strong> NHGRI recorded this destination using unencrypted HTTP. The link may be stale or unavailable.</p>}
+    {record.primary_url.startsWith("http://") && <Callout variant="warning"><p><strong>Legacy link:</strong> NHGRI recorded this destination using unencrypted HTTP. The link may be stale or unavailable.</p></Callout>}
   </section>
 
   <section class="section-block reading-width">
     <h2>Provenance</h2>
     <p>{manifest.attribution}. This source layer preserves the state, primary link, topic, bill status, and summary retrieved from NHGRI.</p>
+  </section>
+
+  <section class="record-contribution reading-width">
+    <h2>Report a source problem</h2>
+    <p>Report a transcription problem, changed legal status, or newer official source for human review. Archived NHGRI wording remains identified separately from project-authored corrections.</p>
+    <p><a href={sourceIssueUrl}>Submit information about this source record</a></p>
+  </section>
+
+  <section id="cite">
+    <h2>Cite this archived record</h2>
+    <p class="citation">{citation}</p>
+    <CopyButton id={`copy-${record.id}-citation`} value={citation} label="Copy citation" />
   </section>
 
 </BaseLayout>

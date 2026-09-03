@@ -7,31 +7,38 @@ import { withBase } from "../../lib/site";
 <BaseLayout title="About">
   <Breadcrumbs items={[{ label: "About" }]} />
   <h1>About the project</h1>
-  <p class="page-intro">Who Owns Your DNA? brings together laws and policies that shape how genetic information is collected, shared, protected, and used.</p>
+  <p class="page-intro">Who Owns Your DNA? helps people find and understand U.S. laws and policies that affect genetic information and biological samples.</p>
 
   <section class="reading-width">
     <h2>Why this project exists</h2>
-    <p>Genetic information has implications for research, health care, consumer testing, insurance, employment, and law enforcement. The rules differ across jurisdictions and legal frameworks. This project makes the records and their primary sources easier to find, compare, and understand.</p>
+    <p>Rules for collecting, using, sharing, and protecting genetic information differ by jurisdiction and context. A rule that applies to an employer may not apply to an insurer, research study, health care provider, testing company, or law-enforcement agency. This project makes those distinctions and the supporting primary sources easier to find.</p>
 
     <h2>Intended audiences</h2>
-    <p>This resource is designed for researchers, journalists, advocates, policymakers, educators, and anyone seeking reliable policy information.</p>
+    <p>This resource is for people seeking reliable policy information, including researchers, journalists, advocates, policymakers, educators, and members of the public. It does not assume that a reader has legal or genetics training.</p>
 
-    <h2>Policy context and factual records</h2>
-    <p>Genetics and genomics policy can affect scientific progress, personal and public health, and how genetic information is used in society. Record summaries remain grounded in the cited source. Plain-language context and advocacy material are identified separately.</p>
+    <h2>What the records provide</h2>
+    <p>Each project-authored record identifies the policy's status, explains what it requires or prohibits, describes important limits, and links to the official source. Factual summaries, plain-language explanations, and advocacy context remain separate.</p>
+
+    <h2>What the records cannot provide</h2>
+    <p>Coverage is not comprehensive, and a short summary cannot determine how a law applies to a specific situation. If the project has not identified a law, that does not establish that no law exists. This website provides information, not legal advice.</p>
   </section>
 
   <div class="resource-grid section-block">
+    <section>
+      <h2><a href={withBase("/glossary/")}>Glossary</a></h2>
+      <p>Plain-language definitions for the legal, privacy, genetics, and data terms used in project records.</p>
+    </section>
     <section>
       <h2><a href={withBase("/methodology/")}>Methodology</a></h2>
       <p>Scope, inclusion criteria, source hierarchy, review, uncertainty, corrections, and versioning.</p>
     </section>
     <section>
       <h2><a href={withBase("/data/")}>Data</a></h2>
-      <p>Structured records, machine-readable downloads, schema validation, and release planning.</p>
+      <p>Structured records, machine-readable downloads, schema validation, and versioned snapshots.</p>
     </section>
     <section>
       <h2><a href={withBase("/cite/")}>Citation</a></h2>
-      <p>Guidance for citing individual records, the website, and future dataset releases.</p>
+      <p>Guidance for citing individual records, the website, and versioned data snapshots.</p>
     </section>
     <section>
       <h2><a href={withBase("/sources/nhgri/")}>NHGRI source archive</a></h2>
@@ -44,16 +51,11 @@ import { withBase } from "../../lib/site";
   </div>
 
   <section id="contribute" class="section-block reading-width">
-    <h2>Contribute a source</h2>
-    <ol>
-      <li>Locate the primary government source.</li>
-      <li>Record the jurisdiction, identifier, legal status, and relevant dates.</li>
-      <li>Propose factual wording and topic tags.</li>
-      <li>Submit the source for human review.</li>
-    </ol>
-    <p>Repository contribution instructions and a public contact method will be added before launch.</p>
+    <h2>Contribute</h2>
+    <p>You can suggest a policy source, correct a record, or report a broken link without editing code. Every submission receives human source and summary review before publication.</p>
+    <p><a href={withBase("/contribute/")}>Choose a contribution path</a></p>
 
     <h2>Contributors and acknowledgments</h2>
-    <p>Contributor names and acknowledgments will be added with permission. This independent project is not affiliated with or endorsed by NIH, NLM, NCBI, ASHG, or another organization.</p>
+    <p>Contributions are reviewed through the public GitHub workflow. Contributors may be acknowledged with their permission. This independent project is not affiliated with or endorsed by NIH, NLM, NCBI, ASHG, or another organization.</p>
   </section>
 </BaseLayout>

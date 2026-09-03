@@ -1,5 +1,10 @@
 ---
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import ActionLink from "../../../components/ActionLink.astro";
+import Callout from "../../../components/Callout.astro";
+import FilterPanel from "../../../components/FilterPanel.astro";
+import Pagination from "../../../components/Pagination.astro";
+import TableRegion from "../../../components/TableRegion.astro";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { getNhgriManifest, getNhgriRecords } from "../../../lib/records";
 import { formatDate, formatDateTime, withBase } from "../../../lib/site";
@@ -21,24 +26,23 @@ function normalizeSearch(values: string[]): string {
 
 <BaseLayout title="NHGRI source archive" wide>
   <Breadcrumbs items={[{ label: "About", href: "/about/" }, { label: "NHGRI source archive" }]} />
-  <p class="section-kicker">NHGRI source snapshot</p>
   <h1>Genome Statute and Legislation Database archive</h1>
-  <p class="page-intro">All {manifest.record_count.toLocaleString()} rows retrieved from the National Human Genome Research Institute database and included in the combined Policy Records directory.</p>
+  <p class="page-intro">Search {manifest.record_count.toLocaleString()} records preserved from the National Human Genome Research Institute database.</p>
 
-  <aside class="source-layer-banner">
-    <p><strong>Retrieved from NHGRI on {formatDateTime(manifest.snapshot_fetched_at)}.</strong> NHGRI last updated the source page on {formatDate(manifest.source_page_last_updated)}. Consult the linked primary source for current legal text.</p>
-  </aside>
+  <Callout variant="source">
+    <p><strong>This archive preserves NHGRI's wording.</strong> The records were retrieved on {formatDateTime(manifest.snapshot_fetched_at)}, and NHGRI last updated its source page on {formatDate(manifest.source_page_last_updated)}. The summaries may not reflect later legal changes. Consult the linked primary source for current legal text.</p>
+  </Callout>
 
   <div class="action-row">
-    <a class="button-link" href={withBase("/data/nhgri-source-records.csv")} download>Download source CSV</a>
-    <a class="button-link button-link--secondary" href={withBase("/data/nhgri-source-records.json")} download>Download source JSON</a>
+    <ActionLink href={withBase("/data/nhgri-source-records.csv")} download>Download source CSV</ActionLink>
+    <ActionLink href={withBase("/data/nhgri-source-records.json")} variant="secondary" download>Download source JSON</ActionLink>
     <a href={manifest.source_page}>View the NHGRI source page</a>
   </div>
 
-  <form class="filters" id="nhgri-filters" aria-label="Filter NHGRI source records">
+  <FilterPanel id="nhgri-filters" label="Filter NHGRI source records">
     <div class="filter-field">
-      <label for="source-search">Search</label>
-      <input id="source-search" name="q" type="search" placeholder="Bill, summary, state, or topic" />
+      <label for="source-search">Search source records</label>
+      <input id="source-search" name="q" type="search" placeholder="Title, bill number, state, or topic" />
     </div>
     <div class="filter-field">
       <label for="source-state">State</label>
@@ -68,20 +72,21 @@ function normalizeSearch(values: string[]): string {
         {years.map((year) => <option value={String(year)}>{year}</option>)}
       </select>
     </div>
-  </form>
+  </FilterPanel>
 
   <p class="result-count" aria-live="polite"><span id="source-result-count">{records.length.toLocaleString()}</span> source records</p>
   <p id="mapped-topic-note" class="metadata" hidden></p>
 
-  <div class="table-wrap">
+  <TableRegion label="NHGRI source records matching the selected filters">
     <table class="policy-record-table">
+      <caption class="sr-only">NHGRI source records matching the selected filters</caption>
       <thead>
         <tr>
           <th scope="col">State</th>
-          <th scope="col">Primary Link</th>
-          <th scope="col">Topic(s)</th>
-          <th scope="col">Bill Status</th>
-          <th scope="col">Summary</th>
+          <th scope="col">Source record</th>
+          <th scope="col">Topics</th>
+          <th scope="col">Status</th>
+          <th scope="col">Archived summary</th>
         </tr>
       </thead>
       <tbody id="source-records">
@@ -95,31 +100,39 @@ function normalizeSearch(values: string[]): string {
             data-status={record.source_status}
             data-year={record.inferred_year ?? ""}
           >
-            <th scope="row">{record.jurisdiction}</th>
-            <td class="policy-record-table__primary">
+            <th scope="row" data-label="State">{record.jurisdiction}</th>
+            <td class="policy-record-table__primary" data-label="Source record">
               <a href={record.primary_url}>{record.source_record_label}</a>
               <span class="policy-record-table__date">{record.inferred_year ? `${record.inferred_year} legislative session` : "Date not stated in source label"}</span>
               <span class="policy-record-table__review">Retrieved from NHGRI on {formatDateTime(manifest.snapshot_fetched_at)}</span>
               <a class="policy-record-table__details" href={withBase(`/source-records/nhgri/${record.id}/`)}>Record details</a>
             </td>
-            <td>{record.source_topics.join(", ")}</td>
-            <td>{record.source_status}</td>
-            <td>{record.source_summary}</td>
+            <td data-label="Topics">{record.source_topics.join(", ")}</td>
+            <td data-label="Status">{record.source_status}</td>
+            <td data-label="Archived summary">{record.source_summary}</td>
           </tr>
         ))}
       </tbody>
     </table>
+  </TableRegion>
+
+  <div id="source-no-results" hidden>
+    <Callout><p>No source records match all selected filters.</p></Callout>
   </div>
 
-  <noscript><p class="notice">Filtering requires JavaScript. All source records remain visible without it.</p></noscript>
+  <Pagination totalCount={records.length} label="NHGRI source record pages" noun="source records" />
+
+  <noscript><Callout><p>Filtering and pagination require JavaScript. All source records remain visible without it.</p></Callout></noscript>
 
   <script>
   const form = document.querySelector<HTMLFormElement>("#nhgri-filters");
   const rows = [...document.querySelectorAll<HTMLTableRowElement>("[data-source-record]")];
   const count = document.querySelector<HTMLElement>("#source-result-count");
   const mappedTopicNote = document.querySelector<HTMLElement>("#mapped-topic-note");
+  const noResults = document.querySelector<HTMLElement>("#source-no-results");
+  const pagination = document.querySelector<HTMLElement>("[data-pagination]");
 
-  if (form && count) {
+  if (form && count && pagination) {
     const searchInput = form.elements.namedItem("q") as HTMLInputElement;
     const stateInput = form.elements.namedItem("state") as HTMLSelectElement;
     const topicInput = form.elements.namedItem("topic") as HTMLSelectElement;
@@ -127,6 +140,23 @@ function normalizeSearch(values: string[]): string {
     const yearInput = form.elements.namedItem("year") as HTMLSelectElement;
     const parameters = new URLSearchParams(window.location.search);
     const mappedTopic = parameters.get("mapped_topic") ?? "";
+    const previousButton = pagination.querySelector<HTMLButtonElement>(
+      "[data-pagination-previous]",
+    );
+    const nextButton = pagination.querySelector<HTMLButtonElement>(
+      "[data-pagination-next]",
+    );
+    const summary = pagination.querySelector<HTMLElement>(
+      "[data-pagination-summary]",
+    );
+    const pageStatus = pagination.querySelector<HTMLElement>(
+      "[data-pagination-page]",
+    );
+    const pageSize = Number(pagination.dataset.pageSize ?? 50);
+    let currentPage = Number.parseInt(parameters.get("page") ?? "1", 10);
+    let filteredRows = rows;
+
+    if (!Number.isFinite(currentPage) || currentPage < 1) currentPage = 1;
 
     searchInput.value = parameters.get("q") ?? "";
     stateInput.value = parameters.get("state") ?? "";
@@ -139,29 +169,68 @@ function normalizeSearch(values: string[]): string {
       mappedTopicNote.textContent = `Showing records mapped to the local topic “${mappedTopic}”. NHGRI’s original topic labels remain in the table.`;
     }
 
-    const applyFilters = () => {
+    const updatePageParameter = (): void => {
+      const url = new URL(window.location.href);
+      if (currentPage > 1) {
+        url.searchParams.set("page", String(currentPage));
+      } else {
+        url.searchParams.delete("page");
+      }
+      window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+    };
+
+    const renderPage = (): void => {
+      const pageCount = Math.max(1, Math.ceil(filteredRows.length / pageSize));
+      currentPage = Math.min(currentPage, pageCount);
+      const startIndex = (currentPage - 1) * pageSize;
+      const pageRows = new Set(filteredRows.slice(startIndex, startIndex + pageSize));
+
+      for (const row of rows) row.hidden = !pageRows.has(row);
+
+      const firstRecord = filteredRows.length === 0 ? 0 : startIndex + 1;
+      const lastRecord = Math.min(startIndex + pageSize, filteredRows.length);
+      if (summary) {
+        summary.textContent = `Showing ${firstRecord}–${lastRecord} of ${filteredRows.length.toLocaleString()} source records`;
+      }
+      if (pageStatus) pageStatus.textContent = `Page ${currentPage} of ${pageCount}`;
+      if (previousButton) previousButton.disabled = currentPage === 1;
+      if (nextButton) nextButton.disabled = currentPage === pageCount;
+      count.textContent = filteredRows.length.toLocaleString();
+      if (noResults) noResults.hidden = filteredRows.length !== 0;
+      updatePageParameter();
+    };
+
+    const applyFilters = (resetPage = true): void => {
       const query = searchInput.value.trim().toLocaleLowerCase();
-      let visibleCount = 0;
-      for (const row of rows) {
+      filteredRows = rows.filter((row) => {
         const sourceTopics = JSON.parse(row.dataset.topics ?? "[]") as string[];
         const mappedTopics = JSON.parse(row.dataset.mappedTopics ?? "[]") as string[];
-        const visible =
+        return (
           (!query || row.dataset.search?.includes(query))
           && (!stateInput.value || row.dataset.state === stateInput.value)
           && (!topicInput.value || sourceTopics.includes(topicInput.value))
           && (!statusInput.value || row.dataset.status === statusInput.value)
           && (!yearInput.value || row.dataset.year === yearInput.value)
-          && (!mappedTopic || mappedTopics.includes(mappedTopic));
-        row.hidden = !visible;
-        if (visible) visibleCount += 1;
-      }
-      count.textContent = visibleCount.toLocaleString();
+          && (!mappedTopic || mappedTopics.includes(mappedTopic))
+        );
+      });
+
+      if (resetPage) currentPage = 1;
+      renderPage();
     };
 
-    form.addEventListener("input", applyFilters);
-    form.addEventListener("change", applyFilters);
+    form.addEventListener("input", () => applyFilters(true));
+    form.addEventListener("change", () => applyFilters(true));
     form.addEventListener("submit", (event) => event.preventDefault());
-    applyFilters();
+    previousButton?.addEventListener("click", () => {
+      currentPage -= 1;
+      renderPage();
+    });
+    nextButton?.addEventListener("click", () => {
+      currentPage += 1;
+      renderPage();
+    });
+    applyFilters(false);
   }
   </script>
 </BaseLayout>

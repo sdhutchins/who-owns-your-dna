@@ -1,9 +1,17 @@
 ---
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Callout from "../../components/Callout.astro";
+import CopyButton from "../../components/CopyButton.astro";
 import StatusLabel from "../../components/StatusLabel.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getRecords, getTopics, type LegalRecord } from "../../lib/records";
-import { formatDate, PUBLIC_SITE_URL, REPOSITORY_URL, withBase } from "../../lib/site";
+import {
+  formatDate,
+  humanizeStatus,
+  PUBLIC_SITE_URL,
+  REPOSITORY_URL,
+  withBase,
+} from "../../lib/site";
 
 export async function getStaticPaths() {
   const records = await getRecords();
@@ -22,9 +30,16 @@ const relatedRecords = (record.related_records ?? []).flatMap((relationship) => 
   const relatedRecord = recordsById.get(relationship.record_id);
   return relatedRecord ? [{ ...relationship, record: relatedRecord }] : [];
 });
-const citation = `Who Owns Your DNA? ${record.identifier}: ${record.title}. U.S. Genetics & Genomics Law and Policy Tracker. Record version ${record.record_version}. Accessed [date].`;
+const citation = `Who Owns Your DNA? ${record.identifier}: ${record.title}. U.S. Genetics & Genomics Law and Policy Tracker. Record version ${record.record_version}. Accessed [date]. ${PUBLIC_SITE_URL}/records/${record.id}/`;
 const permanentUrl = `${PUBLIC_SITE_URL}/records/${record.id}/`;
 const sourceFileUrl = `${REPOSITORY_URL}/blob/main/${record.source_path}`;
+const correctionIssueUrl = `${REPOSITORY_URL}/issues/new?template=02-record-correction.yml&title=${encodeURIComponent(`[Correction]: ${record.identifier}`)}`;
+const verificationLabels: Record<LegalRecord["verification_status"], string> = {
+  "verified-primary": "Primary source reviewed",
+  "review-in-progress": "Review in progress",
+  mock: "Demonstration record",
+};
+const primarySource = record.primary_sources[0];
 ---
 
 <BaseLayout title={`${record.identifier}: ${record.title}`} description={record.summary}>
@@ -35,30 +50,35 @@ const sourceFileUrl = `${REPOSITORY_URL}/blob/main/${record.source_path}`;
   ]} />
 
   <header class="record-header">
-    <p class="section-kicker">{record.jurisdiction} · {record.record_type.replaceAll("-", " ")}</p>
+    <p class="record-context">{record.jurisdiction} · {humanizeStatus(record.record_type)}</p>
     <h1>{record.identifier}</h1>
     <p class="record-subtitle">{record.title}</p>
-    <StatusLabel status={record.status} />
+    {primarySource && (
+      <p class="official-source-link"><a href={primarySource.url}>View the official source</a></p>
+    )}
   </header>
 
-  <dl class="metadata-list">
-    <dt>Jurisdiction</dt><dd>{record.jurisdiction}</dd>
-    <dt>Record type</dt><dd>{record.record_type.replaceAll("-", " ")}</dd>
-    {record.session && <><dt>Session</dt><dd>{record.session}</dd></>}
-    {record.statute_citation && <><dt>Statute citation</dt><dd>{record.statute_citation}</dd></>}
-    {record.regulatory_citation && <><dt>Regulatory citation</dt><dd>{record.regulatory_citation}</dd></>}
-    {record.introduced_date && <><dt>Introduced</dt><dd>{formatDate(record.introduced_date)}</dd></>}
-    {record.passed_date && <><dt>Passed</dt><dd>{formatDate(record.passed_date)}</dd></>}
-    {record.signed_date && <><dt>Signed</dt><dd>{formatDate(record.signed_date)}</dd></>}
-    {record.effective_date && <><dt>Effective</dt><dd>{formatDate(record.effective_date)}</dd></>}
-    {record.last_action_date && <><dt>Last legislative action</dt><dd>{formatDate(record.last_action_date)}</dd></>}
-    <dt>Last reviewed</dt><dd>{formatDate(record.last_reviewed)}</dd>
-    <dt>Record version</dt><dd>{record.record_version}</dd>
-    <dt>Verification</dt><dd>{record.verification_status.replaceAll("-", " ")}</dd>
-    <dt>Permanent URL</dt><dd><a href={permanentUrl}>{permanentUrl}</a></dd>
+  <dl class="record-facts" aria-label="Record facts">
+    <div><dt>Status</dt><dd><StatusLabel status={record.status} /></dd></div>
+    <div><dt>Effective date</dt><dd>{record.effective_date ? formatDate(record.effective_date) : "Not stated"}</dd></div>
+    <div><dt>Last reviewed</dt><dd>{formatDate(record.last_reviewed)}</dd></div>
+    <div><dt>Source review</dt><dd>{verificationLabels[record.verification_status]}</dd></div>
   </dl>
 
-  <p class="topic-line"><strong>Topics:</strong> {record.topics.map((topic) => topicNames.get(topic) ?? topic).join(" · ")}</p>
+  <section class="reading-width record-at-a-glance">
+    <h2>Summary</h2>
+    <p>{record.summary}</p>
+    <p class="topic-line"><strong>Topics:</strong> {record.topics.map((topic) => topicNames.get(topic) ?? topic).join(" · ")}</p>
+  </section>
+
+  <section class="reading-width">
+    <h2>What it requires or prohibits</h2>
+    <p>{record.legal_effects}</p>
+    <h2>In plain language</h2>
+    <p>{record.plain_language}</p>
+    {record.advocacy_context && <><h2>Why advocates are watching</h2><p>{record.advocacy_context}</p></>}
+    {record.limitations && <Callout><p><strong>Important limits and exceptions:</strong> {record.limitations}</p></Callout>}
+  </section>
 
   {relatedRecords.length > 0 && (
     <section class="reading-width">
@@ -75,17 +95,6 @@ const sourceFileUrl = `${REPOSITORY_URL}/blob/main/${record.source_path}`;
     </section>
   )}
 
-  <section class="reading-width">
-    <h2>Summary</h2>
-    <p>{record.summary}</p>
-    <h2>What the law or policy does</h2>
-    <p>{record.legal_effects}</p>
-    <h2>What this means</h2>
-    <p>{record.plain_language}</p>
-    {record.advocacy_context && <><h2>Why advocates are watching</h2><p>{record.advocacy_context}</p></>}
-    {record.limitations && <aside class="notice"><p><strong>Scope note:</strong> {record.limitations}</p></aside>}
-  </section>
-
   <section>
     <h2>Primary sources</h2>
     <ul>
@@ -97,6 +106,27 @@ const sourceFileUrl = `${REPOSITORY_URL}/blob/main/${record.source_path}`;
 
   <section>
     <h2>Record details</h2>
+    <details>
+      <summary>Record metadata</summary>
+      <div>
+        <dl class="metadata-list">
+          <dt>Jurisdiction</dt><dd>{record.jurisdiction}</dd>
+          <dt>Record type</dt><dd>{humanizeStatus(record.record_type)}</dd>
+          {record.session && <><dt>Session</dt><dd>{record.session}</dd></>}
+          {record.statute_citation && <><dt>Statute citation</dt><dd>{record.statute_citation}</dd></>}
+          {record.regulatory_citation && <><dt>Regulatory citation</dt><dd>{record.regulatory_citation}</dd></>}
+          {record.introduced_date && <><dt>Introduced</dt><dd>{formatDate(record.introduced_date)}</dd></>}
+          {record.passed_date && <><dt>Passed</dt><dd>{formatDate(record.passed_date)}</dd></>}
+          {record.signed_date && <><dt>Signed</dt><dd>{formatDate(record.signed_date)}</dd></>}
+          {record.effective_date && <><dt>Effective</dt><dd>{formatDate(record.effective_date)}</dd></>}
+          {record.last_action_date && <><dt>Last legislative action</dt><dd>{formatDate(record.last_action_date)}</dd></>}
+          <dt>Last reviewed</dt><dd>{formatDate(record.last_reviewed)}</dd>
+          <dt>Record version</dt><dd>{record.record_version}</dd>
+          <dt>Source review</dt><dd>{verificationLabels[record.verification_status]}</dd>
+          <dt>Permanent URL</dt><dd><a href={permanentUrl}>{permanentUrl}</a></dd>
+        </dl>
+      </div>
+    </details>
     <details>
       <summary>Record history</summary>
       <div>
@@ -115,9 +145,18 @@ const sourceFileUrl = `${REPOSITORY_URL}/blob/main/${record.source_path}`;
     </details>
   </section>
 
+  <section class="record-contribution reading-width">
+    <h2>Help improve this record</h2>
+    <p>If an official source, legal status, date, or summary needs attention, submit the record and supporting primary source for review.</p>
+    <p><a href={correctionIssueUrl}>Suggest a correction to {record.identifier}</a></p>
+  </section>
+
   <section id="cite">
     <h2>Cite this record</h2>
     <p class="citation">{citation}</p>
-    <p><a href={withBase("/cite/")}>Read the complete citation guidance</a></p>
+    <div class="page-actions">
+      <CopyButton id={`copy-${record.id}-citation`} value={citation} label="Copy citation" />
+      <a href={withBase("/cite/")}>Read the complete citation guidance</a>
+    </div>
   </section>
 </BaseLayout>

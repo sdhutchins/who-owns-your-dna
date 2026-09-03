@@ -2,12 +2,12 @@
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getNhgriManifest, getRecords, getTopics } from "../../lib/records";
-import { REPOSITORY_URL, withBase } from "../../lib/site";
+import { formatDate, REPOSITORY_URL, withBase } from "../../lib/site";
 
 const records = await getRecords();
 const topics = await getTopics();
 const nhgriManifest = await getNhgriManifest();
-const totalRecordCount = records.length + nhgriManifest.record_count;
+const latestProjectReview = records[0]?.last_reviewed;
 ---
 
 <BaseLayout title="Data">
@@ -15,41 +15,71 @@ const totalRecordCount = records.length + nhgriManifest.record_count;
   <h1>Open policy data</h1>
   <p class="page-intro">The website is a public interface for a structured, version-controlled policy dataset.</p>
 
-  <dl class="metadata-list">
-    <dt>Prototype version</dt><dd>0.1.0</dd>
-    <dt>Records</dt><dd>{totalRecordCount}</dd>
-    <dt>Topics</dt><dd>{topics.length}</dd>
-    <dt>Release date</dt><dd>Not yet released</dd>
-    <dt>Repository</dt><dd><a href={REPOSITORY_URL}>GitHub source repository</a></dd>
-    <dt>Citation</dt><dd><a href={withBase("/cite/")}>Citation guidance</a></dd>
-    <dt>License</dt><dd>To be selected before the first dataset release</dd>
-    <dt>Zenodo DOI</dt><dd>Planned for a future dataset release</dd>
-  </dl>
-
-  <section>
-    <h2>Project record downloads</h2>
-    <div class="action-row">
-      <a class="button-link" href={withBase("/data/records.csv")} download>Download CSV</a>
-      <a class="button-link button-link--secondary" href={withBase("/data/records.json")} download>Download JSON</a>
+  <section class="data-catalog" aria-labelledby="available-data">
+    <h2 id="available-data">Available data</h2>
+    <div class="table-wrap">
+      <table class="data-catalog-table">
+        <thead>
+          <tr>
+            <th scope="col">Dataset</th>
+            <th scope="col">Records</th>
+            <th scope="col">Review or retrieval date</th>
+            <th scope="col">Files</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" data-label="Dataset">
+              Project-reviewed records
+              <span>Primary-source reviewed records maintained by this project.</span>
+            </th>
+            <td data-label="Records">{records.length.toLocaleString()}</td>
+            <td data-label="Latest review">
+              {latestProjectReview ? formatDate(latestProjectReview) : "Not recorded"}
+            </td>
+            <td data-label="Files">
+              <ul class="data-download-links">
+                <li><a href={withBase("/data/records.csv")} download>CSV</a></li>
+                <li><a href={withBase("/data/records.json")} download>JSON</a></li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Dataset">
+              NHGRI source archive
+              <span>Records preserved from the NHGRI Genome Statute and Legislation Database.</span>
+            </th>
+            <td data-label="Records">{nhgriManifest.record_count.toLocaleString()}</td>
+            <td data-label="Retrieved">
+              {formatDate(nhgriManifest.snapshot_fetched_at.slice(0, 10))}
+            </td>
+            <td data-label="Files">
+              <ul class="data-download-links">
+                <li><a href={withBase("/data/nhgri-source-records.csv")} download>CSV</a></li>
+                <li><a href={withBase("/data/nhgri-source-records.json")} download>JSON</a></li>
+                <li><a href={withBase("/data/nhgri-source-manifest.json")} download>Manifest</a></li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <p class="metadata">Project-authored YAML files remain in the repository. CSV and JSON are reproducible build artifacts.</p>
-  </section>
-
-  <section class="section-block">
-    <h2>NHGRI provenance downloads</h2>
-    <p class="reading-width">These files reproduce records retrieved from NHGRI. The manifest identifies the source URL, retrieval timestamp, source-page date, and checksums. These records are also available through Policy Records.</p>
-    <div class="action-row">
-      <a class="button-link" href={withBase("/data/nhgri-source-records.csv")} download>Download NHGRI source CSV</a>
-      <a class="button-link button-link--secondary" href={withBase("/data/nhgri-source-records.json")} download>Download NHGRI source JSON</a>
-      <a href={withBase("/data/nhgri-source-manifest.json")} download>Download provenance manifest</a>
-    </div>
-    <p><a href={withBase("/sources/nhgri/")}>Search the NHGRI source archive</a></p>
+    <p class="metadata">CSV and JSON files are reproducible build artifacts. Project-authored YAML files remain in the repository.</p>
   </section>
 
   <section class="section-block reading-width">
-    <h2>Data model</h2>
-    <p>Each record has a stable identifier, jurisdiction, record type, legal status, review date, record version, controlled topic tags, factual and plain-language summaries, primary sources, and record history. Optional fields support statutes, regulations, court decisions, bills, archived sources, checksums, and review metadata.</p>
-    <p>Presentation code does not contain the substantive legal records. A schema validator checks the source files before the site builds.</p>
-    <p>Records retrieved from NHGRI retain a separate source schema so their original wording and provenance remain intact. Policy Records presents both schemas through one shared status vocabulary.</p>
+    <h2>Repository and citation</h2>
+    <ul class="reference-links">
+      <li><a href={`${REPOSITORY_URL}/releases`}>Browse versioned data releases</a></li>
+      <li><a href={REPOSITORY_URL}>View the source repository</a></li>
+      <li><a href={withBase("/cite/")}>Read the citation guidance</a></li>
+      <li><a href={withBase("/sources/nhgri/")}>Search the NHGRI source archive</a></li>
+    </ul>
+  </section>
+
+  <section class="section-block reading-width">
+    <h2>What the records contain</h2>
+    <p>Project-reviewed records include a stable identifier, jurisdiction, record type, status, review date, version, {topics.length} controlled topics, summaries, primary sources, and record history. A schema validator checks each source file before the site builds.</p>
+    <p>NHGRI records retain their original wording in a separate source schema. The provenance manifest records the source URL, retrieval time, source-page date, and checksums.</p>
   </section>
 </BaseLayout>

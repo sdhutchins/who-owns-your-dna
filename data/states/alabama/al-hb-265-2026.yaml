@@ -11,8 +11,8 @@ session: 2026 Regular Session
 status: died
 introduced_date: 2026-01-15
 last_action_date: 2026-02-05
-last_reviewed: 2026-08-31
-record_version: "1.0"
+last_reviewed: 2026-09-02
+record_version: "1.1"
 verification_status: verified-primary
 topics:
   - genetic-privacy
@@ -21,28 +21,27 @@ topics:
   - data-sale
   - law-enforcement
 summary: >-
-  Alabama HB 265 renewed a proposal to create first-, second-, and third-degree
-  offenses for specified intentional collection, retention, testing,
-  disclosure, sale, or transfer of another person's DNA sample or genetic data
-  without express consent.
+  Alabama HB 265 did not become law. It would have created first-, second-, and
+  third-degree offenses for intentionally collecting, retaining, testing,
+  disclosing, selling, or transferring another person's DNA sample or genetic
+  data without express consent in specified circumstances.
 legal_effects: >-
   The bill would have assigned different criminal penalties to unauthorized DNA
-  sale or transfer, genetic testing or disclosure, and specified collection or
-  retention. It used definitions from Alabama's Genetic Data Privacy Act and
-  included stated exceptions.
+  sale or transfer, genetic testing or disclosure, and collection or retention.
+  It would have used definitions from Alabama's Genetic Data Privacy Act.
 plain_language: >-
-  This 2026 proposal revisited the criminal DNA-use protections considered in
-  2025. It reached the House calendar but did not receive a House floor vote and
-  did not become law.
+  The proposal would have criminalized several intentional uses of another
+  person's DNA without permission. Because it died, the proposed offenses and
+  penalties never took effect.
 limitations: >-
-  The bill included exceptions for legal process, law enforcement and forensic
-  databases, and genetic testing companies complying with state law. Its
-  proposed October 1, 2026 effective date never became operative.
+  Exceptions would have applied to specified legal process, law enforcement and
+  forensic databases, and genetic testing companies complying with state law.
+  The bill reached the House calendar but did not receive a House floor vote.
 primary_sources:
   - title: HB 265 introduced bill
     url: https://alison.legislature.state.al.us/files/pdf/SearchableInstruments/2026RS/HB265-int.pdf
     publisher: Alabama Legislature
-    accessed_date: 2026-08-31
+    accessed_date: 2026-09-02
 secondary_sources:
   - title: Alabama HB 265 legislative history
     url: https://legiscan.com/AL/bill/HB265/2026
@@ -63,4 +62,7 @@ history:
     source: Alabama Legislature
   - date: 2026-08-31
     event: Record created from the introduced bill and legislative history.
+    source: Project review
+  - date: 2026-09-02
+    event: Project-authored analysis revised after primary-source review.
     source: Project review

@@ -13,8 +13,8 @@ status: enacted
 introduced_date: 2020-12-07
 signed_date: 2021-10-06
 effective_date: 2022-01-01
-last_reviewed: 2026-08-31
-record_version: "1.0"
+last_reviewed: 2026-09-02
+record_version: "1.1"
 verification_status: verified-primary
 topics:
   - genetic-privacy
@@ -23,28 +23,30 @@ topics:
   - data-deletion
   - sample-destruction
 summary: >-
-  California SB 41 established requirements for covered direct-to-consumer
-  genetic testing companies, including privacy notices, express consent for
-  specified uses and disclosures, security practices, access and deletion
-  procedures, and biological-sample destruction following consent revocation.
+  California's Genetic Information Privacy Act took effect on January 1, 2022.
+  It regulates direct-to-consumer genetic testing companies that collect,
+  use, maintain, or disclose genetic data collected or derived from a consumer
+  or from the consumer's biological sample.
 legal_effects: >-
-  The act requires covered companies to publish specified notices, obtain
-  separate express consent for listed uses and disclosures, provide access and
-  deletion mechanisms, maintain reasonable security practices, and honor
-  qualifying consent revocations.
+  Covered companies must publish privacy notices, obtain separate express
+  consent for listed uses and disclosures, provide access and deletion methods,
+  and maintain reasonable security practices. After a qualifying consent
+  revocation, a company must destroy the consumer's biological sample within
+  30 days.
 plain_language: >-
-  Covered companies must explain their genetic-data practices and obtain
-  specific consent for several uses. Consumers can revoke consent and request
-  account or data deletion and sample destruction, subject to the law's scope
-  and exceptions.
+  If you use a genetic testing company covered by the act, it must explain its
+  data practices and ask separately before several uses or disclosures. You may
+  access or delete your data and request sample destruction through the act's
+  procedures.
 limitations: >-
-  The act contains definitions and exclusions. Whether a company, service,
-  sample, or use is covered requires review of the current statutory text.
+  The act excludes protected health information governed by HIPAA and medical
+  information governed by California's Confidentiality of Medical Information
+  Act. It also contains exceptions for specified research and other activities.
 primary_sources:
   - title: SB 41 bill text, chaptered version
     url: https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202120220SB41
     publisher: California Legislative Information
-    accessed_date: 2026-08-31
+    accessed_date: 2026-09-02
 secondary_sources: []
 history:
   - date: 2020-12-07
@@ -55,4 +57,7 @@ history:
     source: California Legislative Information
   - date: 2026-08-31
     event: Record created from the chaptered bill text.
+    source: Project review
+  - date: 2026-09-02
+    event: Project-authored analysis revised after primary-source review.
     source: Project review
