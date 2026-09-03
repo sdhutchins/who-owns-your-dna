@@ -665,6 +665,104 @@ main.page-shell {
   vertical-align: super;
 }
 
+.archive-introduction {
+  align-items: end;
+  display: grid;
+  gap: 1.5rem 3rem;
+  grid-template-columns: minmax(0, 1.7fr) minmax(17rem, 0.8fr);
+  max-width: 70rem;
+}
+
+.archive-eyebrow {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin: 0.35rem 0 0.45rem;
+  text-transform: uppercase;
+}
+
+.archive-introduction h1 {
+  margin-top: 0;
+}
+
+.archive-introduction .page-intro {
+  margin-bottom: 0;
+}
+
+.archive-snapshot {
+  border-bottom: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+.archive-snapshot div {
+  align-items: baseline;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(8rem, 1fr) auto;
+  padding: 0.55rem 0;
+}
+
+.archive-snapshot div + div {
+  border-top: 1px solid var(--border);
+}
+
+.archive-snapshot dt {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.archive-snapshot dd {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0;
+  text-align: right;
+}
+
+.archive-note .callout {
+  margin-bottom: 0;
+  max-width: 70rem;
+}
+
+.archive-search {
+  margin-top: 2rem;
+}
+
+.archive-search__heading {
+  align-items: end;
+  display: flex;
+  gap: 1rem 2rem;
+  justify-content: space-between;
+}
+
+.archive-search__heading h2 {
+  margin: 0;
+}
+
+.archive-search__heading p {
+  margin: 0.25rem 0 0;
+}
+
+.archive-resource-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  justify-content: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.archive-resource-links a {
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .methodology-references {
   padding-left: 1.4rem;
 }
@@ -1568,6 +1666,20 @@ details > div {
 }
 
 @media (max-width: 48rem) {
+  .archive-introduction {
+    align-items: start;
+    grid-template-columns: 1fr;
+  }
+
+  .archive-search__heading {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .archive-resource-links {
+    justify-content: flex-start;
+  }
+
   .data-catalog .table-wrap {
     overflow-x: visible;
   }

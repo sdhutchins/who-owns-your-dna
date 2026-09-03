@@ -1,6 +1,8 @@
 ---
+import ExternalLinkIcon from "@lucide/astro/icons/external-link";
+import FileDownIcon from "@lucide/astro/icons/file-down";
+
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
-import ActionLink from "../../../components/ActionLink.astro";
 import Callout from "../../../components/Callout.astro";
 import FilterPanel from "../../../components/FilterPanel.astro";
 import Pagination from "../../../components/Pagination.astro";
@@ -26,103 +28,150 @@ function normalizeSearch(values: string[]): string {
 
 <BaseLayout title="NHGRI source archive" wide>
   <Breadcrumbs items={[{ label: "About", href: "/about/" }, { label: "NHGRI source archive" }]} />
-  <h1>Genome Statute and Legislation Database archive</h1>
-  <p class="page-intro">Search {manifest.record_count.toLocaleString()} records preserved from the National Human Genome Research Institute database.</p>
 
-  <Callout variant="source">
-    <p><strong>This archive preserves NHGRI's wording.</strong> The records were retrieved on {formatDateTime(manifest.snapshot_fetched_at)}, and NHGRI last updated its source page on {formatDate(manifest.source_page_last_updated)}. The summaries may not reflect later legal changes. Consult the linked primary source for current legal text.</p>
-  </Callout>
+  <section class="archive-introduction" aria-labelledby="archive-title">
+    <div>
+      <p class="archive-eyebrow">NHGRI source archive</p>
+      <h1 id="archive-title">Genome Statute and Legislation Database</h1>
+      <p class="page-intro">Search {manifest.record_count.toLocaleString()} archived records from the National Human Genome Research Institute.</p>
+    </div>
+    <dl class="archive-snapshot">
+      <div>
+        <dt>Records</dt>
+        <dd>{manifest.record_count.toLocaleString()}</dd>
+      </div>
+      <div>
+        <dt>Snapshot retrieved</dt>
+        <dd><time datetime={manifest.snapshot_fetched_at}>{formatDateTime(manifest.snapshot_fetched_at)}</time></dd>
+      </div>
+      <div>
+        <dt>Source page updated</dt>
+        <dd><time datetime={manifest.source_page_last_updated}>{formatDate(manifest.source_page_last_updated)}</time></dd>
+      </div>
+    </dl>
+  </section>
 
-  <div class="action-row">
-    <ActionLink href={withBase("/data/nhgri-source-records.csv")} download>Download source CSV</ActionLink>
-    <ActionLink href={withBase("/data/nhgri-source-records.json")} variant="secondary" download>Download source JSON</ActionLink>
-    <a href={manifest.source_page}>View the NHGRI source page</a>
+  <div class="archive-note">
+    <Callout variant="source">
+      <p><strong>Archived source material.</strong> These records preserve NHGRI's wording and may not reflect later legal changes. Use the linked primary source to verify current legal text.</p>
+    </Callout>
   </div>
 
-  <FilterPanel id="nhgri-filters" label="Filter NHGRI source records">
-    <div class="filter-field">
-      <label for="source-search">Search source records</label>
-      <input id="source-search" name="q" type="search" placeholder="Title, bill number, state, or topic" />
+  <section class="archive-search" aria-labelledby="search-archive">
+    <div class="archive-search__heading">
+      <div>
+        <h2 id="search-archive">Search archived records</h2>
+        <p>Filter by keyword, state, NHGRI topic, source status, or year.</p>
+      </div>
+      <nav aria-label="Archive resources">
+        <ul class="archive-resource-links">
+          <li>
+            <a class="icon-link" href={withBase("/data/nhgri-source-records.csv")} download>
+              <FileDownIcon class="interface-icon" size={16} />
+              <span>Download CSV</span>
+            </a>
+          </li>
+          <li>
+            <a class="icon-link" href={withBase("/data/nhgri-source-records.json")} download>
+              <FileDownIcon class="interface-icon" size={16} />
+              <span>Download JSON</span>
+            </a>
+          </li>
+          <li>
+            <a class="icon-link" href={manifest.source_page}>
+              <ExternalLinkIcon class="interface-icon" size={16} />
+              <span>Original NHGRI page</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
-    <div class="filter-field">
-      <label for="source-state">State</label>
-      <select id="source-state" name="state">
-        <option value="">All states</option>
-        {jurisdictions.map((jurisdiction) => <option value={jurisdiction}>{jurisdiction}</option>)}
-      </select>
-    </div>
-    <div class="filter-field">
-      <label for="source-topic">NHGRI topic</label>
-      <select id="source-topic" name="topic">
-        <option value="">All topics</option>
-        {topics.map((topic) => <option value={topic}>{topic}</option>)}
-      </select>
-    </div>
-    <div class="filter-field">
-      <label for="source-status">Source status</label>
-      <select id="source-status" name="status">
-        <option value="">All statuses</option>
-        {statuses.map((status) => <option value={status}>{status}</option>)}
-      </select>
-    </div>
-    <div class="filter-field">
-      <label for="source-year">Year or session</label>
-      <select id="source-year" name="year">
-        <option value="">All years</option>
-        {years.map((year) => <option value={String(year)}>{year}</option>)}
-      </select>
-    </div>
-  </FilterPanel>
 
-  <p class="result-count" aria-live="polite"><span id="source-result-count">{records.length.toLocaleString()}</span> source records</p>
-  <p id="mapped-topic-note" class="metadata" hidden></p>
+    <FilterPanel id="nhgri-filters" label="Filter NHGRI source records">
+      <div class="filter-field">
+        <label for="source-search">Search source records</label>
+        <input id="source-search" name="q" type="search" placeholder="Title, bill number, state, or topic" />
+      </div>
+      <div class="filter-field">
+        <label for="source-state">State</label>
+        <select id="source-state" name="state">
+          <option value="">All states</option>
+          {jurisdictions.map((jurisdiction) => <option value={jurisdiction}>{jurisdiction}</option>)}
+        </select>
+      </div>
+      <div class="filter-field">
+        <label for="source-topic">NHGRI topic</label>
+        <select id="source-topic" name="topic">
+          <option value="">All topics</option>
+          {topics.map((topic) => <option value={topic}>{topic}</option>)}
+        </select>
+      </div>
+      <div class="filter-field">
+        <label for="source-status">Source status</label>
+        <select id="source-status" name="status">
+          <option value="">All statuses</option>
+          {statuses.map((status) => <option value={status}>{status}</option>)}
+        </select>
+      </div>
+      <div class="filter-field">
+        <label for="source-year">Year or session</label>
+        <select id="source-year" name="year">
+          <option value="">All years</option>
+          {years.map((year) => <option value={String(year)}>{year}</option>)}
+        </select>
+      </div>
+    </FilterPanel>
 
-  <TableRegion label="NHGRI source records matching the selected filters">
-    <table class="policy-record-table">
-      <caption class="sr-only">NHGRI source records matching the selected filters</caption>
-      <thead>
-        <tr>
-          <th scope="col">State</th>
-          <th scope="col">Source record</th>
-          <th scope="col">Topics</th>
-          <th scope="col">Status</th>
-          <th scope="col">Archived summary</th>
-        </tr>
-      </thead>
-      <tbody id="source-records">
-        {records.map((record) => (
-          <tr
-            data-source-record
-            data-search={normalizeSearch([record.jurisdiction, record.source_record_label, record.source_summary, ...record.source_topics])}
-            data-state={record.jurisdiction}
-            data-topics={JSON.stringify(record.source_topics)}
-            data-mapped-topics={JSON.stringify(record.mapped_topics)}
-            data-status={record.source_status}
-            data-year={record.inferred_year ?? ""}
-          >
-            <th scope="row" data-label="State">{record.jurisdiction}</th>
-            <td class="policy-record-table__primary" data-label="Source record">
-              <a href={record.primary_url}>{record.source_record_label}</a>
-              <span class="policy-record-table__date">{record.inferred_year ? `${record.inferred_year} legislative session` : "Date not stated in source label"}</span>
-              <span class="policy-record-table__review">Retrieved from NHGRI on {formatDateTime(manifest.snapshot_fetched_at)}</span>
-              <a class="policy-record-table__details" href={withBase(`/source-records/nhgri/${record.id}/`)}>Record details</a>
-            </td>
-            <td data-label="Topics">{record.source_topics.join(", ")}</td>
-            <td data-label="Status">{record.source_status}</td>
-            <td data-label="Archived summary">{record.source_summary}</td>
+    <p class="result-count" aria-live="polite"><span id="source-result-count">{records.length.toLocaleString()}</span> source records</p>
+    <p id="mapped-topic-note" class="metadata" hidden></p>
+
+    <TableRegion label="NHGRI source records matching the selected filters">
+      <table class="policy-record-table">
+        <caption class="sr-only">NHGRI source records matching the selected filters</caption>
+        <thead>
+          <tr>
+            <th scope="col">State</th>
+            <th scope="col">Source record</th>
+            <th scope="col">Topics</th>
+            <th scope="col">Status</th>
+            <th scope="col">Archived summary</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-  </TableRegion>
+        </thead>
+        <tbody id="source-records">
+          {records.map((record) => (
+            <tr
+              data-source-record
+              data-search={normalizeSearch([record.jurisdiction, record.source_record_label, record.source_summary, ...record.source_topics])}
+              data-state={record.jurisdiction}
+              data-topics={JSON.stringify(record.source_topics)}
+              data-mapped-topics={JSON.stringify(record.mapped_topics)}
+              data-status={record.source_status}
+              data-year={record.inferred_year ?? ""}
+            >
+              <th scope="row" data-label="State">{record.jurisdiction}</th>
+              <td class="policy-record-table__primary" data-label="Source record">
+                <a href={record.primary_url}>{record.source_record_label}</a>
+                <span class="policy-record-table__date">{record.inferred_year ? `${record.inferred_year} legislative session` : "Date not stated in source label"}</span>
+                <span class="policy-record-table__review">Retrieved from NHGRI on {formatDateTime(manifest.snapshot_fetched_at)}</span>
+                <a class="policy-record-table__details" href={withBase(`/source-records/nhgri/${record.id}/`)}>Record details</a>
+              </td>
+              <td data-label="Topics">{record.source_topics.join(", ")}</td>
+              <td data-label="Status">{record.source_status}</td>
+              <td data-label="Archived summary">{record.source_summary}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </TableRegion>
 
-  <div id="source-no-results" hidden>
-    <Callout><p>No source records match all selected filters.</p></Callout>
-  </div>
+    <div id="source-no-results" hidden>
+      <Callout><p>No source records match all selected filters.</p></Callout>
+    </div>
 
-  <Pagination totalCount={records.length} label="NHGRI source record pages" noun="source records" />
+    <Pagination totalCount={records.length} label="NHGRI source record pages" noun="source records" />
 
-  <noscript><Callout><p>Filtering and pagination require JavaScript. All source records remain visible without it.</p></Callout></noscript>
+    <noscript><Callout><p>Filtering and pagination require JavaScript. All source records remain visible without it.</p></Callout></noscript>
+  </section>
 
   <script>
   const form = document.querySelector<HTMLFormElement>("#nhgri-filters");
