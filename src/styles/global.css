@@ -660,6 +660,7 @@ main.page-shell {
 
 .citation-reference {
   font-size: 0.78em;
+  line-height: 0;
   margin-left: 0.16rem;
   vertical-align: super;
 }
