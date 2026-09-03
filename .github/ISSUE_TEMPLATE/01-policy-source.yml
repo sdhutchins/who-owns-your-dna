@@ -1,0 +1,68 @@
+name: Suggest a policy source
+description: Share an official source for a law, bill, regulation, policy, or court decision.
+title: "[Source]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping expand the project. Submit the official government source when one is available. A submission is a candidate for human review, not a published legal conclusion.
+  - type: input
+    id: jurisdiction
+    attributes:
+      label: Jurisdiction
+      description: Name the federal, state, district, or territorial jurisdiction.
+      placeholder: Alabama
+    validations:
+      required: true
+  - type: input
+    id: identifier
+    attributes:
+      label: Policy identifier
+      description: Provide the bill number, statute citation, regulation number, case name, or policy title.
+      placeholder: HB 123 or Public Law 110-233
+    validations:
+      required: true
+  - type: input
+    id: official_source
+    attributes:
+      label: Official source URL
+      description: Link to a legislature, government agency, court, or official code publication.
+      placeholder: https://...
+    validations:
+      required: true
+  - type: dropdown
+    id: record_type
+    attributes:
+      label: Source type
+      options:
+        - Legislation
+        - Statute
+        - Regulation
+        - Guidance
+        - Policy
+        - Court decision
+        - Agency action
+        - Unsure
+    validations:
+      required: true
+  - type: textarea
+    id: relevance
+    attributes:
+      label: Connection to genetic information or biological samples
+      description: Explain briefly what the source appears to cover. Do not provide personal or confidential information.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional context
+      description: Add relevant dates, status information, related records, or secondary sources.
+    validations:
+      required: false
+  - type: checkboxes
+    id: review_boundary
+    attributes:
+      label: Submission acknowledgment
+      options:
+        - label: I understand that a reviewer must verify the source, status, scope, and summary before publication.
+          required: true

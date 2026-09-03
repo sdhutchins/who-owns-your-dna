@@ -1,23 +1,107 @@
 [
-  { "slug": "genetic-privacy", "name": "Genetic privacy" },
-  { "slug": "genetic-discrimination", "name": "Genetic discrimination" },
-  { "slug": "employment", "name": "Employment" },
-  { "slug": "health-insurance", "name": "Health insurance" },
-  { "slug": "life-insurance", "name": "Life insurance" },
-  { "slug": "disability-insurance", "name": "Disability insurance" },
-  { "slug": "long-term-care-insurance", "name": "Long-term care insurance" },
-  { "slug": "direct-to-consumer-testing", "name": "Direct-to-consumer genetic testing" },
-  { "slug": "research", "name": "Research" },
-  { "slug": "biobanks", "name": "Biobanks" },
-  { "slug": "consent", "name": "Consent" },
-  { "slug": "data-sharing", "name": "Data sharing" },
-  { "slug": "data-sale", "name": "Data sale" },
-  { "slug": "data-deletion", "name": "Data deletion" },
-  { "slug": "sample-destruction", "name": "Sample destruction" },
-  { "slug": "law-enforcement", "name": "Law enforcement" },
-  { "slug": "forensic-genetic-genealogy", "name": "Forensic investigative genetic genealogy" },
-  { "slug": "newborn-screening", "name": "Newborn screening" },
-  { "slug": "reproductive-genetics", "name": "Reproductive genetics" },
-  { "slug": "minors", "name": "Minors" },
-  { "slug": "ai-and-genomics", "name": "AI and genomics" }
+  {
+    "slug": "genetic-privacy",
+    "name": "Genetic privacy",
+    "description": "Rules concerning the collection, use, disclosure, retention, or protection of genetic information."
+  },
+  {
+    "slug": "genetic-discrimination",
+    "name": "Genetic discrimination",
+    "description": "Rules concerning decisions or unequal treatment based on genetic information or genetic-test results."
+  },
+  {
+    "slug": "employment",
+    "name": "Employment",
+    "description": "Rules concerning how employers and other employment entities may obtain or use genetic information."
+  },
+  {
+    "slug": "health-insurance",
+    "name": "Health insurance",
+    "description": "Rules concerning genetic information in health-plan eligibility, coverage, underwriting, or reimbursement."
+  },
+  {
+    "slug": "life-insurance",
+    "name": "Life insurance",
+    "description": "Rules concerning how life insurers may request or use genetic information."
+  },
+  {
+    "slug": "disability-insurance",
+    "name": "Disability insurance",
+    "description": "Rules concerning how disability insurers may request or use genetic information."
+  },
+  {
+    "slug": "long-term-care-insurance",
+    "name": "Long-term care insurance",
+    "description": "Rules concerning how long-term care insurers may request or use genetic information."
+  },
+  {
+    "slug": "direct-to-consumer-testing",
+    "name": "Direct-to-consumer genetic testing",
+    "description": "Rules concerning genetic testing services marketed or provided directly to consumers."
+  },
+  {
+    "slug": "research",
+    "name": "Research",
+    "description": "Rules and policies concerning genetic information or biological samples used in research."
+  },
+  {
+    "slug": "biobanks",
+    "name": "Biobanks",
+    "description": "Rules concerning repositories that collect, store, manage, or distribute biological samples and related data."
+  },
+  {
+    "slug": "consent",
+    "name": "Consent",
+    "description": "Requirements for permission or informed consent before specified genetic tests, collections, or uses."
+  },
+  {
+    "slug": "data-sharing",
+    "name": "Data sharing",
+    "description": "Rules concerning disclosure, transfer, or access to genetic information between people or organizations."
+  },
+  {
+    "slug": "data-sale",
+    "name": "Data sale",
+    "description": "Rules concerning the sale of genetic information or its transfer in exchange for value."
+  },
+  {
+    "slug": "data-deletion",
+    "name": "Data deletion",
+    "description": "Rights or duties concerning deletion of genetic information held by an organization."
+  },
+  {
+    "slug": "sample-destruction",
+    "name": "Sample destruction",
+    "description": "Rights or duties concerning destruction of biological samples after collection or testing."
+  },
+  {
+    "slug": "law-enforcement",
+    "name": "Law enforcement",
+    "description": "Rules concerning law-enforcement access to or use of genetic information and DNA samples."
+  },
+  {
+    "slug": "forensic-genetic-genealogy",
+    "name": "Forensic investigative genetic genealogy",
+    "description": "Rules concerning the use of genetic genealogy databases and family relationships in investigations."
+  },
+  {
+    "slug": "newborn-screening",
+    "name": "Newborn screening",
+    "description": "Rules and policies concerning genetic or related screening of newborns and retained screening specimens."
+  },
+  {
+    "slug": "reproductive-genetics",
+    "name": "Reproductive genetics",
+    "description": "Rules concerning genetic testing or information in reproductive and prenatal settings."
+  },
+  {
+    "slug": "minors",
+    "name": "Minors",
+    "description": "Rules concerning genetic testing, information, consent, or decision-making involving minors."
+  },
+  {
+    "slug": "ai-and-genomics",
+    "name": "AI and genomics",
+    "description": "Rules and policies concerning artificial intelligence used with genomic information or genetic analyses."
+  }
 ]

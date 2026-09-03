@@ -14,8 +14,8 @@ introduced_date: 2026-01-29
 signed_date: 2026-04-17
 effective_date: 2027-05-01
 last_action_date: 2026-04-17
-last_reviewed: 2026-08-31
-record_version: "1.0"
+last_reviewed: 2026-09-02
+record_version: "1.1"
 verification_status: verified-primary
 topics:
   - genetic-privacy
@@ -24,34 +24,34 @@ topics:
   - data-sale
   - data-deletion
 summary: >-
-  Alabama HB 351 enacted the Alabama Personal Data Protection Act. The act
-  classifies genetic or biometric data processed to uniquely identify a person
-  as sensitive data and establishes broader consumer rights and controller
-  obligations for covered businesses.
+  Alabama enacted the Personal Data Protection Act in 2026, but its requirements
+  do not take effect until May 1, 2027. The act treats genetic or biometric data
+  processed to uniquely identify a person as sensitive data within a broader
+  consumer privacy framework.
 legal_effects: >-
-  Covered controllers must obtain consent before processing sensitive data and
-  must comply with duties concerning transparency, data minimization, security,
-  consumer requests, targeted advertising, personal-data sales, and certain
-  profiling. The Attorney General has exclusive enforcement authority.
+  Businesses meeting the act's coverage thresholds must obtain consent before
+  processing sensitive data. Covered controllers also have duties involving
+  transparency, data minimization, security, consumer requests, targeted
+  advertising, data sales, and certain profiling. The Attorney General has
+  exclusive enforcement authority.
 plain_language: >-
-  Beginning May 1, 2027, qualifying businesses will have to follow statewide
-  rules for personal data. Genetic identifying data receives the act's
-  sensitive-data protections, including a general consent requirement for its
-  processing.
+  Beginning May 1, 2027, qualifying businesses must get consent before processing
+  genetic data to uniquely identify a person. The act will also provide consumers
+  with broader rights concerning personal data held by those businesses.
 limitations: >-
-  The act applies only when its business and processing thresholds are met and
-  contains entity-level and data-level exemptions, including several involving
-  health care and federally regulated information. It was enacted in 2026 but
-  is not effective until May 1, 2027.
+  Coverage depends on business and data-processing thresholds. The act also has
+  entity-level and data-level exemptions, including several for health care and
+  federally regulated information, and generally excludes employment-context
+  data from its definition of consumer.
 primary_sources:
   - title: HB 351 enrolled act
     url: https://alison.legislature.state.al.us/files/pdf/SearchableInstruments/2026RS/HB351-enr.pdf
     publisher: Alabama Legislature
-    accessed_date: 2026-08-31
+    accessed_date: 2026-09-02
   - title: Alabama Code § 8-44-1
     url: https://alison.legislature.state.al.us/code-of-alabama?section=8-44-1
     publisher: Alabama Legislature
-    accessed_date: 2026-08-31
+    accessed_date: 2026-09-02
 secondary_sources:
   - title: Alabama HB 351 legislative history
     url: https://legiscan.com/AL/bill/HB351/2026
@@ -72,4 +72,7 @@ history:
     source: Alabama Legislature
   - date: 2026-08-31
     event: Record created from the enrolled act, current code, and legislative history.
+    source: Project review
+  - date: 2026-09-02
+    event: Project-authored analysis revised after primary-source review.
     source: Project review

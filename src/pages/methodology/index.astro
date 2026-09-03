@@ -6,17 +6,20 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 <BaseLayout title="Methodology">
   <Breadcrumbs items={[{ label: "About", href: "/about/" }, { label: "Methodology" }]} />
   <h1>Methodology</h1>
-  <p class="page-intro">How the tracker finds, evaluates, summarizes, reviews, and versions U.S. genetics and genomics law and policy.</p>
+  <p class="page-intro">How the project finds, checks, explains, and updates U.S. genetics and genomics law and policy records.</p>
 
   <section class="reading-width">
-    <h2>Project scope</h2>
-    <p>The project tracks U.S. federal, state, district, and future territorial law and policy concerning genetic information, genomic data, biological samples, genetic testing, and related uses. Coverage is not comprehensive and expands through source review.</p>
+    <h2>How to read a record</h2>
+    <p>Start with the status and review date. Then read what the law or policy requires or prohibits, followed by its important limits and exceptions. Use the linked primary source to confirm the current official text.</p>
 
-    <h2>Inclusion criteria</h2>
-    <p>A record must have an identifiable jurisdiction, authoritative source, record type, legal or policy status, and a direct connection to a controlled genetics or genomics topic. Candidate records remain outside the verified dataset until a human reviewer checks the primary source.</p>
+    <h2>Project scope</h2>
+    <p>The project tracks U.S. federal, state, district, and territorial law and policy concerning genetic information, genomic data, biological samples, genetic testing, and related uses. Coverage is not comprehensive and expands through source review.</p>
+
+    <h2 id="inclusion-criteria">Inclusion criteria</h2>
+    <p>A record must identify the relevant government, official source, type of record, legal or policy status, and connection to a defined genetics or genomics topic. Candidate records remain outside the verified dataset until a human reviewer checks the primary source.<sup class="citation-reference"><a href="#reference-1" aria-label="Reference 1">1</a>, <a href="#reference-2" aria-label="Reference 2">2</a></sup></p>
 
     <h2>Exclusion criteria</h2>
-    <p>The tracker excludes unsupported claims, duplicate records, secondary summaries presented as legal authority, and candidate changes that have not completed review. General privacy or health laws may be excluded until their application to genetic information is documented.</p>
+    <p>The project excludes unsupported claims, duplicate records, secondary summaries presented as legal authority, and candidate changes that have not completed review. General privacy or health laws may be excluded until a source documents how they apply to genetic information.</p>
 
     <h2>Source hierarchy</h2>
     <ol>
@@ -29,8 +32,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <li>Credible legal or policy secondary source</li>
       <li>News reporting when necessary for context</li>
     </ol>
+    <p>The hierarchy itself is a project rule. The supporting legal-mapping literature informed the broader practices of defining scope, retrieving legal text, and documenting how records are coded and checked.<sup class="citation-reference"><a href="#reference-1" aria-label="Reference 1">1</a>–<a href="#reference-3" aria-label="Reference 3">3</a></sup></p>
 
-    <h2>NHGRI provenance</h2>
+    <h2 id="nhgri-provenance">NHGRI provenance</h2>
     <p>The complete NHGRI Genome Statute and Legislation Database is included in the combined Policy Records directory. Its original state, primary link, topic, status, and summary are preserved. Local topic mappings support search and do not establish legal equivalence.</p>
     <p>These entries identify NHGRI as their source and display the retrieval timestamp. NHGRI’s source page was last updated February 8, 2024. Current legal decisions should always use the linked primary source.</p>
 
@@ -41,20 +45,35 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <ol>
       <li>Locate an official government source.</li>
       <li>Determine the jurisdiction, record type, status, dates, and scope.</li>
-      <li>Draft a factual summary separately from plain-language interpretation.</li>
+      <li>Draft a factual summary separately from plain-language interpretation.<sup class="citation-reference"><a href="#reference-4" aria-label="Reference 4">4</a></sup></li>
       <li>Assign controlled topic tags and document uncertainty.</li>
       <li>Run schema and controlled-vocabulary validation.</li>
-      <li>Complete human source and summary review before publication.</li>
+      <li>Complete human source and summary review before publication.<sup class="citation-reference"><a href="#reference-1" aria-label="Reference 1">1</a>, <a href="#reference-2" aria-label="Reference 2">2</a>, <a href="#reference-4" aria-label="Reference 4">4</a></sup></li>
     </ol>
+
+    <h2>Evidence informing this method</h2>
+    <p>A targeted PubMed Central search conducted through Paperclip on September 2, 2026, informed selected parts of this methodology. Search concepts included legal epidemiology, policy surveillance, legal mapping, coding, quality control, transparent search reporting, and plain-language summaries. Disclosing the information source, search concepts, and execution date was informed by search-reporting guidance.<sup class="citation-reference"><a href="#reference-5" aria-label="Reference 5">5</a></sup></p>
+    <p>The literature is cited above at the points where it informed the method. It was used to refine the project’s method and writing, not to identify the legal records.</p>
+    <p>This was a focused background search, not a systematic or scoping review. The project does not claim adherence to PRISMA-S or another evidence-synthesis reporting guideline.</p>
 
     <h2>Uncertainty and absence</h2>
     <p>“No specific law identified” describes a dataset finding, not a definitive conclusion that no law exists. Legal coverage can depend on definitions, exceptions, effective dates, preemption, enforcement, and the facts of a particular situation.</p>
 
     <h2>Corrections and versioning</h2>
-    <p>Corrections create a record-history entry and increment the record version when the substantive public record changes. Dataset releases will receive stable version identifiers. Future releases may be archived with checksums and a DOI.</p>
+    <p>Corrections create a record-history entry and increment the record version when the substantive public record changes. GitHub releases provide stable snapshot identifiers and checksum-verified data files.</p>
 
     <h2>Automation boundary</h2>
-    <p>Future monitors may identify candidate changes from Congress.gov, the Federal Register, state legislatures, state codes, and agency notices. Automated systems must not rewrite legal summaries or publish legal conclusions without human review.</p>
+    <p>A weekly monitor compares the checked-in NHGRI snapshot with a newly retrieved candidate. Structured changes are presented in a draft pull request for source and data review. Retrieval timestamps and cosmetic page changes do not create a new snapshot when the policy records are unchanged.</p>
+    <p>Automated systems must not rewrite legal summaries, merge candidate data, or publish legal conclusions without human review.</p>
+
+    <h2>References</h2>
+    <ol class="methodology-references">
+      <li id="reference-1">Burris S. The Advantages of Scientific Legal Mapping. <em>Journal of Law, Medicine &amp; Ethics</em>. 2025;53(1):134-136. <a href="https://doi.org/10.1017/jme.2025.47">doi:10.1017/jme.2025.47</a></li>
+      <li id="reference-2">Skuster P, Menzel J, Ghorashi AR, Perkins M. Policy surveillance for a global analysis of national abortion laws. <em>Sexual and Reproductive Health Matters</em>. 2022;30(1):2064208. <a href="https://doi.org/10.1080/26410397.2022.2064208">doi:10.1080/26410397.2022.2064208</a></li>
+      <li id="reference-3">Poirier MJP, Viens AM, Penney TL, et al. Principles and methods of global legal epidemiology. <em>Journal of Epidemiology and Community Health</em>. 2022;76:840-845. <a href="https://doi.org/10.1136/jech-2021-217202">doi:10.1136/jech-2021-217202</a></li>
+      <li id="reference-4">Maurer M, Siegel JE, Firminger KB, Lowers J, Dutta T, Chang JS. Lessons Learned from Developing Plain Language Summaries of Research Studies. <em>HLRP: Health Literacy Research and Practice</em>. 2021;5(2):e155-e161. <a href="https://doi.org/10.3928/24748307-20210524-01">doi:10.3928/24748307-20210524-01</a></li>
+      <li id="reference-5">Rethlefsen ML, Kirtley S, Waffenschmidt S, et al. PRISMA-S: an extension to the PRISMA Statement for Reporting Literature Searches in Systematic Reviews. <em>Systematic Reviews</em>. 2021;10:39. <a href="https://doi.org/10.1186/s13643-020-01542-z">doi:10.1186/s13643-020-01542-z</a></li>
+    </ol>
   </section>
 
 </BaseLayout>

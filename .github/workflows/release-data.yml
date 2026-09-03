@@ -1,0 +1,88 @@
+name: Publish reviewed data snapshot
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Snapshot date, optionally followed by a revision, such as 2026-09-02 or 2026-09-02.2
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify release prerequisites
+        shell: bash
+        env:
+          SNAPSHOT_VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          if [[ ! "$SNAPSHOT_VERSION" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}(\.[0-9]+)?$ ]]; then
+            echo "Version must use YYYY-MM-DD or YYYY-MM-DD.N format."
+            exit 1
+          fi
+          if [[ ! -f LICENSE && ! -f LICENSE.md && ! -f LICENSE.txt ]]; then
+            echo "Select and add a repository license before publishing a dataset release."
+            exit 1
+          fi
+
+      - name: Validate and build release files
+        run: |
+          npm test
+          npm run lint
+          npm run build
+
+      - name: Package data snapshot
+        id: package
+        shell: bash
+        env:
+          SNAPSHOT_VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          release_directory="$RUNNER_TEMP/who-owns-your-dna-data-$SNAPSHOT_VERSION"
+          mkdir -p "$release_directory"
+          cp public/data/records.csv "$release_directory/"
+          cp public/data/records.json "$release_directory/"
+          cp public/data/nhgri-source-records.csv "$release_directory/"
+          cp public/data/nhgri-source-records.json "$release_directory/"
+          cp public/data/nhgri-source-manifest.json "$release_directory/"
+          cp public/data/changes.json "$release_directory/"
+          (
+            cd "$release_directory"
+            sha256sum ./*.csv ./*.json > SHA256SUMS.txt
+          )
+          echo "release_directory=$release_directory" >> "$GITHUB_OUTPUT"
+
+      - name: Publish GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_DIRECTORY: ${{ steps.package.outputs.release_directory }}
+          SNAPSHOT_VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          release_tag="data-$SNAPSHOT_VERSION"
+          if gh release view "$release_tag" >/dev/null 2>&1; then
+            echo "Release $release_tag already exists. Choose a new revision."
+            exit 1
+          fi
+          gh release create "$release_tag" "$RELEASE_DIRECTORY"/* \
+            --target "$GITHUB_SHA" \
+            --title "Data snapshot $SNAPSHOT_VERSION" \
+            --notes "Human-reviewed project records, archived NHGRI source records, provenance metadata, and checksums. Consult linked primary sources before relying on a legal status."

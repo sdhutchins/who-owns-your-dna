@@ -9,32 +9,34 @@ identifier: 78 FR 5566
 regulatory_citation: 45 C.F.R. Parts 160 and 164
 status: approved
 effective_date: 2013-03-26
-last_reviewed: 2026-08-31
-record_version: "1.0"
+last_reviewed: 2026-09-02
+record_version: "1.1"
 verification_status: verified-primary
 topics:
   - genetic-privacy
   - health-insurance
 summary: >-
-  The 2013 HIPAA final rule implemented GINA-related changes by treating
-  genetic information as health information and restricting covered health
-  plans from using or disclosing genetic information for underwriting.
+  The 2013 HIPAA final rule made clear that genetic information is health
+  information under the HIPAA Privacy Rule. It also prohibited most health
+  plans covered by HIPAA from using or disclosing protected health information
+  that is genetic information for underwriting.
 legal_effects: >-
-  The final rule revised HIPAA definitions and privacy provisions so genetic
-  information is treated as health information and covered health plans may not
-  use or disclose it for underwriting purposes.
+  The rule revised HIPAA definitions and barred most HIPAA-covered health plans
+  from using or disclosing genetic information for underwriting. It took effect
+  on March 26, 2013, with a September 23, 2013 compliance date.
 plain_language: >-
-  Genetic information held by a HIPAA-covered entity can be protected health
-  information. HIPAA does not cover every company or every consumer genetic
-  testing service.
+  Identifiable genetic information held by a health plan, health care provider,
+  or clearinghouse covered by HIPAA can be protected health information. The
+  rule also limits how most covered health plans may use it for underwriting.
 limitations: >-
-  HIPAA coverage depends on whether the organization and information fall
-  within the rule. The compliance date followed the rule's effective date.
+  HIPAA does not apply to every organization that collects genetic information.
+  Coverage depends on the organization, the information, and the activity. The
+  underwriting prohibition does not apply to issuers of long-term care policies.
 primary_sources:
   - title: Modifications to the HIPAA Privacy, Security, Enforcement, and Breach Notification Rules
     url: https://www.federalregister.gov/documents/2013/01/25/2013-01073/modifications-to-the-hipaa-privacy-security-enforcement-and-breach-notification-rules-under-the
     publisher: Office of the Federal Register
-    accessed_date: 2026-08-31
+    accessed_date: 2026-09-02
 secondary_sources: []
 history:
   - date: 2013-01-25
@@ -42,4 +44,7 @@ history:
     source: 78 FR 5566
   - date: 2026-08-31
     event: Record created from the final rule.
+    source: Project review
+  - date: 2026-09-02
+    event: Project-authored analysis revised after primary-source review.
     source: Project review

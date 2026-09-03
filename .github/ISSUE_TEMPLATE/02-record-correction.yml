@@ -1,0 +1,60 @@
+name: Correct a record
+description: Report a factual, status, date, scope, or wording problem in an existing record.
+title: "[Correction]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Identify the exact record and support the proposed correction with a primary source whenever possible. Please do not include personal or confidential information.
+  - type: input
+    id: record
+    attributes:
+      label: Record URL or identifier
+      placeholder: https://whoownsyourdna.org/records/... or HB 123
+    validations:
+      required: true
+  - type: dropdown
+    id: correction_type
+    attributes:
+      label: What needs attention?
+      options:
+        - Legal status
+        - Date
+        - Citation or identifier
+        - Factual summary
+        - Legal effects
+        - Plain-language explanation
+        - Limitation or exception
+        - Topic classification
+        - Primary source
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: current_problem
+    attributes:
+      label: Current problem
+      description: Quote or describe the specific field or statement that needs review.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_correction
+    attributes:
+      label: Proposed correction
+      description: Explain what the record should say or what status or date should be checked.
+    validations:
+      required: true
+  - type: input
+    id: official_source
+    attributes:
+      label: Supporting primary source URL
+      placeholder: https://...
+    validations:
+      required: true
+  - type: checkboxes
+    id: review_boundary
+    attributes:
+      label: Submission acknowledgment
+      options:
+        - label: I understand that the proposed correction requires independent human source review.
+          required: true

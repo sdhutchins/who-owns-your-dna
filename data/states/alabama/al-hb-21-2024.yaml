@@ -14,8 +14,8 @@ introduced_date: 2024-02-06
 signed_date: 2024-05-16
 effective_date: 2024-10-01
 last_action_date: 2024-05-16
-last_reviewed: 2026-08-31
-record_version: "1.0"
+last_reviewed: 2026-09-02
+record_version: "1.1"
 verification_status: verified-primary
 topics:
   - genetic-privacy
@@ -25,34 +25,34 @@ topics:
   - data-deletion
   - sample-destruction
 summary: >-
-  Alabama HB 21 enacted the Alabama Genetic Data Privacy Act, which regulates
-  covered direct-to-consumer genetic testing companies and their contractors.
-  The act requires privacy notices, consent for specified uses and disclosures,
-  and procedures for accessing or deleting genetic data and destroying samples.
+  Alabama's Genetic Data Privacy Act took effect on October 1, 2024. It regulates
+  businesses that directly solicit biological samples from consumers for
+  genetic-testing products or services, as well as contractors handling data
+  for those businesses.
 legal_effects: >-
-  Covered companies must obtain express consent for specified data collection,
-  use, retention, and disclosure practices. The act also requires informed
-  consent for certain research, reasonable security practices, deletion and
-  sample-destruction procedures, and confidentiality protections. The Attorney
-  General may seek civil remedies for violations.
+  Genetic testing companies must publish privacy notices and obtain initial
+  express consent. Separate consent is required for each transfer or disclosure,
+  uses beyond the requested service, and marketing. The act also provides access,
+  deletion, and sample-destruction procedures, requires security and contractor
+  confidentiality, and authorizes Attorney General enforcement.
 plain_language: >-
-  A covered consumer genetic testing company must explain how it uses genetic
-  information and obtain specific permission for several uses. Consumers may
-  access their data, revoke consent, and request deletion or sample destruction
-  within the act's stated procedures.
+  If you use a consumer genetic testing service covered by the act, the company
+  must explain its data practices and ask before several uses or disclosures.
+  You may access your genetic data, withdraw consent, and request data deletion
+  or sample destruction through the act's procedures.
 limitations: >-
-  The act is limited to entities meeting its definition of a genetic testing
-  company and contains exclusions for health care providers, covered clinical
-  activities, research, and other specified circumstances.
+  The act does not cover every holder of genetic information. Its exclusions
+  include HIPAA-covered entities and business associates, health care providers,
+  and certain noncommercial research conducted by higher education institutions.
 primary_sources:
   - title: HB 21 enrolled act
     url: https://alison.legislature.state.al.us/files/pdf/SearchableInstruments/2024RS/HB21-enr.pdf
     publisher: Alabama Legislature
-    accessed_date: 2026-08-31
+    accessed_date: 2026-09-02
   - title: Alabama Code § 8-43-2
     url: https://alison.legislature.state.al.us/code-of-alabama?section=8-43-2
     publisher: Alabama Legislature
-    accessed_date: 2026-08-31
+    accessed_date: 2026-09-02
 secondary_sources:
   - title: Alabama HB 21 legislative history
     url: https://legiscan.com/AL/bill/HB21/2024
@@ -76,4 +76,7 @@ history:
     source: Alabama Legislature
   - date: 2026-08-31
     event: Record created from the enrolled act, current code, and legislative history.
+    source: Project review
+  - date: 2026-09-02
+    event: Project-authored analysis revised after primary-source review.
     source: Project review

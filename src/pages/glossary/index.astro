@@ -1,0 +1,97 @@
+---
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Callout from "../../components/Callout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Glossary"
+  description="Plain-language definitions for terms used in U.S. genetics and genomics law and policy records."
+>
+  <Breadcrumbs items={[{ label: "About", href: "/about/" }, { label: "Glossary" }]} />
+  <h1>Glossary</h1>
+  <p class="page-intro">
+    Plain-language definitions for terms used throughout this project.
+  </p>
+
+  <Callout>
+    <p>
+      <strong>Definitions vary by law.</strong> These explanations describe how the project uses each term.
+      A statute, regulation, or policy may define the same term differently. The linked primary source controls.
+    </p>
+  </Callout>
+
+  <section class="reading-width section-block" aria-labelledby="information-and-samples">
+    <h2 id="information-and-samples">Information and samples</h2>
+
+    <h3>Biological sample</h3>
+    <p>Blood, saliva, tissue, or other material from a person that may contain DNA. Laws differ in which materials they include.</p>
+
+    <h3>Genetic information</h3>
+    <p>Information connected to genetic tests, inherited characteristics, or family medical history. The exact definition depends on the law or policy.</p>
+
+    <h3>Genetic test</h3>
+    <p>An analysis used to detect genetic variants, chromosomes, genes, or related products. Legal definitions may include or exclude particular tests.</p>
+
+    <h3>Deidentified data</h3>
+    <p>Data processed to reduce its connection to an identifiable person. Deidentified does not necessarily mean that reidentification is impossible.</p>
+  </section>
+
+  <section class="reading-width section-block" aria-labelledby="privacy-and-control">
+    <h2 id="privacy-and-control">Privacy and control</h2>
+
+    <h3>Privacy</h3>
+    <p>A broad concept concerning access to a person, sample, or information and how that information may be collected or used.</p>
+
+    <h3>Confidentiality</h3>
+    <p>A duty or expectation that a person or organization receiving information will limit how it is disclosed.</p>
+
+    <h3>Security</h3>
+    <p>Administrative, physical, and technical safeguards used to protect information from unauthorized access, use, or disclosure.</p>
+
+    <h3>Consent</h3>
+    <p>Permission for an action such as testing, storage, use, or disclosure. Who must consent, what they must be told, and how permission may be withdrawn depend on the governing rule.</p>
+  </section>
+
+  <section class="reading-width section-block" aria-labelledby="records-and-sources">
+    <h2 id="records-and-sources">Records and sources</h2>
+
+    <h3>Jurisdiction</h3>
+    <p>The government whose law or policy is described, such as the United States, a state, the District of Columbia, or a territory.</p>
+
+    <h3 id="legal-status">Legal status</h3>
+    <p>The stage or form assigned to a record, such as introduced, passed, enacted, died, approved, or statute. Status labels do not by themselves establish whether every provision is currently effective.</p>
+
+    <dl>
+      <dt>Introduced</dt>
+      <dd>A bill was filed in a legislature. It has not become law.</dd>
+
+      <dt>Passed House or Passed Senate</dt>
+      <dd>A bill passed one legislative chamber. It has not necessarily completed the process required to become law.</dd>
+
+      <dt>Died</dt>
+      <dd>A bill did not complete the legislative process in the session tracked by the record.</dd>
+
+      <dt>Enacted</dt>
+      <dd>A bill completed the required approval process and became law. Its effective date may be later than its enactment date.</dd>
+
+      <dt>Statute</dt>
+      <dd>The record describes law codified in a jurisdiction's statutory code.</dd>
+
+      <dt>Approved</dt>
+      <dd>An agency rule or policy received the final approval described by its primary source. The effective or compliance date may be later.</dd>
+
+      <dt>Pending</dt>
+      <dd>The source snapshot did not show a final outcome. Readers should verify the current status with the linked official source.</dd>
+    </dl>
+
+    <h3>Primary source</h3>
+    <p>The official bill, statute, regulation, policy, court opinion, or government record used to verify a project summary.</p>
+
+    <h3>Project-authored summary</h3>
+    <p>A description written and reviewed for this project. It is separate from the official text and does not provide legal advice.</p>
+
+    <h3>NHGRI source summary</h3>
+    <p>Archived wording retrieved from the National Human Genome Research Institute. The project preserves this text as source material and does not treat it as a current legal conclusion.</p>
+  </section>
+</BaseLayout>

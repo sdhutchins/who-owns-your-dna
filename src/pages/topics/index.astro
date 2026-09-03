@@ -25,6 +25,12 @@ function countTopicRecords(topicSlug: string): number {
   <Breadcrumbs items={[{ label: "Topics" }]} />
   <h1>Policy topics</h1>
   <p class="page-intro">Browse state and federal records through a consistent genetics and genomics policy vocabulary.</p>
+  <p class="reading-width">
+    Topic tags group records that discuss related issues. A shared tag does not
+    mean that the records cover the same people, organizations, data, conduct,
+    remedies, or level of legal protection. Counts combine project-authored
+    records with an archived NHGRI policy snapshot.
+  </p>
   <p class="reading-width">For additional policy context, explore <a href="https://www.ashg.org/advocacy/public-policy-positions/">ASHG’s public policy positions</a>.</p>
 
   <ul class="topic-grid section-block">
@@ -34,6 +40,7 @@ function countTopicRecords(topicSlug: string): number {
         return (
           <li>
             <a href={withBase(`/topics/${topic.slug}/`)}>{topic.name}</a><br />
+            <span class="topic-grid__description">{topic.description}</span><br />
             <span class="metadata">{recordCount.toLocaleString()} {recordCount === 1 ? "record" : "records"}</span>
           </li>
         );

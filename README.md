@@ -17,6 +17,7 @@ The site provides informational summaries. It does not provide legal advice.
 - [Usage](#usage)
 - [Validation](#validation)
 - [Refresh the NHGRI Snapshot](#refresh-the-nhgri-snapshot)
+- [Snapshot Monitoring and Releases](#snapshot-monitoring-and-releases)
 - [Repository Structure](#repository-structure)
 - [Contributing](#contributing)
 - [Citation](#citation)
@@ -122,6 +123,23 @@ source-page date, duplicate metrics, and checksums. The [NHGRI source snapshot
 documentation](docs/nhgri-source-import.md) describes the provenance, refresh
 process, and known source conditions.
 
+## Snapshot Monitoring and Releases
+
+The `Monitor NHGRI source snapshot` workflow checks the source every Monday and
+can also be run manually. It compares normalized policy records, the visible
+source-page date, and the declared topic and status vocabularies. Retrieval-time
+or cosmetic HTML changes do not create a data update.
+
+When structured data changes, the workflow validates and builds the candidate
+snapshot, then opens or updates a draft pull request. A person must review the
+source and differences before merging. The repository setting that allows
+GitHub Actions to create pull requests must be enabled for this step.
+
+The manual `Publish reviewed data snapshot` workflow packages the project and
+NHGRI CSV and JSON exports, provenance manifest, changelog, and SHA-256 checksum
+file as a tagged GitHub Release. It will not publish until the repository has a
+license. Snapshot versions use `YYYY-MM-DD` or `YYYY-MM-DD.N`.
+
 ## Repository Structure
 
 ```text
@@ -142,6 +160,11 @@ docs/                 Data model, research method, and import documentation
 Contributions should improve the source record without overstating what the
 source establishes. Read the [contribution guidelines](CONTRIBUTING.md) before
 adding or updating a policy record.
+
+Contributors who do not edit code can use the repository forms to [suggest a
+policy source](https://github.com/sdhutchins/who-owns-your-dna/issues/new?template=01-policy-source.yml),
+[correct a record](https://github.com/sdhutchins/who-owns-your-dna/issues/new?template=02-record-correction.yml),
+or [report a broken link](https://github.com/sdhutchins/who-owns-your-dna/issues/new?template=03-broken-link.yml).
 
 All candidate records and automated monitoring results require human review of
 the source, legal status, scope, and summary before publication.

@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
+import { pathToFileURL } from "node:url";
 
 import { load } from "cheerio";
 
@@ -78,7 +79,7 @@ function mapTopics(sourceTopics) {
     .sort();
 }
 
-function parseSourcePage(html) {
+export function parseSourcePage(html) {
   const $ = load(html);
   const duplicateOccurrences = new Map();
   const records = [];
@@ -155,15 +156,7 @@ function parseSourcePage(html) {
   return { records, sourcePageLastUpdated, declaredTopics, declaredStatuses };
 }
 
-async function main() {
-  const response = await fetch(SOURCE_URL, {
-    headers: { "user-agent": "WhoOwnsYourDNA-source-import/0.1" },
-  });
-  if (!response.ok) {
-    throw new Error(`NHGRI request failed with HTTP ${response.status}.`);
-  }
-
-  const html = await response.text();
+export function buildNhgriSnapshot(html, fetchedAt = new Date()) {
   const { records, sourcePageLastUpdated, declaredTopics, declaredStatuses } =
     parseSourcePage(html);
   const recordsJson = `${JSON.stringify(records, null, 2)}\n`;
@@ -183,7 +176,7 @@ async function main() {
     source_page: SOURCE_PAGE_URL,
     source_query: SOURCE_URL,
     source_page_last_updated: sourcePageLastUpdated,
-    snapshot_fetched_at: new Date().toISOString(),
+    snapshot_fetched_at: fetchedAt.toISOString(),
     stated_coverage: "State statutes and bills introduced during 2002-2024 U.S. state legislative sessions.",
     stated_exclusions: [
       "Federal statutes and bills",
@@ -218,18 +211,60 @@ async function main() {
     records_sha256: sha256(recordsJson),
   };
 
-  await mkdir(OUTPUT_DIRECTORY, { recursive: true });
-  await Promise.all([
-    writeFile(`${OUTPUT_DIRECTORY}/records.json`, recordsJson),
-    writeFile(
-      `${OUTPUT_DIRECTORY}/manifest.json`,
-      `${JSON.stringify(manifest, null, 2)}\n`,
-    ),
-  ]);
+  return { manifest, recordsJson };
+}
 
-  console.log(
-    `Imported ${records.length} NHGRI rows from a page last updated ${sourcePageLastUpdated}.`,
+export async function fetchNhgriSnapshot() {
+  const response = await fetch(SOURCE_URL, {
+    headers: { "user-agent": "WhoOwnsYourDNA-source-import/0.1" },
+    signal: AbortSignal.timeout(30_000),
+  });
+  if (!response.ok) {
+    throw new Error(`NHGRI request failed with HTTP ${response.status}.`);
+  }
+
+  const html = await response.text();
+  return buildNhgriSnapshot(html);
+}
+
+export function hasNhgriSnapshotChanged(currentManifest, candidateManifest) {
+  // Retrieval timestamps and raw HTML checksums do not describe a structured
+  // data change. Ignoring them prevents cosmetic page updates from creating
+  // review pull requests with unchanged legal records.
+  const comparisonFields = [
+    "records_sha256",
+    "source_page_last_updated",
+    "declared_topics",
+    "declared_statuses",
+  ];
+
+  return comparisonFields.some(
+    (field) =>
+      JSON.stringify(currentManifest[field]) !==
+      JSON.stringify(candidateManifest[field]),
   );
 }
 
-await main();
+export async function writeNhgriSnapshot(snapshot) {
+  await mkdir(OUTPUT_DIRECTORY, { recursive: true });
+  await Promise.all([
+    writeFile(`${OUTPUT_DIRECTORY}/records.json`, snapshot.recordsJson),
+    writeFile(
+      `${OUTPUT_DIRECTORY}/manifest.json`,
+      `${JSON.stringify(snapshot.manifest, null, 2)}\n`,
+    ),
+  ]);
+}
+
+async function main() {
+  const snapshot = await fetchNhgriSnapshot();
+  await writeNhgriSnapshot(snapshot);
+
+  console.log(
+    `Imported ${snapshot.manifest.record_count} NHGRI rows from a page last updated ${snapshot.manifest.source_page_last_updated}.`,
+  );
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  await main();
+}

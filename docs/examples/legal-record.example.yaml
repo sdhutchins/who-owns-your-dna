@@ -1,0 +1,41 @@
+# Copy this file into data/federal/ or the appropriate data/states/ directory.
+# Replace every example value and remove optional fields that do not apply.
+id: al-example-policy-2026
+jurisdiction: Alabama
+jurisdiction_code: AL
+jurisdiction_type: state
+record_type: legislation
+title: Replace with the official policy title
+identifier: HB 000
+bill_number: HB 000
+session: 2026 Regular Session
+status: introduced
+introduced_date: 2026-01-01
+effective_date:
+last_reviewed: 2026-01-01
+record_version: "0.1"
+verification_status: review-in-progress
+topics:
+  - genetic-privacy
+summary: >-
+  Replace this text with a factual description of the policy, its overall
+  subject, and its current status based on the primary source.
+legal_effects: >-
+  Identify the actor and state what the policy would require, allow, limit, or
+  prohibit. Preserve conditions and exceptions that affect the rule.
+plain_language: >-
+  Explain the practical subject in accessible language without expanding the
+  legal effect or presenting a proposed bill as current law.
+limitations: >-
+  Identify exclusions, unresolved scope, incomplete information, or other
+  reasons that the short explanation may not apply to a specific situation.
+primary_sources:
+  - title: Replace with the official source title
+    url: https://example.gov/replace-with-official-source
+    publisher: Replace with the government publisher
+    accessed_date: 2026-01-01
+secondary_sources: []
+history:
+  - date: 2026-01-01
+    event: Candidate record created for primary-source review.
+    source: Contributor submission

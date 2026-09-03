@@ -1,0 +1,80 @@
+---
+import FilePlusIcon from "@lucide/astro/icons/file-plus";
+import PencilLineIcon from "@lucide/astro/icons/pencil-line";
+import UnlinkIcon from "@lucide/astro/icons/unlink";
+
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { REPOSITORY_URL } from "../../lib/site";
+
+const issueChooserUrl = `${REPOSITORY_URL}/issues/new/choose`;
+const sourceIssueUrl = `${REPOSITORY_URL}/issues/new?template=01-policy-source.yml`;
+const correctionIssueUrl = `${REPOSITORY_URL}/issues/new?template=02-record-correction.yml`;
+const brokenLinkIssueUrl = `${REPOSITORY_URL}/issues/new?template=03-broken-link.yml`;
+---
+
+<BaseLayout title="Contribute">
+  <Breadcrumbs items={[{ label: "About", href: "/about/" }, { label: "Contribute" }]} />
+  <h1>Contribute</h1>
+  <p class="page-intro">Found a missing policy, an error, or a broken source? Choose the form that matches what you found.</p>
+
+  <section class="reading-width" aria-labelledby="choose-contribution">
+    <h2 id="choose-contribution">Choose a contribution</h2>
+    <ul class="contribution-options">
+      <li>
+        <h3>
+          <a class="icon-link" href={sourceIssueUrl}>
+            <FilePlusIcon class="interface-icon" size={18} />
+            <span>Suggest a policy source</span>
+          </a>
+        </h3>
+        <p>Share an official source for a law, bill, regulation, policy, or court decision that may belong in the tracker.</p>
+      </li>
+      <li>
+        <h3>
+          <a class="icon-link" href={correctionIssueUrl}>
+            <PencilLineIcon class="interface-icon" size={18} />
+            <span>Correct an existing record</span>
+          </a>
+        </h3>
+        <p>Identify a factual error, unclear summary, status change, or missing limitation in a published record.</p>
+      </li>
+      <li>
+        <h3>
+          <a class="icon-link" href={brokenLinkIssueUrl}>
+            <UnlinkIcon class="interface-icon" size={18} />
+            <span>Report a broken link</span>
+          </a>
+        </h3>
+        <p>Flag an official source that has moved, stopped working, or no longer points to the cited material.</p>
+      </li>
+    </ul>
+    <p class="metadata">A GitHub account is required to submit a form. You do not need to edit code.</p>
+    <p><a href={issueChooserUrl}>View all contribution forms</a></p>
+  </section>
+
+  <section class="section-block reading-width">
+    <h2>What to include</h2>
+    <ul>
+      <li>The jurisdiction and record identifier, when one exists</li>
+      <li>A link to the official government source</li>
+      <li>The correction or addition you are proposing</li>
+      <li>Any date, status, or scope detail that helps a reviewer check the change</li>
+    </ul>
+  </section>
+
+  <section class="section-block reading-width">
+    <h2>For data contributors</h2>
+    <p>If you are comfortable editing structured data, you can add or update a YAML record in a fork of the repository. The pull request template lists the source and validation information needed for review.</p>
+    <p><a href={`${REPOSITORY_URL}/blob/main/CONTRIBUTING.md`}>Read the complete contribution guide</a></p>
+  </section>
+
+  <section class="section-block reading-width">
+    <h2>How submissions are reviewed</h2>
+    <ol>
+      <li>Check that the item is in scope and supported by an official source.</li>
+      <li>Compare the status, dates, affected actors, effects, and limits with the source.</li>
+      <li>Validate and publish accepted changes with a review date and record-history entry.</li>
+    </ol>
+  </section>
+</BaseLayout>

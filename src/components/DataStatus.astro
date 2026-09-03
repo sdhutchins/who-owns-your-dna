@@ -1,0 +1,41 @@
+---
+import type { LegalRecord, NhgriManifest } from "../lib/records";
+import { formatDate, withBase } from "../lib/site";
+
+interface Props {
+  records: LegalRecord[];
+  manifest: NhgriManifest;
+}
+
+const { records, manifest } = Astro.props;
+const latestProjectReview = records
+  .map((record) => record.last_reviewed)
+  .sort()
+  .at(-1);
+---
+
+<aside class="data-status" aria-label="Data status">
+  <dl class="data-status__items">
+    <div>
+      <dt>Project records</dt>
+      <dd>{records.length.toLocaleString()} records</dd>
+    </div>
+    <div>
+      <dt>Archived NHGRI records</dt>
+      <dd>{manifest.record_count.toLocaleString()} records</dd>
+    </div>
+    <div>
+      <dt>Latest project review</dt>
+      <dd>{formatDate(latestProjectReview)}</dd>
+    </div>
+    <div>
+      <dt>Archive retrieved</dt>
+      <dd>{formatDate(manifest.snapshot_fetched_at.slice(0, 10))}</dd>
+    </div>
+  </dl>
+  <p class="data-status__note">
+    Coverage is selected, not comprehensive. NHGRI last updated its source database on {formatDate(manifest.source_page_last_updated)}.
+    {" "}<a href={withBase("/methodology/#inclusion-criteria")}>Inclusion criteria</a>
+    {" · "}<a href={withBase("/methodology/#nhgri-provenance")}>Archive provenance</a>
+  </p>
+</aside>

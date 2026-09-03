@@ -1,0 +1,11 @@
+---
+interface Props {
+  variant?: "information" | "warning" | "source";
+}
+
+const { variant = "information" } = Astro.props;
+---
+
+<aside class:list={["callout", `callout--${variant}`]}>
+  <slot />
+</aside>

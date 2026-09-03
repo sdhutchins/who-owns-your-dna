@@ -1,54 +1,128 @@
 ---
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import CopyButton from "../../components/CopyButton.astro";
+import PolicyRecordTable from "../../components/PolicyRecordTable.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import {
   getJurisdictions,
+  getNhgriManifest,
   getNhgriRecords,
   getRecords,
+  getTopics,
   type Jurisdiction,
+  type LegalRecord,
+  type NhgriManifest,
+  type NhgriSourceRecord,
+  type Topic,
 } from "../../lib/records";
-import { withBase } from "../../lib/site";
+import { formatDate, PUBLIC_SITE_URL, withBase } from "../../lib/site";
 
 export async function getStaticPaths() {
-  const [jurisdictions, projectRecords, nhgriRecords] = await Promise.all([
+  const [jurisdictions, projectRecords, nhgriRecords, topics, manifest] = await Promise.all([
     getJurisdictions(),
     getRecords(),
     getNhgriRecords(),
+    getTopics(),
+    getNhgriManifest(),
   ]);
-  return jurisdictions.map((jurisdiction) => {
-    const projectRecordCount = projectRecords.filter(
-      (record) => record.jurisdiction_code === jurisdiction.code,
-    ).length;
-    const nhgriRecordCount = nhgriRecords.filter(
-      (record) => record.jurisdiction === jurisdiction.name,
-    ).length;
-    return {
-      params: { slug: jurisdiction.slug },
-      props: {
-        jurisdiction,
-        recordCount: projectRecordCount + nhgriRecordCount,
-      },
-    };
-  });
+  return jurisdictions.map((jurisdiction) => ({
+    params: { slug: jurisdiction.slug },
+    props: {
+      jurisdiction,
+      projectRecords: projectRecords.filter(
+        (record) => record.jurisdiction_code === jurisdiction.code,
+      ),
+      nhgriRecords: nhgriRecords.filter(
+        (record) => record.jurisdiction === jurisdiction.name,
+      ),
+      topics,
+      manifest,
+    },
+  }));
 }
 
 interface Props {
   jurisdiction: Jurisdiction;
-  recordCount: number;
+  projectRecords: LegalRecord[];
+  nhgriRecords: NhgriSourceRecord[];
+  topics: Topic[];
+  manifest: NhgriManifest;
 }
 
-const { jurisdiction, recordCount } = Astro.props;
+const { jurisdiction, projectRecords, nhgriRecords, topics, manifest } = Astro.props;
+const recordCount = projectRecords.length + nhgriRecords.length;
+const previewLimit = 20;
+const sortedProjectRecords = [...projectRecords].sort(
+  (left, right) => right.last_reviewed.localeCompare(left.last_reviewed),
+);
+const sortedNhgriRecords = [...nhgriRecords].sort(
+  (left, right) => (right.inferred_year ?? 0) - (left.inferred_year ?? 0),
+);
+const previewProjectRecords = sortedProjectRecords.slice(0, previewLimit);
+const previewNhgriRecords = sortedNhgriRecords.slice(
+  0,
+  Math.max(0, previewLimit - previewProjectRecords.length),
+);
+const previewCount = previewProjectRecords.length + previewNhgriRecords.length;
+const latestProjectReview = sortedProjectRecords[0]?.last_reviewed;
+const enactedStatuses = new Set(["approved", "enacted", "statute"]);
+const proposedStatuses = new Set(["introduced", "pending", "passed-house", "passed-senate"]);
+const recordStatuses = [
+  ...projectRecords.map((record) => record.status),
+  ...nhgriRecords.map((record) => record.base_status),
+];
+const enactedCount = recordStatuses.filter((status) => enactedStatuses.has(status)).length;
+const proposedCount = recordStatuses.filter((status) => proposedStatuses.has(status)).length;
+const topicNames = new Map(topics.map((topic) => [topic.slug, topic.name]));
+const topicCounts = new Map<string, number>();
+for (const topic of projectRecords.flatMap((record) => record.topics)) {
+  topicCounts.set(topic, (topicCounts.get(topic) ?? 0) + 1);
+}
+for (const topic of nhgriRecords.flatMap((record) => record.mapped_topics)) {
+  topicCounts.set(topic, (topicCounts.get(topic) ?? 0) + 1);
+}
+const leadingTopics = [...topicCounts.entries()]
+  .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
+  .slice(0, 3)
+  .map(([slug, count]) => ({ slug, count, name: topicNames.get(slug) ?? slug }));
 const recordsUrl = `/records/?jurisdiction=${encodeURIComponent(jurisdiction.name)}`;
+const permanentUrl = `${PUBLIC_SITE_URL}/states/${jurisdiction.slug}/`;
 ---
 
-<BaseLayout title={jurisdiction.name}>
+<BaseLayout title={jurisdiction.name} wide>
   <Breadcrumbs items={[{ label: "States", href: "/states/" }, { label: jurisdiction.name }]} />
-  <p class="section-kicker">Jurisdiction records</p>
   <h1>{jurisdiction.name}</h1>
-  <p class="page-intro">{recordCount.toLocaleString()} genetics and genomics policy {recordCount === 1 ? "record" : "records"}.</p>
+  <p class="page-intro">Selected genetics and genomics laws and policies associated with {jurisdiction.name}.</p>
+  <p class="reading-width">
+    This page reports current site coverage. It is not a comprehensive statement of every relevant law, policy, right, or protection in {jurisdiction.name}.
+  </p>
 
-  <p><a class="button-link" href={withBase(recordsUrl)}>View {jurisdiction.name} records</a></p>
-  <p class="reading-width">Use the records directory to search within this jurisdiction and narrow results by topic, status, or year.</p>
+  <div class="coverage-summary reading-width">
+    <p><strong>Current coverage:</strong> {projectRecords.length.toLocaleString()} project-reviewed {projectRecords.length === 1 ? "record" : "records"} and {nhgriRecords.length.toLocaleString()} archived NHGRI {nhgriRecords.length === 1 ? "record" : "records"}.</p>
+    <p><strong>Status summary:</strong> {enactedCount.toLocaleString()} enacted or approved; {proposedCount.toLocaleString()} proposed or pending.</p>
+    <p><strong>Latest project review:</strong> {latestProjectReview ? formatDate(latestProjectReview) : "No project-reviewed record is currently available."}</p>
+  </div>
+
+  {leadingTopics.length > 0 && (
+    <p class="reading-width"><strong>Most common mapped topics:</strong> {leadingTopics.map((topic) => `${topic.name} (${topic.count})`).join(" · ")}</p>
+  )}
+
+  <div class="page-actions">
+    <a href={withBase(recordsUrl)}>Filter all {recordCount.toLocaleString()} {jurisdiction.name} records</a>
+    <CopyButton id={`copy-${jurisdiction.slug}-link`} value={permanentUrl} label="Copy page link" />
+  </div>
+
+  <section class="section-block" aria-labelledby="jurisdiction-records">
+    <h2 id="jurisdiction-records">Records in {jurisdiction.name}</h2>
+    <p>Showing {previewCount.toLocaleString()} of {recordCount.toLocaleString()} records, with project-reviewed records first.</p>
+    <PolicyRecordTable
+      projectRecords={previewProjectRecords}
+      nhgriRecords={previewNhgriRecords}
+      topics={topics}
+      manifest={manifest}
+      label={`Selected policy records for ${jurisdiction.name}`}
+    />
+  </section>
 
   <p class="section-block"><a href={withBase("/federal/")}>Review federal law and policy</a></p>
 </BaseLayout>

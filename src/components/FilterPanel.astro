@@ -1,0 +1,21 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  layout?: "standard" | "records";
+}
+
+const {
+  id,
+  label,
+  layout = "standard",
+} = Astro.props;
+---
+
+<form
+  class:list={["filter-panel", { "filter-panel--records": layout === "records" }]}
+  id={id}
+  aria-label={label}
+>
+  <slot />
+</form>

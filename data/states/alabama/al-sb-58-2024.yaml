@@ -11,8 +11,8 @@ session: 2024 Regular Session
 status: died
 introduced_date: 2024-02-06
 last_action_date: 2024-02-06
-last_reviewed: 2026-08-31
-record_version: "1.0"
+last_reviewed: 2026-09-02
+record_version: "1.1"
 verification_status: verified-primary
 topics:
   - genetic-privacy
@@ -23,30 +23,30 @@ topics:
   - life-insurance
   - long-term-care-insurance
 summary: >-
-  Alabama SB 58 proposed express-consent requirements for collecting, analyzing,
-  using, retaining, or transferring DNA. It also proposed confidentiality and
-  ownership protections for DNA-analysis results and restrictions on insurer
-  use of genetic information.
+  Alabama SB 58 did not become law. It would have required express consent for
+  collecting, analyzing, using, retaining, or transferring DNA, declared DNA
+  analysis results to be the individual's exclusive property and confidential,
+  and restricted some insurer uses of genetic information.
 legal_effects: >-
   The bill would have established criminal penalties for specified DNA
   collection, analysis, disclosure, and transfer without express consent. It
-  also would have restricted health, life, and long-term care insurers from
-  requiring or using genetic information for specified coverage and premium
-  decisions.
+  also would have limited health, life, and long-term care insurers from
+  requiring or using genetic information for specified eligibility, coverage,
+  and premium decisions.
 plain_language: >-
-  The proposal would have given individuals greater control over DNA samples
-  and test results and would have limited how several kinds of insurers could
-  use genetic information. It did not become law.
+  The proposal would have given individuals more control over DNA samples and
+  test results and limited some insurance uses. Because it died in committee,
+  it created no new rights, restrictions, or penalties.
 limitations: >-
-  The bill contained exceptions for criminal investigations, court orders,
-  medical care, regulated research, paternity matters, and other specified
-  uses. It remained in the Senate Banking and Insurance Committee and died at
-  the end of the 2024 session.
+  Exceptions would have applied to criminal investigations, court orders,
+  medical care, regulated research, paternity matters, and other specified uses.
+  Some insurance products were excluded, and insurers could still consider a
+  medical diagnosis even when genetic information contributed to it.
 primary_sources:
   - title: SB 58 introduced bill
     url: https://alison.legislature.state.al.us/files/pdf/SearchableInstruments/2024RS/SB58-int.pdf
     publisher: Alabama Legislature
-    accessed_date: 2026-08-31
+    accessed_date: 2026-09-02
 secondary_sources:
   - title: Alabama SB 58 legislative history
     url: https://legiscan.com/AL/bill/SB58/2024
@@ -61,4 +61,7 @@ history:
     source: Alabama Legislature
   - date: 2026-08-31
     event: Record created from the introduced bill and legislative history.
+    source: Project review
+  - date: 2026-09-02
+    event: Project-authored analysis revised after primary-source review.
     source: Project review

@@ -1,48 +1,84 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { getNhgriRecords, getRecords } from "../lib/records";
-import { withBase } from "../lib/site";
+import SearchIcon from "@lucide/astro/icons/search";
 
-const [records, nhgriRecords] = await Promise.all([
+import BaseLayout from "../layouts/BaseLayout.astro";
+import StatusLabel from "../components/StatusLabel.astro";
+import { getNhgriManifest, getNhgriRecords, getRecords } from "../lib/records";
+import { formatDate, withBase } from "../lib/site";
+
+const [records, nhgriRecords, nhgriManifest] = await Promise.all([
   getRecords(),
   getNhgriRecords(),
+  getNhgriManifest(),
 ]);
 const totalRecordCount = records.length + nhgriRecords.length;
+const recentlyReviewedRecords = [...records]
+  .sort((left, right) => right.last_reviewed.localeCompare(left.last_reviewed))
+  .slice(0, 4);
+const latestProjectReview = recentlyReviewedRecords[0]?.last_reviewed;
 ---
 
 <BaseLayout>
   <section class="intro-band">
-    <h1>Who Owns Your DNA?</h1>
-    <p class="page-intro">Explore U.S. genetics and genomics law and policy.</p>
-    <p class="reading-width">
-      Search bills, statutes, regulations, and policies by jurisdiction, topic, status, or year.
-      Each record links to its primary source.
+    <h1>Find U.S. laws and policies about genetic information</h1>
+    <p class="intro-band__summary">
+      Search selected federal and state sources about genetic privacy, discrimination, testing,
+      research, insurance, and data use.
     </p>
-    <form class="homepage-record-search" action={withBase("/records/")} method="get" role="search">
-      <label for="homepage-record-query">Search all policy records</label>
-      <div class="homepage-record-search__controls">
-        <input id="homepage-record-query" name="q" type="search" placeholder="Search bills, laws, topics, or summaries" />
-        <button type="submit">Search records</button>
-      </div>
-    </form>
-    <p><a href={withBase("/records/")}>Browse all {totalRecordCount.toLocaleString()} policy records</a></p>
+    <div class="homepage-search-region">
+      <form class="homepage-record-search" action={withBase("/records/")} method="get" role="search">
+        <label class="sr-only" for="homepage-record-query">Search laws and policy records</label>
+        <div class="homepage-record-search__controls">
+          <input id="homepage-record-query" name="q" type="search" placeholder="Search a law, state, topic, or bill number" />
+          <button type="submit">
+            <SearchIcon class="interface-icon" size={18} />
+            <span>Search records</span>
+          </button>
+        </div>
+      </form>
+      <p class="homepage-record-link">
+        <a href={withBase("/records/")}>Browse all {totalRecordCount.toLocaleString()} policy records</a>
+      </p>
+      <p class="homepage-coverage-summary">
+        Includes {records.length.toLocaleString()} project-reviewed records and {nhgriRecords.length.toLocaleString()} records from the archived NHGRI database. The latest project review was {formatDate(latestProjectReview)}; the NHGRI snapshot was retrieved {formatDate(nhgriManifest.snapshot_fetched_at.slice(0, 10))}. Coverage is selected, not comprehensive. <a href={withBase("/methodology/#inclusion-criteria")}>How records are included</a>.
+      </p>
+    </div>
   </section>
 
-  <section aria-labelledby="browse-policy">
+  <section class="homepage-browse" aria-labelledby="browse-policy">
     <h2 id="browse-policy">Browse policy</h2>
-    <div class="explore-grid">
-      <section>
+    <ul class="homepage-directory">
+      <li>
         <h3><a href={withBase("/states/")}>States</a></h3>
-        <p>Compare genetics and genomics policy across states and the District of Columbia.</p>
-      </section>
-      <section>
-        <h3><a href={withBase("/federal/")}>Federal</a></h3>
-        <p>Review federal statutes, regulations, guidance, and research policies.</p>
-      </section>
-      <section>
+        <p>Find records for a state or the District of Columbia.</p>
+      </li>
+      <li>
+        <h3><a href={withBase("/federal/")}>Federal law and policy</a></h3>
+        <p>Review federal statutes, regulations, agency guidance, and research policies.</p>
+      </li>
+      <li>
         <h3><a href={withBase("/topics/")}>Topics</a></h3>
-        <p>Explore policies affecting privacy, discrimination, research, testing, insurance, and data use.</p>
-      </section>
+        <p>Browse records by privacy, discrimination, research, testing, insurance, or data use.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="homepage-recent section-block" aria-labelledby="recently-reviewed">
+    <div class="section-heading-row">
+      <h2 id="recently-reviewed">Recently reviewed</h2>
+      <a href={withBase("/records/?source=project&sort=newest")}>View all project-reviewed records</a>
     </div>
+    <ol class="recent-review-list">
+      {recentlyReviewedRecords.map((record) => (
+        <li>
+          <div>
+            <a href={withBase(`/records/${record.id}/`)}>{record.identifier}: {record.title}</a>
+            <span>{record.jurisdiction}</span>
+          </div>
+          <StatusLabel status={record.status} />
+          <time datetime={record.last_reviewed}>{formatDate(record.last_reviewed)}</time>
+        </li>
+      ))}
+    </ol>
   </section>
 </BaseLayout>
