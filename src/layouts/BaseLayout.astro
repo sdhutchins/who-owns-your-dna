@@ -3,6 +3,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "../styles/global.css";
+import SearchIcon from "@lucide/astro/icons/search";
 
 import { getNhgriManifest } from "../lib/records";
 import { formatDate, SITE_NAME, SITE_SUBTITLE, withBase } from "../lib/site";
@@ -139,7 +140,10 @@ const isAboutPage = [
                 <form class="header-search" action={withBase("/records/")} method="get" role="search">
                   <label class="sr-only" for="header-search">Search laws and policy records</label>
                   <input id="header-search" name="q" type="search" placeholder="Search laws, policies, or topics" />
-                  <button type="submit">Search</button>
+                  <button type="submit">
+                    <SearchIcon class="interface-icon" size={18} />
+                    <span>Search</span>
+                  </button>
                 </form>
               )}
             </div>

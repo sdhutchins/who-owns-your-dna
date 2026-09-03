@@ -1,4 +1,6 @@
 ---
+import FileDownIcon from "@lucide/astro/icons/file-down";
+
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getNhgriManifest, getRecords, getTopics } from "../../lib/records";
@@ -39,8 +41,18 @@ const latestProjectReview = records[0]?.last_reviewed;
             </td>
             <td data-label="Files">
               <ul class="data-download-links">
-                <li><a href={withBase("/data/records.csv")} download>CSV</a></li>
-                <li><a href={withBase("/data/records.json")} download>JSON</a></li>
+                <li>
+                  <a class="icon-link" href={withBase("/data/records.csv")} download>
+                    <FileDownIcon class="interface-icon" size={16} />
+                    <span>CSV</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="icon-link" href={withBase("/data/records.json")} download>
+                    <FileDownIcon class="interface-icon" size={16} />
+                    <span>JSON</span>
+                  </a>
+                </li>
               </ul>
             </td>
           </tr>
@@ -55,9 +67,24 @@ const latestProjectReview = records[0]?.last_reviewed;
             </td>
             <td data-label="Files">
               <ul class="data-download-links">
-                <li><a href={withBase("/data/nhgri-source-records.csv")} download>CSV</a></li>
-                <li><a href={withBase("/data/nhgri-source-records.json")} download>JSON</a></li>
-                <li><a href={withBase("/data/nhgri-source-manifest.json")} download>Manifest</a></li>
+                <li>
+                  <a class="icon-link" href={withBase("/data/nhgri-source-records.csv")} download>
+                    <FileDownIcon class="interface-icon" size={16} />
+                    <span>CSV</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="icon-link" href={withBase("/data/nhgri-source-records.json")} download>
+                    <FileDownIcon class="interface-icon" size={16} />
+                    <span>JSON</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="icon-link" href={withBase("/data/nhgri-source-manifest.json")} download>
+                    <FileDownIcon class="interface-icon" size={16} />
+                    <span>Manifest</span>
+                  </a>
+                </li>
               </ul>
             </td>
           </tr>

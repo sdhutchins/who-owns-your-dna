@@ -329,7 +329,11 @@ main.page-shell {
 }
 
 .header-search button {
+  align-items: center;
   border-radius: 0 var(--radius-inner) var(--radius-inner) 0;
+  display: inline-flex;
+  gap: 0.4rem;
+  justify-content: center;
 }
 
 .button-link,
@@ -447,13 +451,17 @@ main.page-shell {
 }
 
 .homepage-record-search button {
+  align-items: center;
   background: var(--primary);
   border: 1px solid var(--primary);
   border-radius: 0 var(--radius-inner) var(--radius-inner) 0;
   color: var(--background);
   cursor: pointer;
+  display: inline-flex;
   flex: none;
   font-weight: 700;
+  gap: 0.4rem;
+  justify-content: center;
   min-height: 3.25rem;
   padding: 0.65rem 1.15rem;
 }
@@ -612,6 +620,16 @@ main.page-shell {
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem 0.8rem;
+}
+
+.icon-link {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.interface-icon {
+  flex: none;
 }
 
 .reference-links li {
@@ -1244,12 +1262,16 @@ tbody tr:hover {
 }
 
 .copy-button {
+  align-items: center;
   background: var(--background);
   border: 1px solid var(--accent);
   border-radius: var(--radius-inner);
   color: var(--accent);
   cursor: pointer;
+  display: inline-flex;
   font-weight: 700;
+  gap: 0.4rem;
+  justify-content: center;
   min-height: var(--control-height);
   padding: 0.5rem 0.8rem;
 }

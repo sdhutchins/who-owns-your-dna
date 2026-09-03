@@ -1,4 +1,6 @@
 ---
+import CopyIcon from "@lucide/astro/icons/copy";
+
 interface Props {
   id: string;
   value: string;
@@ -17,7 +19,8 @@ const statusId = `${id}-status`;
     data-copy-value={value}
     aria-describedby={statusId}
   >
-    {label}
+    <CopyIcon class="interface-icon" size={17} />
+    <span>{label}</span>
   </button>
   <span class="copy-control__status" id={statusId} data-copy-status aria-live="polite"></span>
 </span>

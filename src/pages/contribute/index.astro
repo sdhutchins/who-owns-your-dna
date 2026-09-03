@@ -1,4 +1,8 @@
 ---
+import FilePlusIcon from "@lucide/astro/icons/file-plus";
+import PencilLineIcon from "@lucide/astro/icons/pencil-line";
+import UnlinkIcon from "@lucide/astro/icons/unlink";
+
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { REPOSITORY_URL } from "../../lib/site";
@@ -18,15 +22,30 @@ const brokenLinkIssueUrl = `${REPOSITORY_URL}/issues/new?template=03-broken-link
     <h2 id="choose-contribution">Choose a contribution</h2>
     <ul class="contribution-options">
       <li>
-        <h3><a href={sourceIssueUrl}>Suggest a policy source</a></h3>
+        <h3>
+          <a class="icon-link" href={sourceIssueUrl}>
+            <FilePlusIcon class="interface-icon" size={18} />
+            <span>Suggest a policy source</span>
+          </a>
+        </h3>
         <p>Share an official source for a law, bill, regulation, policy, or court decision that may belong in the tracker.</p>
       </li>
       <li>
-        <h3><a href={correctionIssueUrl}>Correct an existing record</a></h3>
+        <h3>
+          <a class="icon-link" href={correctionIssueUrl}>
+            <PencilLineIcon class="interface-icon" size={18} />
+            <span>Correct an existing record</span>
+          </a>
+        </h3>
         <p>Identify a factual error, unclear summary, status change, or missing limitation in a published record.</p>
       </li>
       <li>
-        <h3><a href={brokenLinkIssueUrl}>Report a broken link</a></h3>
+        <h3>
+          <a class="icon-link" href={brokenLinkIssueUrl}>
+            <UnlinkIcon class="interface-icon" size={18} />
+            <span>Report a broken link</span>
+          </a>
+        </h3>
         <p>Flag an official source that has moved, stopped working, or no longer points to the cited material.</p>
       </li>
     </ul>

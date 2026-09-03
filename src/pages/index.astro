@@ -1,4 +1,6 @@
 ---
+import SearchIcon from "@lucide/astro/icons/search";
+
 import BaseLayout from "../layouts/BaseLayout.astro";
 import StatusLabel from "../components/StatusLabel.astro";
 import { getNhgriManifest, getNhgriRecords, getRecords } from "../lib/records";
@@ -28,7 +30,10 @@ const latestProjectReview = recentlyReviewedRecords[0]?.last_reviewed;
         <label class="sr-only" for="homepage-record-query">Search laws and policy records</label>
         <div class="homepage-record-search__controls">
           <input id="homepage-record-query" name="q" type="search" placeholder="Search a law, state, topic, or bill number" />
-          <button type="submit">Search records</button>
+          <button type="submit">
+            <SearchIcon class="interface-icon" size={18} />
+            <span>Search records</span>
+          </button>
         </div>
       </form>
       <p class="homepage-record-link">

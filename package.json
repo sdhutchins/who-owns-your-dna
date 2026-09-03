@@ -17,9 +17,10 @@
     "data:prepare": "npm run validate:data && npm run export:data && npm run build:changelog"
   },
   "devDependencies": {
-    "@eslint/js": "10.0.1",
     "@astrojs/check": "0.9.10",
+    "@eslint/js": "10.0.1",
     "@fontsource/roboto": "5.3.0",
+    "@lucide/astro": "1.39.0",
     "@types/node": "^26.4.0",
     "ajv": "8.20.0",
     "astro": "7.2.10",
