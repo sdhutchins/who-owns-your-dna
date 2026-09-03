@@ -1,6 +1,7 @@
 name: Report a broken link
 description: Identify a source or website link that is unavailable, redirected, or incorrect.
 title: "[Broken link]: "
+labels: ["broken link"]
 body:
   - type: input
     id: page

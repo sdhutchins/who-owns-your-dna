@@ -1,6 +1,7 @@
 name: Suggest a policy source
 description: Share an official source for a law, bill, regulation, policy, or court decision.
 title: "[Source]: "
+labels: ["source suggestion", "needs review"]
 body:
   - type: markdown
     attributes:

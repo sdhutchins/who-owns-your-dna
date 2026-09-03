@@ -1,6 +1,7 @@
 name: Correct a record
 description: Report a factual, status, date, scope, or wording problem in an existing record.
 title: "[Correction]: "
+labels: ["record correction", "needs review"]
 body:
   - type: markdown
     attributes:
