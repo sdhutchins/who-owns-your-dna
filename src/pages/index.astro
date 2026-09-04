@@ -3,19 +3,17 @@ import SearchIcon from "@lucide/astro/icons/search";
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 import StatusLabel from "../components/StatusLabel.astro";
-import { getNhgriManifest, getNhgriRecords, getRecords } from "../lib/records";
+import { getNhgriRecords, getRecords } from "../lib/records";
 import { formatDate, withBase } from "../lib/site";
 
-const [records, nhgriRecords, nhgriManifest] = await Promise.all([
+const [records, nhgriRecords] = await Promise.all([
   getRecords(),
   getNhgriRecords(),
-  getNhgriManifest(),
 ]);
 const totalRecordCount = records.length + nhgriRecords.length;
 const recentlyReviewedRecords = [...records]
   .sort((left, right) => right.last_reviewed.localeCompare(left.last_reviewed))
   .slice(0, 4);
-const latestProjectReview = recentlyReviewedRecords[0]?.last_reviewed;
 ---
 
 <BaseLayout>
@@ -38,9 +36,6 @@ const latestProjectReview = recentlyReviewedRecords[0]?.last_reviewed;
       </form>
       <p class="homepage-record-link">
         <a href={withBase("/records/")}>Browse all {totalRecordCount.toLocaleString()} policy records</a>
-      </p>
-      <p class="homepage-coverage-summary">
-        Includes {records.length.toLocaleString()} project-reviewed records and {nhgriRecords.length.toLocaleString()} records from the archived NHGRI database. The latest project review was {formatDate(latestProjectReview)}; the NHGRI snapshot was retrieved {formatDate(nhgriManifest.snapshot_fetched_at.slice(0, 10))}. Coverage is selected, not comprehensive. <a href={withBase("/methodology/#inclusion-criteria")}>How records are included</a>.
       </p>
     </div>
   </section>

@@ -7,55 +7,58 @@ import { withBase } from "../../lib/site";
 <BaseLayout title="About">
   <Breadcrumbs items={[{ label: "About" }]} />
   <h1>About the project</h1>
-  <p class="page-intro">Who Owns Your DNA? helps people find and understand U.S. laws and policies that affect genetic information and biological samples.</p>
+  <p class="page-intro">A guide to U.S. laws and policies affecting genetic information and biological samples.</p>
 
   <section class="reading-width">
-    <h2>Why this project exists</h2>
-    <p>Rules for collecting, using, sharing, and protecting genetic information differ by jurisdiction and context. A rule that applies to an employer may not apply to an insurer, research study, health care provider, testing company, or law-enforcement agency. This project makes those distinctions and the supporting primary sources easier to find.</p>
+    <h2>Purpose</h2>
+    <p>Genetic-information rules vary by jurisdiction and context. This project helps researchers, journalists, policymakers, educators, and the public find the relevant rules and primary sources.</p>
 
-    <h2>Intended audiences</h2>
-    <p>This resource is for people seeking reliable policy information, including researchers, journalists, advocates, policymakers, educators, and members of the public. It does not assume that a reader has legal or genetics training.</p>
-
-    <h2>What the records provide</h2>
-    <p>Each project-authored record identifies the policy's status, explains what it requires or prohibits, describes important limits, and links to the official source. Factual summaries, plain-language explanations, and advocacy context remain separate.</p>
-
-    <h2>What the records cannot provide</h2>
-    <p>Coverage is not comprehensive, and a short summary cannot determine how a law applies to a specific situation. If the project has not identified a law, that does not establish that no law exists. This website provides information, not legal advice.</p>
+    <h2>Scope and limits</h2>
+    <p>Project-reviewed records summarize status, requirements, limits, and official sources. Coverage is not comprehensive, and the absence of a record does not mean no law exists. This site provides information, not legal advice.</p>
   </section>
 
-  <div class="resource-grid section-block">
-    <section>
-      <h2><a href={withBase("/glossary/")}>Glossary</a></h2>
-      <p>Plain-language definitions for the legal, privacy, genetics, and data terms used in project records.</p>
-    </section>
-    <section>
-      <h2><a href={withBase("/methodology/")}>Methodology</a></h2>
-      <p>Scope, inclusion criteria, source hierarchy, review, uncertainty, corrections, and versioning.</p>
-    </section>
-    <section>
-      <h2><a href={withBase("/data/")}>Data</a></h2>
-      <p>Structured records, machine-readable downloads, schema validation, and versioned snapshots.</p>
-    </section>
-    <section>
-      <h2><a href={withBase("/cite/")}>Citation</a></h2>
-      <p>Guidance for citing individual records, the website, and versioned data snapshots.</p>
-    </section>
-    <section>
-      <h2><a href={withBase("/sources/nhgri/")}>NHGRI source archive</a></h2>
-      <p>Source records retrieved from NHGRI, with the retrieval date, original wording, and provenance manifest preserved.</p>
-    </section>
-    <section>
-      <h2><a href="https://www.ashg.org/advocacy/public-policy-positions/">ASHG policy positions</a></h2>
-      <p>Explore professional-society perspectives on genetic privacy, data sharing, discrimination, genetic testing, research, and related policy questions.</p>
-    </section>
-  </div>
+  <section class="about-resource-directory section-block" aria-labelledby="project-resources-heading">
+    <h2 id="project-resources-heading">Project resources</h2>
+    <div class="about-resource-list">
+      <article class="about-resource-row">
+        <h3><a href={withBase("/glossary/")}>Glossary</a></h3>
+        <p>Definitions used throughout the records.</p>
+      </article>
+      <article class="about-resource-row">
+        <h3><a href={withBase("/methodology/")}>Methodology</a></h3>
+        <p>How records are selected, reviewed, and updated.</p>
+      </article>
+      <article class="about-resource-row">
+        <h3><a href={withBase("/data/")}>Data</a></h3>
+        <p>Download records and review the data structure.</p>
+      </article>
+      <article class="about-resource-row">
+        <h3><a href={withBase("/cite/")}>Citation</a></h3>
+        <p>How to cite records, the site, and data releases.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="about-resource-directory section-block" aria-labelledby="source-resources-heading">
+    <h2 id="source-resources-heading">Sources and perspectives</h2>
+    <div class="about-resource-list">
+      <article class="about-resource-row">
+        <h3><a href={withBase("/sources/nhgri/")}>NHGRI source archive</a></h3>
+        <p>Archived records with their original wording and provenance.</p>
+      </article>
+      <article class="about-resource-row">
+        <h3><a href="https://www.ashg.org/advocacy/public-policy-positions/">ASHG policy positions</a></h3>
+        <p>Professional-society perspectives on genetics and public policy.</p>
+      </article>
+    </div>
+  </section>
 
   <section id="contribute" class="section-block reading-width">
     <h2>Contribute</h2>
-    <p>You can suggest a policy source, correct a record, or report a broken link without editing code. Every submission receives human source and summary review before publication.</p>
+    <p>Suggest a policy source, correct a record, or report a broken link. Every submission receives human review.</p>
     <p><a href={withBase("/contribute/")}>Choose a contribution path</a></p>
 
     <h2>Contributors and acknowledgments</h2>
-    <p>Contributions are reviewed through the public GitHub workflow. Contributors may be acknowledged with their permission. This independent project is not affiliated with or endorsed by NIH, NLM, NCBI, ASHG, or another organization.</p>
+    <p>Contributions use the public GitHub workflow and may be acknowledged with permission. This independent project is not affiliated with or endorsed by NIH, NLM, NCBI, ASHG, or another organization.</p>
   </section>
 </BaseLayout>
