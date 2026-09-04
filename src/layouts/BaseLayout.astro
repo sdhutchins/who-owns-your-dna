@@ -49,6 +49,7 @@ const resourceLinks = [
   { label: "Methodology", href: "/methodology/" },
   { label: "Data and downloads", href: "/data/" },
   { label: "NHGRI source archive", href: "/sources/nhgri/" },
+  { label: "Policy resources", href: "/resources/policy/" },
   { label: "How to cite", href: "/cite/" },
 ];
 const aboutLinks = [
@@ -62,6 +63,7 @@ const isResourcesPage = [
   "/data/",
   "/cite/",
   "/sources/nhgri/",
+  "/resources/policy/",
 ].some((path) => pathname.includes(path));
 const isAboutPage = ["/about/", "/changes/", "/contribute/"].some((path) =>
   pathname.includes(path),
@@ -246,7 +248,7 @@ const isAboutPage = ["/about/", "/changes/", "/contribute/"].some((path) =>
           <ul>
             <li><a href={withBase("/about/")}>About</a></li>
             <li><a href={withBase("/contribute/")}>Contribute</a></li>
-            <li><a href="https://www.ashg.org/advocacy/public-policy-positions/">ASHG public policy positions</a></li>
+            <li><a href={withBase("/resources/policy/")}>Policy resources</a></li>
           </ul>
         </nav>
       </div>
