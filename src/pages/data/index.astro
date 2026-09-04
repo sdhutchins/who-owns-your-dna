@@ -15,7 +15,7 @@ const latestProjectReview = records[0]?.last_reviewed;
 <BaseLayout title="Data">
   <Breadcrumbs items={[{ label: "About", href: "/about/" }, { label: "Data" }]} />
   <h1>Open policy data</h1>
-  <p class="page-intro">The website is a public interface for a structured, version-controlled policy dataset.</p>
+  <p class="page-intro">Download project-reviewed records and the archived NHGRI dataset.</p>
 
   <section class="data-catalog" aria-labelledby="available-data">
     <h2 id="available-data">Available data</h2>
@@ -91,7 +91,7 @@ const latestProjectReview = records[0]?.last_reviewed;
         </tbody>
       </table>
     </div>
-    <p class="metadata">CSV and JSON files are reproducible build artifacts. Project-authored YAML files remain in the repository.</p>
+    <p class="metadata">Downloads are generated from source data. Project records are maintained as YAML in the repository.</p>
   </section>
 
   <section class="section-block reading-width">
@@ -106,7 +106,7 @@ const latestProjectReview = records[0]?.last_reviewed;
 
   <section class="section-block reading-width">
     <h2>What the records contain</h2>
-    <p>Project-reviewed records include a stable identifier, jurisdiction, record type, status, review date, version, {topics.length} controlled topics, summaries, primary sources, and record history. A schema validator checks each source file before the site builds.</p>
-    <p>NHGRI records retain their original wording in a separate source schema. The provenance manifest records the source URL, retrieval time, source-page date, and checksums.</p>
+    <p>Project records include identifiers, jurisdiction, type, status, review and version details, {topics.length} controlled topics, summaries, sources, and history. The build validates each source file.</p>
+    <p>Archived NHGRI records retain their original wording and a provenance manifest with source, retrieval date, and checksums.</p>
   </section>
 </BaseLayout>

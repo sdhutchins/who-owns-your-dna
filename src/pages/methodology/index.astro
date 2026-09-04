@@ -12,16 +12,17 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <h2>How to read a record</h2>
     <p>Start with the status and review date. Then read what the law or policy requires or prohibits, followed by its important limits and exceptions. Use the linked primary source to confirm the current official text.</p>
 
-    <h2>Project scope</h2>
+    <h2>Scope and inclusion</h2>
     <p>The project tracks U.S. federal, state, district, and territorial law and policy concerning genetic information, genomic data, biological samples, genetic testing, and related uses. Coverage is not comprehensive and expands through source review.</p>
 
-    <h2 id="inclusion-criteria">Inclusion criteria</h2>
+    <h3 id="inclusion-criteria">Inclusion criteria</h3>
     <p>A record must identify the relevant government, official source, type of record, legal or policy status, and connection to a defined genetics or genomics topic. Candidate records remain outside the verified dataset until a human reviewer checks the primary source.<sup class="citation-reference"><a href="#reference-1" aria-label="Reference 1">1</a>, <a href="#reference-2" aria-label="Reference 2">2</a></sup></p>
 
-    <h2>Exclusion criteria</h2>
+    <h3>Exclusions</h3>
     <p>The project excludes unsupported claims, duplicate records, secondary summaries presented as legal authority, and candidate changes that have not completed review. General privacy or health laws may be excluded until a source documents how they apply to genetic information.</p>
 
-    <h2>Source hierarchy</h2>
+    <h2>Sources and review</h2>
+    <h3>Source order</h3>
     <ol>
       <li>Enacted statutory text</li>
       <li>Legislature or government bill page</li>
@@ -34,14 +35,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     </ol>
     <p>The hierarchy itself is a project rule. The supporting legal-mapping literature informed the broader practices of defining scope, retrieving legal text, and documenting how records are coded and checked.<sup class="citation-reference"><a href="#reference-1" aria-label="Reference 1">1</a>–<a href="#reference-3" aria-label="Reference 3">3</a></sup></p>
 
-    <h2 id="nhgri-provenance">NHGRI provenance</h2>
-    <p>The complete NHGRI Genome Statute and Legislation Database is included in the combined Policy Records directory. Its original state, primary link, topic, status, and summary are preserved. Local topic mappings support search and do not establish legal equivalence.</p>
-    <p>These entries identify NHGRI as their source and display the retrieval timestamp. NHGRI’s source page was last updated February 8, 2024. Current legal decisions should always use the linked primary source.</p>
-
-    <h2>Status vocabulary</h2>
-    <p>All records use the NHGRI status vocabulary: Approved, Died, Enacted, Passed House, Passed Senate, Statute, Pending, and Introduced. Record type remains separate so statutes, regulations, policies, and legislation retain their substantive form.</p>
-
-    <h2>Research and review process</h2>
+    <h3>Review process</h3>
     <ol>
       <li>Locate an official government source.</li>
       <li>Determine the jurisdiction, record type, status, dates, and scope.</li>
@@ -51,20 +45,24 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <li>Complete human source and summary review before publication.<sup class="citation-reference"><a href="#reference-1" aria-label="Reference 1">1</a>, <a href="#reference-2" aria-label="Reference 2">2</a>, <a href="#reference-4" aria-label="Reference 4">4</a></sup></li>
     </ol>
 
-    <h2>Evidence informing this method</h2>
-    <p>A targeted PubMed Central search conducted through Paperclip on September 2, 2026, informed selected parts of this methodology. Search concepts included legal epidemiology, policy surveillance, legal mapping, coding, quality control, transparent search reporting, and plain-language summaries. Disclosing the information source, search concepts, and execution date was informed by search-reporting guidance.<sup class="citation-reference"><a href="#reference-5" aria-label="Reference 5">5</a></sup></p>
-    <p>The literature is cited above at the points where it informed the method. It was used to refine the project’s method and writing, not to identify the legal records.</p>
-    <p>This was a focused background search, not a systematic or scoping review. The project does not claim adherence to PRISMA-S or another evidence-synthesis reporting guideline.</p>
+    <h2 id="nhgri-provenance">NHGRI archive</h2>
+    <p>The combined directory includes the complete NHGRI Genome Statute and Legislation Database. Records retain their original state, link, topic, status, summary, and retrieval timestamp. Local topic mappings support search but do not establish legal equivalence. NHGRI last updated its source page on February 8, 2024; current decisions should use the linked primary source.</p>
 
-    <h2>Uncertainty and absence</h2>
+    <h2>Status labels</h2>
+    <p>Records use the NHGRI labels Approved, Died, Enacted, Passed House, Passed Senate, Statute, Pending, and Introduced. Record type remains separate.</p>
+
+    <h2>Method evidence</h2>
+    <p>A targeted PubMed Central search through Paperclip on September 2, 2026, informed the method. It covered legal epidemiology, policy surveillance, legal mapping, coding, quality control, search reporting, and plain-language summaries.<sup class="citation-reference"><a href="#reference-5" aria-label="Reference 5">5</a></sup> This was background research, not a systematic or scoping review, and the project does not claim adherence to PRISMA-S.</p>
+
+    <h2>Maintenance and limits</h2>
+    <h3>Uncertainty</h3>
     <p>“No specific law identified” describes a dataset finding, not a definitive conclusion that no law exists. Legal coverage can depend on definitions, exceptions, effective dates, preemption, enforcement, and the facts of a particular situation.</p>
 
-    <h2>Corrections and versioning</h2>
+    <h3>Corrections and versions</h3>
     <p>Corrections create a record-history entry and increment the record version when the substantive public record changes. GitHub releases provide stable snapshot identifiers and checksum-verified data files.</p>
 
-    <h2>Automation boundary</h2>
-    <p>A weekly monitor compares the checked-in NHGRI snapshot with a newly retrieved candidate. Structured changes are presented in a draft pull request for source and data review. Retrieval timestamps and cosmetic page changes do not create a new snapshot when the policy records are unchanged.</p>
-    <p>Automated systems must not rewrite legal summaries, merge candidate data, or publish legal conclusions without human review.</p>
+    <h3>Automated updates</h3>
+    <p>A weekly monitor compares the checked-in NHGRI snapshot with a newly retrieved candidate and presents changes in a draft pull request. Human review is required before legal summaries or candidate data are published. Retrieval timestamps and cosmetic changes alone do not create a snapshot.</p>
 
     <h2>References</h2>
     <ol class="methodology-references">

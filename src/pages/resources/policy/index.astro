@@ -1,0 +1,34 @@
+---
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Policy resources">
+  <Breadcrumbs items={[{ label: "Resources" }, { label: "Policy resources" }]} />
+  <h1>Policy resources</h1>
+  <p class="page-intro">External sources for researching genetics, privacy, and public health policy.</p>
+
+  <section class="reading-width">
+    <h2>Genomics law and programs</h2>
+    <ul>
+      <li><a href="https://www.genome.gov/about-genomics/policy-issues/Genome-Statute-Legislation-Database">NHGRI Genome Statute and Legislation Database</a>: state statutes and bills from 2002 to 2024.</li>
+      <li>LawSeq: <a href="https://lawseq.umn.edu/federal-search">federal law</a>, <a href="https://lawseq.umn.edu/state-search">state law</a>, and <a href="https://lawseq.umn.edu/annotated-bibliography">selected secondary sources</a> relevant to genomics.</li>
+      <li>NCJA Center for Forensic DNA Policy and Practice: <a href="https://ncjadnacenter.org/legislation-database/">legislation database</a> and <a href="https://ncjadnacenter.org/state-dna-policy-map/">state DNA policy map</a>.</li>
+      <li><a href="https://www.nsgc.org/Advocacy/State-Licensure">NSGC state licensure</a>: genetic counselor licensure maps and state laws.</li>
+    </ul>
+
+    <h2>Broader policy tracking</h2>
+    <ul>
+      <li><a href="https://lawatlas.org/">LawAtlas</a>: policy surveillance datasets with codebooks and research protocols.</li>
+      <li><a href="https://www.ncsl.org/technology-and-communication/ncsl-50-state-searchable-bill-tracking-databases">NCSL legislation databases</a>: active and archived state bill-tracking databases.</li>
+      <li><a href="https://iapp.org/resources/article/us-state-privacy-legislation-tracker">IAPP state privacy tracker</a>: comprehensive state privacy laws and bills.</li>
+    </ul>
+
+    <h2>Policy positions</h2>
+    <ul>
+      <li><a href="https://www.ashg.org/advocacy/public-policy-positions/">ASHG public policy positions</a>: society statements and advocacy positions on genetics policy.</li>
+    </ul>
+
+    <p class="metadata">Check each source's scope and update date before relying on it.</p>
+  </section>
+</BaseLayout>

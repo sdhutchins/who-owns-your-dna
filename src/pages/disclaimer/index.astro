@@ -1,0 +1,17 @@
+---
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Disclaimer">
+  <Breadcrumbs items={[{ label: "About", href: "/about/" }, { label: "Disclaimer" }]} />
+  <h1>Disclaimer</h1>
+
+  <section class="reading-width">
+    <p>This site provides general information, not legal advice. Laws and policies change, and how they apply depends on the facts and jurisdiction. Records may be incomplete, delayed, or inaccurate.</p>
+
+    <p>Check the linked primary source and consult a qualified attorney before making legal decisions. Using this site does not create an attorney-client relationship.</p>
+
+    <p>This site links to materials maintained by third parties. Their content, availability, and copyright terms are controlled by their owners.</p>
+  </section>
+</BaseLayout>

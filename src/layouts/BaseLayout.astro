@@ -3,7 +3,6 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "../styles/global.css";
-import SearchIcon from "@lucide/astro/icons/search";
 
 import { getNhgriManifest } from "../lib/records";
 import { formatDate, SITE_NAME, SITE_SUBTITLE, withBase } from "../lib/site";
@@ -22,7 +21,6 @@ const {
 const pageTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} | ${SITE_SUBTITLE}`;
 const nhgriManifest = await getNhgriManifest();
 const pathname = Astro.url.pathname;
-const isHomePage = pathname === withBase("/");
 const primaryLinks = [
   {
     label: "Records",
@@ -46,26 +44,31 @@ const primaryLinks = [
   },
 ];
 const mobileStableLinks = primaryLinks.slice(0, 2);
-const aboutLinks = [
-  { label: "About the project", href: "/about/" },
+const resourceLinks = [
   { label: "Plain-language glossary", href: "/glossary/" },
   { label: "Methodology", href: "/methodology/" },
   { label: "Data and downloads", href: "/data/" },
   { label: "NHGRI source archive", href: "/sources/nhgri/" },
-  { label: "Updates", href: "/changes/" },
+  { label: "Policy resources", href: "/resources/policy/" },
   { label: "How to cite", href: "/cite/" },
+];
+const aboutLinks = [
+  { label: "About the project", href: "/about/" },
+  { label: "Disclaimer", href: "/disclaimer/" },
+  { label: "Updates", href: "/changes/" },
   { label: "Contribute", href: "/contribute/" },
 ];
-const isAboutPage = [
-  "/about/",
+const isResourcesPage = [
   "/glossary/",
   "/methodology/",
   "/data/",
   "/cite/",
-  "/changes/",
-  "/contribute/",
   "/sources/nhgri/",
+  "/resources/policy/",
 ].some((path) => pathname.includes(path));
+const isAboutPage = ["/about/", "/disclaimer/", "/changes/", "/contribute/"].some((path) =>
+  pathname.includes(path),
+);
 ---
 
 <!doctype html>
@@ -81,73 +84,78 @@ const isAboutPage = [
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <header class="site-header">
-      <div class="site-header__identity page-shell">
-        <a class="project-name" href={withBase("/")}>{SITE_NAME}</a>
-        <p>{SITE_SUBTITLE}</p>
-      </div>
-      <div class="site-header__navigation">
-        <div class="navigation-shell page-shell">
-          <nav class="mobile-stable-nav" aria-label="Key pages">
-            <ul>
-              {mobileStableLinks.map((link) => {
-                const isActive = link.activePaths.some((path) => pathname.includes(path));
-                return (
-                  <li>
-                    <a href={withBase(link.href)} aria-current={isActive ? "page" : undefined}>
-                      {link.label}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-          <details class="primary-navigation" data-primary-navigation>
-            <summary class="mobile-nav-toggle">Menu</summary>
-            <div class="navigation-row">
-              <nav class="primary-nav" aria-label="Primary navigation">
-                <ul>
-                  {
-                    primaryLinks.map((link) => {
-                      const isActive = link.activePaths.some((path) => pathname.includes(path));
-                      const isMobileDuplicate = mobileStableLinks.includes(link);
-                      return (
-                        <li data-mobile-duplicate={isMobileDuplicate ? "true" : undefined}>
-                          <a
-                            class="primary-nav__link"
-                            href={withBase(link.href)}
-                            aria-current={isActive ? "page" : undefined}
-                          >{link.label}</a>
-                        </li>
-                      );
-                    })
-                  }
-                  <li>
-                    <details class="nav-group" data-nav-group>
-                      <summary
-                        class:list={["nav-group__summary", { "is-current": isAboutPage }]}
-                        aria-current={isAboutPage ? "page" : undefined}
-                      >About</summary>
-                      <ul id="about-navigation" class="nav-group__submenu nav-group__submenu--right">
-                        {aboutLinks.map((link) => (
-                          <li><a href={withBase(link.href)}>{link.label}</a></li>
-                        ))}
-                      </ul>
-                    </details>
-                  </li>
-                </ul>
-              </nav>
-              {!isHomePage && (
-                <form class="header-search" action={withBase("/records/")} method="get" role="search">
-                  <label class="sr-only" for="header-search">Search laws and policy records</label>
-                  <input id="header-search" name="q" type="search" placeholder="Search laws, policies, or topics" />
-                  <button type="submit">
-                    <SearchIcon class="interface-icon" size={18} />
-                    <span>Search</span>
-                  </button>
-                </form>
-              )}
-            </div>
-          </details>
+      <div class="site-header__bar page-shell">
+        <div class="site-header__identity">
+          <a class="project-name" href={withBase("/")}>{SITE_NAME}</a>
+          <p>{SITE_SUBTITLE}</p>
+        </div>
+        <div class="site-header__navigation">
+          <div class="navigation-shell">
+            <nav class="mobile-stable-nav" aria-label="Key pages">
+              <ul>
+                {mobileStableLinks.map((link) => {
+                  const isActive = link.activePaths.some((path) => pathname.includes(path));
+                  return (
+                    <li>
+                      <a href={withBase(link.href)} aria-current={isActive ? "page" : undefined}>
+                        {link.label}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+            <details class="primary-navigation" data-primary-navigation open>
+              <summary class="mobile-nav-toggle">Menu</summary>
+              <div class="navigation-row">
+                <nav class="primary-nav" aria-label="Primary navigation">
+                  <ul>
+                    {
+                      primaryLinks.map((link) => {
+                        const isActive = link.activePaths.some((path) => pathname.includes(path));
+                        const isMobileDuplicate = mobileStableLinks.includes(link);
+                        return (
+                          <li data-mobile-duplicate={isMobileDuplicate ? "true" : undefined}>
+                            <a
+                              class="primary-nav__link"
+                              href={withBase(link.href)}
+                              aria-current={isActive ? "page" : undefined}
+                            >{link.label}</a>
+                          </li>
+                        );
+                      })
+                    }
+                    <li>
+                      <details class="nav-group" data-nav-group>
+                        <summary
+                          class:list={["nav-group__summary", { "is-current": isResourcesPage }]}
+                          aria-current={isResourcesPage ? "page" : undefined}
+                        >Resources</summary>
+                        <ul id="resources-navigation" class="nav-group__submenu">
+                          {resourceLinks.map((link) => (
+                            <li><a href={withBase(link.href)}>{link.label}</a></li>
+                          ))}
+                        </ul>
+                      </details>
+                    </li>
+                    <li>
+                      <details class="nav-group" data-nav-group>
+                        <summary
+                          class:list={["nav-group__summary", { "is-current": isAboutPage }]}
+                          aria-current={isAboutPage ? "page" : undefined}
+                        >About</summary>
+                        <ul id="about-navigation" class="nav-group__submenu nav-group__submenu--right">
+                          {aboutLinks.map((link) => (
+                            <li><a href={withBase(link.href)}>{link.label}</a></li>
+                          ))}
+                        </ul>
+                      </details>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </details>
+          </div>
         </div>
       </div>
     </header>
@@ -157,6 +165,25 @@ const isAboutPage = [
         "[data-primary-navigation]",
       );
       const navigationGroups = [...document.querySelectorAll<HTMLDetailsElement>("[data-nav-group]")];
+      const desktopNavigation = window.matchMedia("(min-width: 58.001rem)");
+
+      const syncPrimaryNavigation = (event: MediaQueryList | MediaQueryListEvent) => {
+        if (primaryNavigation) primaryNavigation.open = event.matches;
+      };
+      const closePrimaryNavigationOnMobile = () => {
+        if (!desktopNavigation.matches && primaryNavigation) {
+          primaryNavigation.open = false;
+        }
+      };
+
+      // The menu must remain open when its mobile-only toggle is hidden.
+      syncPrimaryNavigation(desktopNavigation);
+      desktopNavigation.addEventListener("change", syncPrimaryNavigation);
+      primaryNavigation?.addEventListener("toggle", () => {
+        if (primaryNavigation && desktopNavigation.matches && !primaryNavigation.open) {
+          primaryNavigation.open = true;
+        }
+      });
 
       for (const group of navigationGroups) {
         group.addEventListener("toggle", () => {
@@ -175,8 +202,8 @@ const isAboutPage = [
           openGroup.querySelector<HTMLElement>("summary")?.focus();
           return;
         }
-        if (primaryNavigation?.open) {
-          primaryNavigation.open = false;
+        if (!desktopNavigation.matches && primaryNavigation?.open) {
+          closePrimaryNavigationOnMobile();
           primaryNavigation.querySelector<HTMLElement>(".mobile-nav-toggle")?.focus();
         }
       });
@@ -187,14 +214,18 @@ const isAboutPage = [
         for (const group of navigationGroups) {
           if (group.open && !group.contains(clickTarget)) group.open = false;
         }
-        if (primaryNavigation?.open && !primaryNavigation.contains(clickTarget)) {
-          primaryNavigation.open = false;
+        if (
+          !desktopNavigation.matches &&
+          primaryNavigation?.open &&
+          !primaryNavigation.contains(clickTarget)
+        ) {
+          closePrimaryNavigationOnMobile();
         }
       });
 
       primaryNavigation?.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => {
         link.addEventListener("click", () => {
-          primaryNavigation.open = false;
+          closePrimaryNavigationOnMobile();
         });
       });
     </script>
@@ -207,7 +238,7 @@ const isAboutPage = [
       <div class="page-shell footer-grid">
         <div>
           <p class="footer-title">{SITE_NAME}</p>
-          <p class="footer-note">This site provides informational summaries, not legal advice. Read the linked primary source before relying on a record.</p>
+          <p class="footer-note">This site provides general information, not legal advice. Laws change and may apply differently to specific facts. <a href={withBase("/disclaimer/")}>Read the disclaimer</a>.</p>
           <p class="footer-note">
             Includes records retrieved from NHGRI on {formatDate(nhgriManifest.snapshot_fetched_at.slice(0, 10))}.
             {" "}<a href={withBase("/sources/nhgri/")}>Review source and coverage details</a>.
@@ -217,12 +248,9 @@ const isAboutPage = [
           <p class="footer-heading">Reference</p>
           <ul>
             <li><a href={withBase("/about/")}>About</a></li>
-            <li><a href={withBase("/glossary/")}>Glossary</a></li>
-            <li><a href={withBase("/data/")}>Data and downloads</a></li>
-            <li><a href={withBase("/methodology/")}>Methodology</a></li>
-            <li><a href={withBase("/cite/")}>How to cite</a></li>
+            <li><a href={withBase("/disclaimer/")}>Disclaimer</a></li>
             <li><a href={withBase("/contribute/")}>Contribute</a></li>
-            <li><a href="https://www.ashg.org/advocacy/public-policy-positions/">ASHG public policy positions</a></li>
+            <li><a href={withBase("/resources/policy/")}>Policy resources</a></li>
           </ul>
         </nav>
       </div>

@@ -70,13 +70,12 @@ const permanentUrl = `${PUBLIC_SITE_URL}/topics/${topic.slug}/`;
   <Breadcrumbs items={[{ label: "Topics", href: "/topics/" }, { label: topic.name }]} />
   <h1>{topic.name}</h1>
   <p class="page-intro">{topic.description}</p>
-  <p class="reading-width">
-    Topic tags group records by subject. A shared tag does not mean that records provide equivalent coverage, rights, restrictions, or legal protections.
-  </p>
+  <p class="reading-width">A shared topic does not imply equivalent legal scope or protection.</p>
 
   <div class="coverage-summary reading-width">
-    <p><strong>Current coverage:</strong> {projectRecords.length.toLocaleString()} project-reviewed {projectRecords.length === 1 ? "record" : "records"} and {nhgriRecords.length.toLocaleString()} archived NHGRI {nhgriRecords.length === 1 ? "record" : "records"}.</p>
-    <p><strong>Latest project review:</strong> {latestProjectReview ? formatDate(latestProjectReview) : "No project-reviewed record is currently available."}</p>
+    <p><strong>Project-reviewed:</strong> {projectRecords.length.toLocaleString()} {projectRecords.length === 1 ? "record" : "records"}</p>
+    <p><strong>Archived NHGRI:</strong> {nhgriRecords.length.toLocaleString()} {nhgriRecords.length === 1 ? "record" : "records"}</p>
+    <p><strong>Latest review:</strong> {latestProjectReview ? formatDate(latestProjectReview) : "No project-reviewed record"}</p>
   </div>
 
   <div class="page-actions">
@@ -86,7 +85,7 @@ const permanentUrl = `${PUBLIC_SITE_URL}/topics/${topic.slug}/`;
 
   <section class="section-block" aria-labelledby="topic-records">
     <h2 id="topic-records">Records about {topic.name.toLocaleLowerCase()}</h2>
-    <p>Showing {previewCount.toLocaleString()} of {recordCount.toLocaleString()} records, with project-reviewed records first.</p>
+    <p>Showing {previewCount.toLocaleString()} of {recordCount.toLocaleString()}; project-reviewed records appear first.</p>
     <PolicyRecordTable
       projectRecords={previewProjectRecords}
       nhgriRecords={previewNhgriRecords}

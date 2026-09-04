@@ -92,15 +92,13 @@ const permanentUrl = `${PUBLIC_SITE_URL}/states/${jurisdiction.slug}/`;
 <BaseLayout title={jurisdiction.name} wide>
   <Breadcrumbs items={[{ label: "States", href: "/states/" }, { label: jurisdiction.name }]} />
   <h1>{jurisdiction.name}</h1>
-  <p class="page-intro">Selected genetics and genomics laws and policies associated with {jurisdiction.name}.</p>
-  <p class="reading-width">
-    This page reports current site coverage. It is not a comprehensive statement of every relevant law, policy, right, or protection in {jurisdiction.name}.
-  </p>
+  <p class="page-intro">Current site coverage for {jurisdiction.name}, not a complete account of every relevant law, policy, right, or protection.</p>
 
   <div class="coverage-summary reading-width">
-    <p><strong>Current coverage:</strong> {projectRecords.length.toLocaleString()} project-reviewed {projectRecords.length === 1 ? "record" : "records"} and {nhgriRecords.length.toLocaleString()} archived NHGRI {nhgriRecords.length === 1 ? "record" : "records"}.</p>
-    <p><strong>Status summary:</strong> {enactedCount.toLocaleString()} enacted or approved; {proposedCount.toLocaleString()} proposed or pending.</p>
-    <p><strong>Latest project review:</strong> {latestProjectReview ? formatDate(latestProjectReview) : "No project-reviewed record is currently available."}</p>
+    <p><strong>Project-reviewed:</strong> {projectRecords.length.toLocaleString()} {projectRecords.length === 1 ? "record" : "records"}</p>
+    <p><strong>Archived NHGRI:</strong> {nhgriRecords.length.toLocaleString()} {nhgriRecords.length === 1 ? "record" : "records"}</p>
+    <p><strong>Status:</strong> {enactedCount.toLocaleString()} enacted or approved; {proposedCount.toLocaleString()} proposed or pending</p>
+    <p><strong>Latest review:</strong> {latestProjectReview ? formatDate(latestProjectReview) : "No project-reviewed record"}</p>
   </div>
 
   {leadingTopics.length > 0 && (
@@ -114,7 +112,7 @@ const permanentUrl = `${PUBLIC_SITE_URL}/states/${jurisdiction.slug}/`;
 
   <section class="section-block" aria-labelledby="jurisdiction-records">
     <h2 id="jurisdiction-records">Records in {jurisdiction.name}</h2>
-    <p>Showing {previewCount.toLocaleString()} of {recordCount.toLocaleString()} records, with project-reviewed records first.</p>
+    <p>Showing {previewCount.toLocaleString()} of {recordCount.toLocaleString()}; project-reviewed records appear first.</p>
     <PolicyRecordTable
       projectRecords={previewProjectRecords}
       nhgriRecords={previewNhgriRecords}
