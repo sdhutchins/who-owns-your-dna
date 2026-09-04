@@ -54,6 +54,7 @@ const resourceLinks = [
 ];
 const aboutLinks = [
   { label: "About the project", href: "/about/" },
+  { label: "Disclaimer", href: "/disclaimer/" },
   { label: "Updates", href: "/changes/" },
   { label: "Contribute", href: "/contribute/" },
 ];
@@ -65,7 +66,7 @@ const isResourcesPage = [
   "/sources/nhgri/",
   "/resources/policy/",
 ].some((path) => pathname.includes(path));
-const isAboutPage = ["/about/", "/changes/", "/contribute/"].some((path) =>
+const isAboutPage = ["/about/", "/disclaimer/", "/changes/", "/contribute/"].some((path) =>
   pathname.includes(path),
 );
 ---
@@ -237,7 +238,7 @@ const isAboutPage = ["/about/", "/changes/", "/contribute/"].some((path) =>
       <div class="page-shell footer-grid">
         <div>
           <p class="footer-title">{SITE_NAME}</p>
-          <p class="footer-note">This site provides informational summaries, not legal advice. Read the linked primary source before relying on a record.</p>
+          <p class="footer-note">This site provides general information, not legal advice. Laws change and may apply differently to specific facts. <a href={withBase("/disclaimer/")}>Read the disclaimer</a>.</p>
           <p class="footer-note">
             Includes records retrieved from NHGRI on {formatDate(nhgriManifest.snapshot_fetched_at.slice(0, 10))}.
             {" "}<a href={withBase("/sources/nhgri/")}>Review source and coverage details</a>.
@@ -247,6 +248,7 @@ const isAboutPage = ["/about/", "/changes/", "/contribute/"].some((path) =>
           <p class="footer-heading">Reference</p>
           <ul>
             <li><a href={withBase("/about/")}>About</a></li>
+            <li><a href={withBase("/disclaimer/")}>Disclaimer</a></li>
             <li><a href={withBase("/contribute/")}>Contribute</a></li>
             <li><a href={withBase("/resources/policy/")}>Policy resources</a></li>
           </ul>
