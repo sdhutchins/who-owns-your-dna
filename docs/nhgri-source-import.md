@@ -52,4 +52,4 @@ The monitoring workflow identifies candidates for review. A person must inspect 
 
 ## Versioned data snapshots
 
-After a reviewed change is merged, a maintainer can run the manual data-release workflow. The workflow packages project records, NHGRI source records, the provenance manifest, the changelog, and SHA-256 checksums in a tagged GitHub Release. A repository license is required before the workflow will publish a release.
+After a reviewed change is merged, a maintainer can run the manual data-release workflow. The workflow packages project records, NHGRI source records, the provenance manifest, the changelog, the CC0 data license, the third-party notice, and SHA-256 checksums in a tagged GitHub Release. Releases are created only after reviewed data changes and are not generated for unchanged data or site-only updates.

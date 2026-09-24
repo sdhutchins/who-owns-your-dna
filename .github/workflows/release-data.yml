@@ -37,8 +37,8 @@ jobs:
             echo "Version must use YYYY-MM-DD or YYYY-MM-DD.N format."
             exit 1
           fi
-          if [[ ! -f LICENSE && ! -f LICENSE.md && ! -f LICENSE.txt ]]; then
-            echo "Select and add a repository license before publishing a dataset release."
+          if [[ ! -f LICENSE || ! -f DATA-LICENSE.md || ! -f NOTICE.md ]]; then
+            echo "Repository, data-license, and provenance notice files are required."
             exit 1
           fi
 
@@ -63,9 +63,11 @@ jobs:
           cp public/data/nhgri-source-records.json "$release_directory/"
           cp public/data/nhgri-source-manifest.json "$release_directory/"
           cp public/data/changes.json "$release_directory/"
+          cp DATA-LICENSE.md "$release_directory/"
+          cp NOTICE.md "$release_directory/"
           (
             cd "$release_directory"
-            sha256sum ./*.csv ./*.json > SHA256SUMS.txt
+            sha256sum ./*.csv ./*.json ./*.md > SHA256SUMS.txt
           )
           echo "release_directory=$release_directory" >> "$GITHUB_OUTPUT"
 
@@ -85,4 +87,4 @@ jobs:
           gh release create "$release_tag" "$RELEASE_DIRECTORY"/* \
             --target "$GITHUB_SHA" \
             --title "Data snapshot $SNAPSHOT_VERSION" \
-            --notes "Human-reviewed project records, archived NHGRI source records, provenance metadata, and checksums. Consult linked primary sources before relying on a legal status."
+            --notes "Human-reviewed project records, archived NHGRI source records, provenance metadata, CC0 licensing information, and checksums. Consult linked primary sources before relying on a legal status."
