@@ -747,6 +747,221 @@
     ]
   },
   {
+    "id": "ms-hb-1051-2026",
+    "jurisdiction": "Mississippi",
+    "jurisdiction_code": "MS",
+    "jurisdiction_type": "state",
+    "record_type": "legislation",
+    "title": "Mississippi Consumer Privacy Protection Act",
+    "subtitle": "Proposed consumer protections covering identifying genetic data",
+    "identifier": "HB 1051 (2026)",
+    "bill_number": "HB 1051",
+    "session": "2026 Regular Session",
+    "status": "died",
+    "introduced_date": "2026-01-16",
+    "last_action_date": "2026-02-03",
+    "last_reviewed": "2026-09-24",
+    "record_version": "1.0",
+    "verification_status": "verified-primary",
+    "topics": [
+      "consumer-personal-data-privacy"
+    ],
+    "summary": "Mississippi HB 1051 did not become law. It would have established a comprehensive consumer-privacy framework that classified processing genetic data for the purpose of uniquely identifying an individual as sensitive-data processing.",
+    "legal_effects": "Covered controllers would have needed consent before processing sensitive data for a nonexempt purpose. The bill also would have provided consumer rights involving access, correction, deletion, data portability, targeted advertising, data sales, and specified profiling. The Attorney General would have had exclusive enforcement authority after a 60-day opportunity to cure.",
+    "plain_language": "The proposal would have required qualifying businesses to obtain consent before using genetic data to identify a consumer. Because the bill died in committee, it created no new consumer rights or business obligations.",
+    "limitations": "The proposal would have applied only to businesses meeting its revenue and data-processing thresholds. It excluded individuals acting in employment or commercial contexts and contained exemptions for insurance entities, HIPAA-covered entities and business associates, nonprofit organizations, government agencies, regulated research, and several types of federally regulated information. Its sensitive-data definition covered genetic data when processed to uniquely identify an individual, not every use of genetic data.",
+    "primary_sources": [
+      {
+        "title": "HB 1051 introduced bill",
+        "url": "https://billstatus.ls.state.ms.us/documents/2026/html/HB/1000-1099/HB1051IN.htm",
+        "publisher": "Mississippi Legislature",
+        "accessed_date": "2026-09-24"
+      },
+      {
+        "title": "HB 1051 legislative history",
+        "url": "https://billstatus.ls.state.ms.us/2026/pdf/history/HB/HB1051.xml",
+        "publisher": "Mississippi Legislature",
+        "accessed_date": "2026-09-24"
+      }
+    ],
+    "secondary_sources": [],
+    "history": [
+      {
+        "date": "2026-01-16",
+        "event": "Bill introduced and referred to the House Judiciary A Committee.",
+        "source": "Mississippi Legislature"
+      },
+      {
+        "date": "2026-02-03",
+        "event": "Bill died in committee.",
+        "source": "Mississippi Legislature"
+      },
+      {
+        "date": "2026-09-24",
+        "event": "Record created from the introduced bill and legislative history.",
+        "source": "Project review"
+      }
+    ]
+  },
+  {
+    "id": "ms-hb-377-2026",
+    "jurisdiction": "Mississippi",
+    "jurisdiction_code": "MS",
+    "jurisdiction_type": "state",
+    "record_type": "legislation",
+    "title": "Missing- and unidentified-person identification procedures",
+    "subtitle": "DNA databases and forensic genetic genealogy requirements",
+    "identifier": "HB 377 (2026)",
+    "bill_number": "HB 377",
+    "session": "2026 Regular Session",
+    "statute_citation": "2026 Miss. Laws ch. 445",
+    "status": "enacted",
+    "introduced_date": "2026-01-09",
+    "signed_date": "2026-04-08",
+    "effective_date": "2026-07-01",
+    "last_action_date": "2026-04-08",
+    "last_reviewed": "2026-09-24",
+    "record_version": "1.0",
+    "verification_status": "verified-primary",
+    "topics": [
+      "genetic-data-and-law-enforcement"
+    ],
+    "summary": "Mississippi enacted HB 377 in 2026 to establish procedures for missing- and unidentified-person investigations. The law governs the collection and submission of specified DNA information and requires forensic genetic genealogy testing of unidentified human remains in state custody after a specified period.",
+    "legal_effects": "Law enforcement agencies must obtain voluntary DNA samples from appropriate family members when carrying out the law's missing-person procedures and submit resulting profiles through the specified state and federal systems. The State Medical Examiner must use forensic genetic genealogy testing after possessing unidentified human remains for 45 days. The act also requires specified missing- and unidentified-person information to be entered into the National Missing and Unidentified Persons System.",
+    "plain_language": "The law directs Mississippi authorities to use family-reference DNA, forensic DNA databases, and genetic genealogy to help identify missing people and unidentified remains. It sets deadlines for entering information and for testing remains held by the State Medical Examiner.",
+    "limitations": "The law concerns missing- and unidentified-person investigations rather than general law-enforcement access to genetic data. It describes family DNA samples as voluntary and refers to genealogy databases consented for law-enforcement use. The enacted text does not establish a general destruction or retention deadline for the family-reference samples collected under these procedures.",
+    "primary_sources": [
+      {
+        "title": "HB 377 final bill text",
+        "url": "https://billstatus.ls.state.ms.us/documents/2026/html/HB/0300-0399/HB0377SG.htm",
+        "publisher": "Mississippi Legislature",
+        "accessed_date": "2026-09-24"
+      },
+      {
+        "title": "HB 377 legislative history",
+        "url": "https://billstatus.ls.state.ms.us/2026/pdf/history/HB/HB0377.xml",
+        "publisher": "Mississippi Legislature",
+        "accessed_date": "2026-09-24"
+      }
+    ],
+    "secondary_sources": [],
+    "history": [
+      {
+        "date": "2026-01-09",
+        "event": "Bill introduced and referred to the House Judiciary B Committee.",
+        "source": "Mississippi Legislature"
+      },
+      {
+        "date": "2026-02-12",
+        "event": "House adopted a committee substitute and passed the bill.",
+        "source": "Mississippi Legislature"
+      },
+      {
+        "date": "2026-03-11",
+        "event": "Senate passed the bill as amended.",
+        "source": "Mississippi Legislature"
+      },
+      {
+        "date": "2026-03-31",
+        "event": "House and Senate adopted the conference report.",
+        "source": "Mississippi Legislature"
+      },
+      {
+        "date": "2026-04-08",
+        "event": "Governor approved the bill as Chapter 445.",
+        "source": "Mississippi Legislature"
+      },
+      {
+        "date": "2026-07-01",
+        "event": "Act became effective.",
+        "source": "Mississippi Legislature"
+      },
+      {
+        "date": "2026-09-24",
+        "event": "Record created from the final bill text and legislative history.",
+        "source": "Project review"
+      }
+    ]
+  },
+  {
+    "id": "ms-hb-565-2026",
+    "jurisdiction": "Mississippi",
+    "jurisdiction_code": "MS",
+    "jurisdiction_type": "state",
+    "record_type": "legislation",
+    "title": "Jill Gary Eure Act",
+    "subtitle": "Required health-plan and Medicaid coverage for biomarker testing",
+    "identifier": "HB 565 (2026)",
+    "bill_number": "HB 565",
+    "session": "2026 Regular Session",
+    "statute_citation": "2026 Miss. Laws ch. 360",
+    "status": "enacted",
+    "introduced_date": "2026-01-13",
+    "signed_date": "2026-03-16",
+    "effective_date": "2026-07-01",
+    "last_action_date": "2026-03-16",
+    "last_reviewed": "2026-09-24",
+    "record_version": "1.0",
+    "verification_status": "verified-primary",
+    "topics": [
+      "biomarker-testing",
+      "coverage-and-reimbursement",
+      "health-insurance-coverage",
+      "pharmacogenomics"
+    ],
+    "summary": "Mississippi enacted the Jill Gary Eure Act, also called Jill's Law, in 2026. The law requires covered health benefit plans, Medicaid, and the State and School Employees Health Insurance Plan to cover qualifying biomarker testing beginning with plans, contracts, or agreements entered into or renewed on or after July 1, 2026.",
+    "legal_effects": "Covered plans must provide biomarker-testing coverage for diagnosis, treatment, disease management, or monitoring when the test is supported by specified medical and scientific evidence. The law requires written reasons for qualifying coverage denials, establishes procedures for prior authorization and coverage exceptions, and directs Medicaid to add applicable billing codes to its fee schedule.",
+    "plain_language": "Health plans covered by the law must pay for medically supported biomarker tests, including certain genomic tests. The definition includes tests for gene mutations and gene-drug interactions, as well as whole-exome, whole-genome, and whole-transcriptome sequencing.",
+    "limitations": "Coverage applies only to health benefit plans within the law's definitions and to tests supported by one of the listed evidence sources. Medicaid services remain subject to eligibility rules, state appropriations, federal matching funds, and applicable federal approval. The law does not require coverage by every type of insurance product.",
+    "primary_sources": [
+      {
+        "title": "HB 565 final bill text",
+        "url": "https://billstatus.ls.state.ms.us/documents/2026/html/HB/0500-0599/HB0565SG.htm",
+        "publisher": "Mississippi Legislature",
+        "accessed_date": "2026-09-24"
+      },
+      {
+        "title": "HB 565 legislative history",
+        "url": "https://billstatus.ls.state.ms.us/2026/pdf/history/HB/HB0565.xml",
+        "publisher": "Mississippi Legislature",
+        "accessed_date": "2026-09-24"
+      }
+    ],
+    "secondary_sources": [],
+    "history": [
+      {
+        "date": "2026-01-13",
+        "event": "Bill introduced and referred to two House committees.",
+        "source": "Mississippi Legislature"
+      },
+      {
+        "date": "2026-01-28",
+        "event": "House passed the bill as amended.",
+        "source": "Mississippi Legislature"
+      },
+      {
+        "date": "2026-03-04",
+        "event": "Senate passed the bill.",
+        "source": "Mississippi Legislature"
+      },
+      {
+        "date": "2026-03-16",
+        "event": "Governor approved the bill as Chapter 360.",
+        "source": "Mississippi Legislature"
+      },
+      {
+        "date": "2026-07-01",
+        "event": "Act became effective.",
+        "source": "Mississippi Legislature"
+      },
+      {
+        "date": "2026-09-24",
+        "event": "Record created from the final bill text and legislative history.",
+        "source": "Project review"
+      }
+    ]
+  },
+  {
     "id": "ny-cvr-79-l",
     "jurisdiction": "New York",
     "jurisdiction_code": "NY",

@@ -1,5 +1,29 @@
 [
   {
+    "date": "2026-09-24",
+    "event": "Record created from the introduced bill and legislative history.",
+    "source": "Project review",
+    "record_id": "ms-hb-1051-2026",
+    "record_title": "Mississippi Consumer Privacy Protection Act",
+    "jurisdiction": "Mississippi"
+  },
+  {
+    "date": "2026-09-24",
+    "event": "Record created from the final bill text and legislative history.",
+    "source": "Project review",
+    "record_id": "ms-hb-377-2026",
+    "record_title": "Missing- and unidentified-person identification procedures",
+    "jurisdiction": "Mississippi"
+  },
+  {
+    "date": "2026-09-24",
+    "event": "Record created from the final bill text and legislative history.",
+    "source": "Project review",
+    "record_id": "ms-hb-565-2026",
+    "record_title": "Jill Gary Eure Act",
+    "jurisdiction": "Mississippi"
+  },
+  {
     "date": "2026-09-02",
     "event": "Project-authored language and scope note revised for clarity.",
     "source": "Project editorial review",
@@ -192,6 +216,22 @@
     "jurisdiction": "New York"
   },
   {
+    "date": "2026-07-01",
+    "event": "Act became effective.",
+    "source": "Mississippi Legislature",
+    "record_id": "ms-hb-377-2026",
+    "record_title": "Missing- and unidentified-person identification procedures",
+    "jurisdiction": "Mississippi"
+  },
+  {
+    "date": "2026-07-01",
+    "event": "Act became effective.",
+    "source": "Mississippi Legislature",
+    "record_id": "ms-hb-565-2026",
+    "record_title": "Jill Gary Eure Act",
+    "jurisdiction": "Mississippi"
+  },
+  {
     "date": "2026-04-17",
     "event": "Enacted as Act 2026-552.",
     "source": "Alabama Legislature",
@@ -216,6 +256,14 @@
     "jurisdiction": "Alabama"
   },
   {
+    "date": "2026-04-08",
+    "event": "Governor approved the bill as Chapter 445.",
+    "source": "Mississippi Legislature",
+    "record_id": "ms-hb-377-2026",
+    "record_title": "Missing- and unidentified-person identification procedures",
+    "jurisdiction": "Mississippi"
+  },
+  {
     "date": "2026-04-07",
     "event": "Senate passed the bill as amended and the House concurred.",
     "source": "Alabama Legislature",
@@ -224,12 +272,44 @@
     "jurisdiction": "Alabama"
   },
   {
+    "date": "2026-03-31",
+    "event": "House and Senate adopted the conference report.",
+    "source": "Mississippi Legislature",
+    "record_id": "ms-hb-377-2026",
+    "record_title": "Missing- and unidentified-person identification procedures",
+    "jurisdiction": "Mississippi"
+  },
+  {
+    "date": "2026-03-16",
+    "event": "Governor approved the bill as Chapter 360.",
+    "source": "Mississippi Legislature",
+    "record_id": "ms-hb-565-2026",
+    "record_title": "Jill Gary Eure Act",
+    "jurisdiction": "Mississippi"
+  },
+  {
     "date": "2026-03-11",
     "event": "Senate committee reported the bill and placed it on the calendar.",
     "source": "Alabama Legislature",
     "record_id": "al-hb-263-2026",
     "record_title": "Biological and neural data in health and fitness apps",
     "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-03-11",
+    "event": "Senate passed the bill as amended.",
+    "source": "Mississippi Legislature",
+    "record_id": "ms-hb-377-2026",
+    "record_title": "Missing- and unidentified-person identification procedures",
+    "jurisdiction": "Mississippi"
+  },
+  {
+    "date": "2026-03-04",
+    "event": "Senate passed the bill.",
+    "source": "Mississippi Legislature",
+    "record_id": "ms-hb-565-2026",
+    "record_title": "Jill Gary Eure Act",
+    "jurisdiction": "Mississippi"
   },
   {
     "date": "2026-02-26",
@@ -248,6 +328,14 @@
     "jurisdiction": "Alabama"
   },
   {
+    "date": "2026-02-12",
+    "event": "House adopted a committee substitute and passed the bill.",
+    "source": "Mississippi Legislature",
+    "record_id": "ms-hb-377-2026",
+    "record_title": "Missing- and unidentified-person identification procedures",
+    "jurisdiction": "Mississippi"
+  },
+  {
     "date": "2026-02-05",
     "event": "Bill read a second time and placed on the House calendar.",
     "source": "Alabama Legislature",
@@ -256,12 +344,36 @@
     "jurisdiction": "Alabama"
   },
   {
+    "date": "2026-02-03",
+    "event": "Bill died in committee.",
+    "source": "Mississippi Legislature",
+    "record_id": "ms-hb-1051-2026",
+    "record_title": "Mississippi Consumer Privacy Protection Act",
+    "jurisdiction": "Mississippi"
+  },
+  {
     "date": "2026-01-29",
     "event": "Bill introduced and referred to the House Commerce and Small Business Committee.",
     "source": "Alabama Legislature",
     "record_id": "al-hb-351-2026",
     "record_title": "Alabama Personal Data Protection Act",
     "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-01-28",
+    "event": "House passed the bill as amended.",
+    "source": "Mississippi Legislature",
+    "record_id": "ms-hb-565-2026",
+    "record_title": "Jill Gary Eure Act",
+    "jurisdiction": "Mississippi"
+  },
+  {
+    "date": "2026-01-16",
+    "event": "Bill introduced and referred to the House Judiciary A Committee.",
+    "source": "Mississippi Legislature",
+    "record_id": "ms-hb-1051-2026",
+    "record_title": "Mississippi Consumer Privacy Protection Act",
+    "jurisdiction": "Mississippi"
   },
   {
     "date": "2026-01-15",
@@ -278,6 +390,22 @@
     "record_id": "al-hb-265-2026",
     "record_title": "Unlawful use of DNA",
     "jurisdiction": "Alabama"
+  },
+  {
+    "date": "2026-01-13",
+    "event": "Bill introduced and referred to two House committees.",
+    "source": "Mississippi Legislature",
+    "record_id": "ms-hb-565-2026",
+    "record_title": "Jill Gary Eure Act",
+    "jurisdiction": "Mississippi"
+  },
+  {
+    "date": "2026-01-09",
+    "event": "Bill introduced and referred to the House Judiciary B Committee.",
+    "source": "Mississippi Legislature",
+    "record_id": "ms-hb-377-2026",
+    "record_title": "Missing- and unidentified-person identification procedures",
+    "jurisdiction": "Mississippi"
   },
   {
     "date": "2025-05-14",
