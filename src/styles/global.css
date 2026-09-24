@@ -2,19 +2,19 @@
   --primary: #171415;
   --background: #ffffff;
   --surface: #fafaf9;
-  --surface-soft: #f7f4f1;
+  --surface-soft: #f5f6f7;
   --border: #e9e4df;
-  --text: #3d3536;
-  --muted: #85807a;
-  --accent: #5a4544;
-  --accent-soft: #96746a;
+  --text: #212b32;
+  --muted: #4c6272;
+  --accent: #2a646d;
+  --accent-soft: #168092;
   --green: #2e8540;
   --green-light: #e7f4e4;
   --gold: #9a6700;
   --gold-light: #fff1d2;
   --red: #b31b1f;
   --red-light: #f9dede;
-  --surface-hover: rgba(150, 116, 106, 0.1);
+  --surface-hover: rgba(22, 128, 146, 0.1);
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -226,7 +226,7 @@ main.page-shell {
 
 .nav-group__summary,
 .primary-nav__link {
-  border-bottom: 4px solid transparent;
+  border-bottom: 0;
   color: var(--accent);
   cursor: pointer;
   display: block;
@@ -235,7 +235,7 @@ main.page-shell {
   letter-spacing: 0.035em;
   line-height: 1.25;
   list-style: none;
-  padding: 0.78rem 0.72rem 0.62rem;
+  padding: 0.78rem 0.72rem 0.87rem;
   text-decoration: none;
   text-transform: uppercase;
   white-space: nowrap;
@@ -260,9 +260,8 @@ main.page-shell {
 .nav-group[open] > .nav-group__summary,
 .nav-group__summary.is-current,
 .primary-nav__link[aria-current="page"] {
-  background: transparent;
-  border-bottom-color: var(--accent-soft);
-  color: var(--text);
+  background: var(--accent-soft);
+  color: var(--background);
   text-decoration: none;
 }
 
@@ -302,9 +301,9 @@ main.page-shell {
 
 .nav-group__submenu a:hover,
 .nav-group__submenu a:focus-visible {
-  background: var(--surface-hover);
-  color: var(--text);
-  text-decoration: underline;
+  background: var(--accent-soft);
+  color: var(--background);
+  text-decoration: none;
 }
 
 .button-link,
@@ -439,7 +438,7 @@ main.page-shell {
 }
 
 .homepage-record-search input {
-  border: 1px solid #a9a29c;
+  border: 1px solid #908a85;
   border-radius: var(--radius-inner) 0 0 var(--radius-inner);
   min-height: 3.25rem;
   min-width: 0;
@@ -511,7 +510,6 @@ main.page-shell {
 }
 
 .record-contribution {
-  border-left: 4px solid var(--accent-soft);
   padding-left: 1rem;
 }
 
@@ -848,7 +846,7 @@ main.page-shell {
   border-top: 1px solid var(--border);
   display: grid;
   gap: 0.75rem 1rem;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   padding: 0.85rem 0;
 }
 
@@ -971,7 +969,6 @@ main.page-shell {
 .advocacy-callout,
 .source-layer-banner,
 .callout {
-  border-left: 5px solid var(--accent-soft);
   margin: 1.5rem 0;
   max-width: var(--reading-width);
   padding: 0.9rem 1.1rem;
@@ -990,7 +987,6 @@ main.page-shell {
 .callout--source,
 .callout--warning {
   background: var(--gold-light);
-  border-left-color: var(--gold);
 }
 
 .notice p:first-child,
@@ -1523,7 +1519,7 @@ details > div {
 
   .mobile-stable-nav a {
     align-items: center;
-    border-bottom: 3px solid transparent;
+    border-bottom: 0;
     color: var(--surface-soft);
     display: flex;
     font-size: 0.84rem;
@@ -1537,7 +1533,7 @@ details > div {
 
   .mobile-stable-nav a:hover,
   .mobile-stable-nav a[aria-current="page"] {
-    border-bottom-color: var(--accent-soft);
+    background: var(--accent-soft);
     color: var(--background);
   }
 
