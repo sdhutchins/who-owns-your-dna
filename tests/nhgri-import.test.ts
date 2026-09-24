@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { hasNhgriSnapshotChanged } from "../scripts/import-nhgri.mjs";
+import {
+  hasNhgriSnapshotChanged,
+  mapTopics,
+} from "../scripts/import-nhgri.mjs";
 
 const currentManifest = {
   records_sha256: "records-a",
@@ -12,6 +15,24 @@ const currentManifest = {
 };
 
 describe("NHGRI snapshot monitoring", () => {
+  it("maps NHGRI topics directly to stable slugs", () => {
+    expect(
+      mapTopics([
+        "Genetic data storage/privacy/sharing (industry)",
+        "Privacy",
+      ]),
+    ).toEqual([
+      "genetic-data-storage-privacy-sharing-industry",
+      "privacy",
+    ]);
+  });
+
+  it("rejects an unreviewed NHGRI topic", () => {
+    expect(() => mapTopics(["New source topic"])).toThrow(
+      "Unknown NHGRI topic: New source topic.",
+    );
+  });
+
   it("ignores retrieval time and cosmetic HTML changes", () => {
     const candidateManifest = {
       ...currentManifest,

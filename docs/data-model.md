@@ -24,6 +24,13 @@ The canonical record format is YAML validated against `schemas/legal-record.sche
 - `advocacy_context`: Optional, explicitly identified advocacy interpretation.
 - `limitations`: Definitions, exceptions, coverage boundaries, or unresolved questions.
 
+## Topics
+
+`topics` uses the topic vocabulary declared by the NHGRI Genome Statute and
+Legislation Database. Human-readable labels are stored in `data/topics.json`.
+Records store stable slugs so topic pages and shared filters do not depend on
+punctuation or capitalization in display labels.
+
 ## Sources and history
 
 Verified records require at least one HTTPS primary-source URL, publisher, and access date. The `history` array records substantive source events and project record changes. Future fields may store archived URLs, source checksums, reviewers, committee actions, votes, and amendment histories.

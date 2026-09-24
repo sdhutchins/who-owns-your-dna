@@ -29,7 +29,6 @@ const jurisdictions = [
     ...nhgriRecords.map((record) => record.jurisdiction),
   ]),
 ].sort();
-const nhgriTopics = [...new Set(nhgriRecords.flatMap((record) => record.source_topics))].sort();
 const recordTypes = [...new Set(projectRecords.map((record) => record.record_type))].sort();
 const years = [
   ...new Set([
@@ -91,12 +90,7 @@ const years = [
       <label for="topic-filter">Topic</label>
       <select id="topic-filter" name="topic">
         <option value="">All topics</option>
-        <optgroup label="Project topics">
-          {topics.map((topic) => <option value={`project:${topic.slug}`}>{topic.name}</option>)}
-        </optgroup>
-        <optgroup label="NHGRI source topics">
-          {nhgriTopics.map((topic) => <option value={`nhgri:${topic}`}>{topic}</option>)}
-        </optgroup>
+        {topics.map((topic) => <option value={`project:${topic.slug}`}>{topic.name}</option>)}
       </select>
     </div>
     <div class="filter-field">

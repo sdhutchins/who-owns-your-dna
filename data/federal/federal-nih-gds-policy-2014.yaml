@@ -13,8 +13,6 @@ record_version: "1.1"
 verification_status: verified-primary
 topics:
   - research
-  - consent
-  - data-sharing
 summary: >-
   The NIH Genomic Data Sharing Policy applies to NIH-funded research that
   generates large-scale human or non-human genomic data and to later research

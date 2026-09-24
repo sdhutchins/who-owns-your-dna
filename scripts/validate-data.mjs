@@ -60,6 +60,15 @@ export async function validateRecords() {
   const errors = [];
   const warnings = [];
 
+  if (
+    JSON.stringify(topics.map((topic) => topic.name))
+    !== JSON.stringify(nhgriManifest.declared_topics)
+  ) {
+    errors.push(
+      "data/topics.json: labels or order do not match the declared NHGRI topics",
+    );
+  }
+
   for (const { file, record } of loadedRecords) {
     if (!validateSchema(record)) {
       for (const error of validateSchema.errors ?? []) {
@@ -149,6 +158,12 @@ export async function validateRecords() {
       if (!validTopics.has(topic)) {
         errors.push(`${recordLocation}: unknown mapped topic "${topic}"`);
       }
+    }
+
+    if (record.mapped_topics.length !== record.source_topics.length) {
+      errors.push(
+        `${recordLocation}: each NHGRI source topic must have one topic slug`,
+      );
     }
 
 

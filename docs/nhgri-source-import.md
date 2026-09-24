@@ -18,7 +18,7 @@ NHGRI describes the database as reviewed monthly, but the visible source-page da
 
 Each imported record retains the NHGRI state, primary-link label, primary URL, topic labels, bill status, and summary. Whitespace introduced by the HTML layout is normalized. The wording within each field is otherwise retained.
 
-The importer adds a deterministic ID, source row number, conservatively inferred year, local topic mappings, source-page URL, and verification status. The original NHGRI topic labels always remain available. A local topic mapping supports discovery only. It does not assert that the source topic and project topic are legally equivalent.
+The importer adds a deterministic ID, source row number, conservatively inferred year, topic slugs, source-page URL, and verification status. The project uses NHGRI's declared topic vocabulary directly. Original NHGRI labels remain attached to each imported record, while stable slugs support topic pages and filters.
 
 ## Provenance and known source conditions
 

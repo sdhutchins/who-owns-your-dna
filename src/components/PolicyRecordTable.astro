@@ -130,10 +130,9 @@ function searchText(values: Array<string | undefined>): string {
           data-topic-search={searchText(record.source_topics)}
           data-summary-search={searchText([record.source_summary])}
           data-jurisdiction={record.jurisdiction}
-          data-topics={JSON.stringify([
-            ...record.source_topics.map((topic) => `nhgri:${topic}`),
-            ...record.mapped_topics.map((topic) => `project:${topic}`),
-          ])}
+          data-topics={JSON.stringify(
+            record.mapped_topics.map((topic) => `project:${topic}`),
+          )}
           data-status={record.base_status}
           data-year={record.inferred_year ?? "not-stated"}
           data-source-layer="nhgri"

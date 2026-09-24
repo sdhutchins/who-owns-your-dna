@@ -20,32 +20,46 @@ const SOURCE_STATUS_MAP = new Map([
   ["Introduced", "introduced"],
 ]);
 
-// Only high-confidence conceptual matches are mapped. The original NHGRI topic
-// is always retained, including when no local topic is equivalent.
-const TOPIC_MAP = new Map([
-  ["AI and Genomic Data", ["ai-and-genomics"]],
-  ["Consumer Personal Data Privacy", ["genetic-privacy"]],
-  [
-    "Genetic data storage/privacy/sharing (industry)",
-    ["genetic-privacy", "data-sharing"],
-  ],
+// The project uses the NHGRI topic vocabulary directly. Keeping this mapping
+// explicit makes a source vocabulary change visible during review instead of
+// silently creating a new public URL.
+const TOPIC_SLUGS = new Map([
+  ["AI and Genomic Data", "ai-and-genomic-data"],
+  ["Biomarker Testing", "biomarker-testing"],
+  ["Consumer Personal Data Privacy", "consumer-personal-data-privacy"],
   [
     "Genetic data storage/privacy/sharing (medicine)",
-    ["genetic-privacy", "data-sharing"],
+    "genetic-data-storage-privacy-sharing-medicine",
   ],
-  ["Coverage and reimbursement", ["health-insurance"]],
-  ["Employment Nondiscrimination", ["employment", "genetic-discrimination"]],
-  ["Genetic Data & Law Enforcement", ["law-enforcement"]],
-  ["Genetic discrimination", ["genetic-discrimination"]],
-  ["Health Insurance Coverage", ["health-insurance"]],
+  ["Coverage and reimbursement", "coverage-and-reimbursement"],
+  ["Employment Nondiscrimination", "employment-nondiscrimination"],
+  ["Gene Patents", "gene-patents"],
+  ["Genetic Data & Law Enforcement", "genetic-data-and-law-enforcement"],
+  [
+    "Genetic data storage/privacy/sharing (industry)",
+    "genetic-data-storage-privacy-sharing-industry",
+  ],
+  ["Genetic discrimination", "genetic-discrimination"],
+  ["Health Insurance Coverage", "health-insurance-coverage"],
   [
     "Health Insurance Nondiscrimination",
-    ["health-insurance", "genetic-discrimination"],
+    "health-insurance-nondiscrimination",
   ],
-  ["Neonatal sequencing", ["newborn-screening"]],
-  ["Privacy", ["genetic-privacy"]],
-  ["Research", ["research"]],
-  ["Use of Residual Newborn Screening Specimens", ["newborn-screening"]],
+  ["Lab Developed Tests", "lab-developed-tests"],
+  ["Neonatal sequencing", "neonatal-sequencing"],
+  [
+    "Other Lines of Insurance Nondiscrimination",
+    "other-lines-of-insurance-nondiscrimination",
+  ],
+  ["Other Topics", "other-topics"],
+  ["Parentage law", "parentage-law"],
+  ["Pharmacogenomics", "pharmacogenomics"],
+  ["Privacy", "privacy"],
+  ["Research", "research"],
+  [
+    "Use of Residual Newborn Screening Specimens",
+    "use-of-residual-newborn-screening-specimens",
+  ],
 ]);
 
 function normalizeText(value) {
@@ -74,9 +88,14 @@ function inferYear(label) {
   return match ? Number(match[1]) : null;
 }
 
-function mapTopics(sourceTopics) {
-  return [...new Set(sourceTopics.flatMap((topic) => TOPIC_MAP.get(topic) ?? []))]
-    .sort();
+export function mapTopics(sourceTopics) {
+  return sourceTopics.map((topic) => {
+    const slug = TOPIC_SLUGS.get(topic);
+    if (!slug) {
+      throw new Error(`Unknown NHGRI topic: ${topic}.`);
+    }
+    return slug;
+  });
 }
 
 export function parseSourcePage(html) {

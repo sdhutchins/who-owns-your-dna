@@ -215,7 +215,7 @@ function normalizeSearch(values: string[]): string {
 
     if (mappedTopic && mappedTopicNote) {
       mappedTopicNote.hidden = false;
-      mappedTopicNote.textContent = `Showing records mapped to the local topic “${mappedTopic}”. NHGRI’s original topic labels remain in the table.`;
+      mappedTopicNote.textContent = `Showing archived records in the shared topic “${mappedTopic}”.`;
     }
 
     const updatePageParameter = (): void => {
