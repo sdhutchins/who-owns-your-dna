@@ -18,10 +18,10 @@ const featuredRecords = [...records]
 
 <BaseLayout>
   <section class="intro-band">
-    <h1>Find U.S. laws and policies about genetic information</h1>
+    <h1>Search U.S. laws and policies about genetics and genomics</h1>
     <p class="intro-band__summary">
-      Explore selected federal and state laws and policies on genetic privacy, discrimination,
-      testing, research, insurance, and data use.
+      Search federal laws and policies and state statutes and bills on employment and insurance
+      discrimination, health insurance coverage, privacy, research, and other topics of interest.
     </p>
     <div class="homepage-search-region">
       <form class="homepage-record-search" action={withBase("/records/")} method="get" role="search">
@@ -30,7 +30,7 @@ const featuredRecords = [...records]
           <input id="homepage-record-query" name="q" type="search" placeholder="Search a law, state, topic, or bill number" />
           <button type="submit">
             <SearchIcon class="interface-icon" size={18} />
-            <span>Search database</span>
+            <span>Search the database</span>
           </button>
         </div>
       </form>
