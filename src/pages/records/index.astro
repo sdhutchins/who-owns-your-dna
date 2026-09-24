@@ -47,27 +47,27 @@ const years = [
 ].sort().reverse();
 ---
 
-<BaseLayout title="Policy records" wide>
-  <Breadcrumbs items={[{ label: "Policy records" }]} />
-  <h1>Policy records</h1>
-  <p class="page-intro">Find a law or policy by title, identifier, location, topic, status, or year.</p>
+<BaseLayout title="Laws Database" wide>
+  <Breadcrumbs items={[{ label: "Laws Database" }]} />
+  <h1>Search the Laws Database</h1>
+  <p class="page-intro">Search by title, bill number or identifier, location, topic, status, or year.</p>
   <p class="reading-width">
-    Results identify the source layer and link to the record page and official source.
+    Each result links to the record page and primary source.
     {" "}<a href={withBase("/glossary/#legal-status")}>Learn what the status labels mean.</a>
   </p>
 
-  <DataStatus records={projectRecords} manifest={nhgriManifest} />
+  <DataStatus recordCount={projectRecords.length} manifest={nhgriManifest} />
 
-  <FilterPanel id="record-filters" label="Filter policy records" layout="records">
+  <FilterPanel id="record-filters" label="Filter laws and policies" layout="records">
     <div class="filter-field filter-field--search">
       <label for="record-query">Search records</label>
       <input id="record-query" name="q" type="search" placeholder="Title, bill number, state, or topic" />
     </div>
     <div class="filter-field">
-      <label for="source-filter">Source layer</label>
+      <label for="source-filter">Database</label>
       <select id="source-filter" name="source">
-        <option value="">All source layers</option>
-        <option value="project">Project reviewed</option>
+        <option value="">All databases</option>
+        <option value="project">Who Owns Your DNA?</option>
         <option value="nhgri">NHGRI archive</option>
       </select>
     </div>
@@ -76,7 +76,7 @@ const years = [
       <select id="record-type-filter" name="record_type">
         <option value="">All record types</option>
         {recordTypes.map((recordType) => <option value={recordType}>{humanizeStatus(recordType)}</option>)}
-        <option value="archived-source">Archived source record</option>
+        <option value="archived-source">Archived NHGRI record</option>
       </select>
     </div>
     <div class="filter-field">
@@ -112,7 +112,6 @@ const years = [
       <label for="sort-filter">Sort</label>
       <select id="sort-filter" name="sort">
         <option value="relevance">Relevance</option>
-        <option value="newest">Newest review or retrieval</option>
         <option value="jurisdiction">Jurisdiction</option>
         <option value="title">Title</option>
       </select>
@@ -122,7 +121,7 @@ const years = [
     </div>
   </FilterPanel>
 
-  <p class="filter-share-note">Filters and sort order are saved in the page URL so the current view can be shared.</p>
+  <p class="filter-share-note">Your filters and sort order stay in the URL, so you can share this view.</p>
   <p class="result-count" aria-live="polite"><span id="result-count">{totalRecordCount.toLocaleString()}</span> records</p>
 
   <PolicyRecordTable
@@ -131,15 +130,16 @@ const years = [
     topics={topics}
     manifest={nhgriManifest}
     bodyId="record-results"
-    label="Policy records matching the selected filters"
+    label="Laws and policies matching the selected filters"
+    showProvenanceDates={false}
   />
   <div id="no-results" hidden>
-    <Callout><p>No records match all selected filters.</p></Callout>
+    <Callout><p>We couldn't find records that match all of those filters. Try removing one or more filters.</p></Callout>
   </div>
 
-  <Pagination totalCount={totalRecordCount} label="Policy record pages" />
+  <Pagination totalCount={totalRecordCount} label="Laws Database pages" />
 
-  <noscript><Callout><p>Filtering and pagination require JavaScript. All records remain visible without it.</p></Callout></noscript>
+  <noscript><Callout><p>Turn on JavaScript to use filters and page controls. You can still view every record without it.</p></Callout></noscript>
 
   <script>
     const form = document.querySelector<HTMLFormElement>("#record-filters");

@@ -15,6 +15,7 @@ interface Props {
   manifest: NhgriManifest;
   bodyId?: string;
   label?: string;
+  showProvenanceDates?: boolean;
 }
 
 const {
@@ -23,7 +24,8 @@ const {
   topics,
   manifest,
   bodyId,
-  label = "Policy records",
+  label = "Laws and policies",
+  showProvenanceDates = true,
 } = Astro.props;
 const topicNames = new Map(topics.map((topic) => [topic.slug, topic.name]));
 const snapshotDate = manifest.snapshot_fetched_at.slice(0, 10);
@@ -100,14 +102,19 @@ function searchText(values: Array<string | undefined>): string {
             <th scope="row" data-label="Jurisdiction">{record.jurisdiction}</th>
             <td class="policy-record-table__primary" data-label="Law or policy">
               <a href={withBase(`/records/${record.id}/`)}>{record.title}</a>
-              <span class="policy-record-table__source">Source: Project review</span>
+              <span class="policy-record-table__source">Who Owns Your DNA?</span>
               <span class="policy-record-table__date">
-                {humanizeStatus(record.record_type)} · {date.label}: {formatDate(date.value)}
+                {humanizeStatus(record.record_type)}
+                {(showProvenanceDates || date.label !== "Last reviewed") && (
+                  <> · {date.label}: {formatDate(date.value)}</>
+                )}
               </span>
-              <span class="policy-record-table__review">
-                Last reviewed {formatDate(record.last_reviewed)}
-              </span>
-              {primarySource && <a class="policy-record-table__official" href={primarySource.url}>Official source</a>}
+              {showProvenanceDates && (
+                <span class="policy-record-table__review">
+                  Last reviewed {formatDate(record.last_reviewed)}
+                </span>
+              )}
+              {primarySource && <a class="policy-record-table__official" href={primarySource.url}>Primary source</a>}
             </td>
             <td data-label="Topics">{displayTopics.join(", ")}</td>
             <td data-label="Status">{humanizeStatus(record.status)}</td>
@@ -144,14 +151,16 @@ function searchText(values: Array<string | undefined>): string {
           <th scope="row" data-label="Jurisdiction">{record.jurisdiction}</th>
           <td class="policy-record-table__primary" data-label="Law or policy">
             <a href={withBase(`/source-records/nhgri/${record.id}/`)}>{record.source_record_label}</a>
-            <span class="policy-record-table__source">Source: Archived NHGRI database</span>
+            <span class="policy-record-table__source">NHGRI archive</span>
             <span class="policy-record-table__date">
               {record.inferred_year ? `${record.inferred_year} legislative session` : "Date not stated in source label"}
             </span>
-            <span class="policy-record-table__review">
-              Retrieved {formatDate(snapshotDate)}
-            </span>
-            <a class="policy-record-table__official" href={record.primary_url}>Official source</a>
+            {showProvenanceDates && (
+              <span class="policy-record-table__review">
+                Retrieved {formatDate(snapshotDate)}
+              </span>
+            )}
+            <a class="policy-record-table__official" href={record.primary_url}>Primary source</a>
           </td>
           <td data-label="Topics">{record.source_topics.join(", ")}</td>
           <td data-label="Status">{humanizeStatus(record.base_status)}</td>

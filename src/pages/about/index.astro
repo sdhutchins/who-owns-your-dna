@@ -6,19 +6,19 @@ import { withBase } from "../../lib/site";
 
 <BaseLayout title="About">
   <Breadcrumbs items={[{ label: "About" }]} />
-  <h1>About the project</h1>
-  <p class="page-intro">A guide to U.S. laws and policies affecting genetic information and biological samples.</p>
+  <h1>About this database</h1>
+  <p class="page-intro">A database of U.S. laws and policies affecting genetic information and biological samples.</p>
 
   <section class="reading-width">
     <h2>Purpose</h2>
-    <p>Genetic-information rules vary by jurisdiction and context. This project helps researchers, journalists, policymakers, educators, and the public find the relevant rules and primary sources.</p>
+    <p>Who Owns Your DNA? continues the work of identifying laws and policies related to genetic information. It builds on the approach used by the <a href="https://www.genome.gov/about-genomics/policy-issues/Genome-Statute-Legislation-Database">NHGRI Genome Statute and Legislation Database</a> and <a href="https://lawseq.umn.edu/">LawSeq</a>.</p>
 
     <h2>Scope and limits</h2>
-    <p>Project-reviewed records summarize status, requirements, limits, and official sources. Coverage is not comprehensive, and the absence of a record does not mean no law exists. This site provides information, not legal advice.</p>
+    <p>Each record identifies a law or policy and provides its status, summary, important limits, and primary sources. Coverage is not comprehensive, and the absence of a record does not mean no law exists. This site provides information, not legal advice.</p>
   </section>
 
   <section class="about-resource-directory section-block" aria-labelledby="project-resources-heading">
-    <h2 id="project-resources-heading">Project resources</h2>
+    <h2 id="project-resources-heading">Database resources</h2>
     <div class="about-resource-list">
       <article class="about-resource-row">
         <h3><a href={withBase("/glossary/")}>Glossary</a></h3>
@@ -26,7 +26,7 @@ import { withBase } from "../../lib/site";
       </article>
       <article class="about-resource-row">
         <h3><a href={withBase("/methodology/")}>Methodology</a></h3>
-        <p>How records are selected, reviewed, and updated.</p>
+        <p>How laws and policies are identified, checked, and updated.</p>
       </article>
       <article class="about-resource-row">
         <h3><a href={withBase("/data/")}>Data</a></h3>
@@ -43,8 +43,8 @@ import { withBase } from "../../lib/site";
     <h2 id="source-resources-heading">Sources and perspectives</h2>
     <div class="about-resource-list">
       <article class="about-resource-row">
-        <h3><a href={withBase("/sources/nhgri/")}>NHGRI source archive</a></h3>
-        <p>Archived records with their original wording and provenance.</p>
+        <h3><a href={withBase("/sources/nhgri/")}>NHGRI database archive</a></h3>
+        <p>Archived records with their original wording and source details.</p>
       </article>
       <article class="about-resource-row">
         <h3><a href={withBase("/resources/policy/")}>Policy resources</a></h3>
@@ -59,6 +59,6 @@ import { withBase } from "../../lib/site";
     <p><a href={withBase("/contribute/")}>Choose a contribution path</a></p>
 
     <h2>Contributors and acknowledgments</h2>
-    <p>Contributions use the public GitHub workflow and may be acknowledged with permission. This independent project is not affiliated with or endorsed by NIH, NLM, NCBI, ASHG, or another organization.</p>
+    <p>Contributions use the public GitHub workflow and may be acknowledged with permission. This independent database is not affiliated with or endorsed by NIH, NLM, NCBI, ASHG, LawSeq, or another organization.</p>
   </section>
 </BaseLayout>

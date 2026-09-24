@@ -44,7 +44,7 @@ const primarySource = record.primary_sources[0];
 
 <BaseLayout title={`${record.identifier}: ${record.title}`} description={record.summary}>
   <Breadcrumbs items={[
-    { label: "Policy records", href: "/records/" },
+    { label: "Laws Database", href: "/records/" },
     { label: record.jurisdiction, href: record.jurisdiction_type === "federal" ? "/federal/" : "/states/" },
     { label: record.identifier },
   ]} />
@@ -54,7 +54,7 @@ const primarySource = record.primary_sources[0];
     <h1>{record.identifier}</h1>
     <p class="record-subtitle">{record.title}</p>
     {primarySource && (
-      <p class="official-source-link"><a href={primarySource.url}>View the official source</a></p>
+      <p class="official-source-link"><a href={primarySource.url}>View the primary source</a></p>
     )}
   </header>
 
@@ -140,7 +140,7 @@ const primarySource = record.primary_sources[0];
       <div>
         <p><strong>Record ID:</strong> <code>{record.id}</code></p>
         <p><strong>Topics:</strong> <code>{record.topics.join(", ")}</code></p>
-        <p><strong>Canonical source file:</strong> <a href={sourceFileUrl}><code>{record.source_path}</code></a></p>
+        <p><strong>Record data file:</strong> <a href={sourceFileUrl}><code>{record.source_path}</code></a></p>
       </div>
     </details>
   </section>

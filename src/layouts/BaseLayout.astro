@@ -23,7 +23,7 @@ const nhgriManifest = await getNhgriManifest();
 const pathname = Astro.url.pathname;
 const primaryLinks = [
   {
-    label: "Records",
+    label: "Laws",
     href: "/records/",
     activePaths: ["/records/", "/source-records/"],
   },
@@ -45,15 +45,15 @@ const primaryLinks = [
 ];
 const mobileStableLinks = primaryLinks.slice(0, 2);
 const resourceLinks = [
-  { label: "Plain-language glossary", href: "/glossary/" },
+  { label: "Glossary", href: "/glossary/" },
   { label: "Methodology", href: "/methodology/" },
   { label: "Data and downloads", href: "/data/" },
-  { label: "NHGRI source archive", href: "/sources/nhgri/" },
+  { label: "NHGRI database archive", href: "/sources/nhgri/" },
   { label: "Policy resources", href: "/resources/policy/" },
   { label: "How to cite", href: "/cite/" },
 ];
 const aboutLinks = [
-  { label: "About the project", href: "/about/" },
+  { label: "About this database", href: "/about/" },
   { label: "Disclaimer", href: "/disclaimer/" },
   { label: "Updates", href: "/changes/" },
   { label: "Contribute", href: "/contribute/" },
@@ -238,7 +238,7 @@ const isAboutPage = ["/about/", "/disclaimer/", "/changes/", "/contribute/"].som
       <div class="page-shell footer-grid">
         <div>
           <p class="footer-title">{SITE_NAME}</p>
-          <p class="footer-note">This site provides general information, not legal advice. Laws change and may apply differently to specific facts. <a href={withBase("/disclaimer/")}>Read the disclaimer</a>.</p>
+          <p class="footer-note">This site offers general information, not legal advice. Laws change, and the same law may apply differently depending on the facts. <a href={withBase("/disclaimer/")}>Read the disclaimer</a>.</p>
           <p class="footer-note">
             Includes records retrieved from NHGRI on {formatDate(nhgriManifest.snapshot_fetched_at.slice(0, 10))}.
             {" "}<a href={withBase("/sources/nhgri/")}>Review source and coverage details</a>.

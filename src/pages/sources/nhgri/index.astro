@@ -26,12 +26,12 @@ function normalizeSearch(values: string[]): string {
 }
 ---
 
-<BaseLayout title="NHGRI source archive" wide>
-  <Breadcrumbs items={[{ label: "About", href: "/about/" }, { label: "NHGRI source archive" }]} />
+<BaseLayout title="NHGRI database archive" wide>
+  <Breadcrumbs items={[{ label: "About", href: "/about/" }, { label: "NHGRI database archive" }]} />
 
   <section class="archive-introduction" aria-labelledby="archive-title">
     <div>
-      <p class="archive-eyebrow">NHGRI source archive</p>
+      <p class="archive-eyebrow">NHGRI database archive</p>
       <h1 id="archive-title">Genome Statute and Legislation Database</h1>
       <p class="page-intro">Search {manifest.record_count.toLocaleString()} archived records from the National Human Genome Research Institute.</p>
     </div>
@@ -53,7 +53,7 @@ function normalizeSearch(values: string[]): string {
 
   <div class="archive-note">
     <Callout variant="source">
-      <p><strong>Archived source material.</strong> These records preserve NHGRI's wording and may not reflect later legal changes. Use the linked primary source to verify current legal text.</p>
+      <p><strong>Archived source material.</strong> These records preserve NHGRI's original wording and may not include later legal changes. Check the linked primary source for current legal text.</p>
     </Callout>
   </div>
 
@@ -61,7 +61,7 @@ function normalizeSearch(values: string[]): string {
     <div class="archive-search__heading">
       <div>
         <h2 id="search-archive">Search archived records</h2>
-        <p>Filter by keyword, state, NHGRI topic, source status, or year.</p>
+        <p>Filter by keyword, state, NHGRI topic, status, or year.</p>
       </div>
       <nav aria-label="Archive resources">
         <ul class="archive-resource-links">
@@ -87,9 +87,9 @@ function normalizeSearch(values: string[]): string {
       </nav>
     </div>
 
-    <FilterPanel id="nhgri-filters" label="Filter NHGRI source records">
+    <FilterPanel id="nhgri-filters" label="Filter the NHGRI database archive">
       <div class="filter-field">
-        <label for="source-search">Search source records</label>
+        <label for="source-search">Search archived records</label>
         <input id="source-search" name="q" type="search" placeholder="Title, bill number, state, or topic" />
       </div>
       <div class="filter-field">
@@ -107,7 +107,7 @@ function normalizeSearch(values: string[]): string {
         </select>
       </div>
       <div class="filter-field">
-        <label for="source-status">Source status</label>
+        <label for="source-status">Status</label>
         <select id="source-status" name="status">
           <option value="">All statuses</option>
           {statuses.map((status) => <option value={status}>{status}</option>)}
@@ -122,16 +122,16 @@ function normalizeSearch(values: string[]): string {
       </div>
     </FilterPanel>
 
-    <p class="result-count" aria-live="polite"><span id="source-result-count">{records.length.toLocaleString()}</span> source records</p>
+    <p class="result-count" aria-live="polite"><span id="source-result-count">{records.length.toLocaleString()}</span> archived records</p>
     <p id="mapped-topic-note" class="metadata" hidden></p>
 
-    <TableRegion label="NHGRI source records matching the selected filters">
+    <TableRegion label="Archived NHGRI records matching the selected filters">
       <table class="policy-record-table">
-        <caption class="sr-only">NHGRI source records matching the selected filters</caption>
+        <caption class="sr-only">Archived NHGRI records matching the selected filters</caption>
         <thead>
           <tr>
             <th scope="col">State</th>
-            <th scope="col">Source record</th>
+            <th scope="col">Primary link</th>
             <th scope="col">Topics</th>
             <th scope="col">Status</th>
             <th scope="col">Archived summary</th>
@@ -149,10 +149,9 @@ function normalizeSearch(values: string[]): string {
               data-year={record.inferred_year ?? ""}
             >
               <th scope="row" data-label="State">{record.jurisdiction}</th>
-              <td class="policy-record-table__primary" data-label="Source record">
+              <td class="policy-record-table__primary" data-label="Primary link">
                 <a href={record.primary_url}>{record.source_record_label}</a>
                 <span class="policy-record-table__date">{record.inferred_year ? `${record.inferred_year} legislative session` : "Date not stated in source label"}</span>
-                <span class="policy-record-table__review">Retrieved from NHGRI on {formatDateTime(manifest.snapshot_fetched_at)}</span>
                 <a class="policy-record-table__details" href={withBase(`/source-records/nhgri/${record.id}/`)}>Record details</a>
               </td>
               <td data-label="Topics">{record.source_topics.join(", ")}</td>
@@ -165,12 +164,12 @@ function normalizeSearch(values: string[]): string {
     </TableRegion>
 
     <div id="source-no-results" hidden>
-      <Callout><p>No source records match all selected filters.</p></Callout>
+      <Callout><p>We couldn't find archived records that match all of those filters. Try removing one or more filters.</p></Callout>
     </div>
 
-    <Pagination totalCount={records.length} label="NHGRI source record pages" noun="source records" />
+    <Pagination totalCount={records.length} label="NHGRI archive pages" noun="archived records" />
 
-    <noscript><Callout><p>Filtering and pagination require JavaScript. All source records remain visible without it.</p></Callout></noscript>
+    <noscript><Callout><p>Turn on JavaScript to use filters and page controls. You can still view every archived record without it.</p></Callout></noscript>
   </section>
 
   <script>
@@ -239,7 +238,7 @@ function normalizeSearch(values: string[]): string {
       const firstRecord = filteredRows.length === 0 ? 0 : startIndex + 1;
       const lastRecord = Math.min(startIndex + pageSize, filteredRows.length);
       if (summary) {
-        summary.textContent = `Showing ${firstRecord}–${lastRecord} of ${filteredRows.length.toLocaleString()} source records`;
+        summary.textContent = `Showing ${firstRecord}–${lastRecord} of ${filteredRows.length.toLocaleString()} archived records`;
       }
       if (pageStatus) pageStatus.textContent = `Page ${currentPage} of ${pageCount}`;
       if (previousButton) previousButton.disabled = currentPage === 1;

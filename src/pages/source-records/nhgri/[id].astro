@@ -35,7 +35,7 @@ const citation = `NHGRI Genome Statute and Legislation Database. ${record.source
 
 <BaseLayout title={record.source_record_label}>
   <Breadcrumbs items={[
-    { label: "NHGRI source archive", href: "/sources/nhgri/" },
+    { label: "NHGRI database archive", href: "/sources/nhgri/" },
     { label: record.source_record_label },
   ]} />
 
@@ -43,12 +43,12 @@ const citation = `NHGRI Genome Statute and Legislation Database. ${record.source
     <p class="record-context">Archived NHGRI record</p>
     <h1>{record.source_record_label}</h1>
     <p class="record-subtitle">{record.jurisdiction}</p>
-    <p class="official-source-link"><a href={record.primary_url}>View the official source recorded by NHGRI</a></p>
+    <p class="official-source-link"><a href={record.primary_url}>Open the primary link recorded by NHGRI</a></p>
   </header>
 
   <dl class="record-facts" aria-label="Record facts">
     <div><dt>Status</dt><dd>{humanizeStatus(record.base_status)}</dd></div>
-    <div><dt>Source layer</dt><dd>NHGRI archive</dd></div>
+    <div><dt>Database</dt><dd>NHGRI archive</dd></div>
     <div><dt>Source database updated</dt><dd>{formatDate(manifest.source_page_last_updated)}</dd></div>
     <div><dt>Snapshot retrieved</dt><dd>{formatDate(manifest.snapshot_fetched_at.slice(0, 10))}</dd></div>
   </dl>
@@ -87,20 +87,20 @@ const citation = `NHGRI Genome Statute and Legislation Database. ${record.source
     <ul>
       <li><a href={record.primary_url}>Open the primary link recorded by NHGRI</a></li>
       <li><a href={record.source_page}>View the NHGRI Genome Statute and Legislation Database</a></li>
-      <li><a href={withBase(`/sources/nhgri/?state=${encodeURIComponent(record.jurisdiction)}`)}>Browse other {record.jurisdiction} source records</a></li>
+      <li><a href={withBase(`/sources/nhgri/?state=${encodeURIComponent(record.jurisdiction)}`)}>Browse other archived {record.jurisdiction} records</a></li>
     </ul>
     {record.primary_url.startsWith("http://") && <Callout variant="warning"><p><strong>Legacy link:</strong> NHGRI recorded this destination using unencrypted HTTP. The link may be stale or unavailable.</p></Callout>}
   </section>
 
   <section class="section-block reading-width">
-    <h2>Provenance</h2>
-    <p>{manifest.attribution}. This source layer preserves the state, primary link, topic, bill status, and summary retrieved from NHGRI.</p>
+    <h2>Archive details</h2>
+    <p>{manifest.attribution}. This archive preserves the state, primary link, topic, bill status, and summary retrieved from NHGRI.</p>
   </section>
 
   <section class="record-contribution reading-width">
     <h2>Report a source problem</h2>
-    <p>Report a transcription problem, changed legal status, or newer official source for human review. Archived NHGRI wording remains identified separately from project-authored corrections.</p>
-    <p><a href={sourceIssueUrl}>Submit information about this source record</a></p>
+    <p>Report a transcription problem, changed legal status, or newer official source for human review. Any correction remains separate from the archived NHGRI wording.</p>
+    <p><a href={sourceIssueUrl}>Submit information about this archived record</a></p>
   </section>
 
   <section id="cite">

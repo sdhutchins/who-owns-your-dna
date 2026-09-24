@@ -6,18 +6,18 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Glossary"
-  description="Plain-language definitions for terms used in U.S. genetics and genomics law and policy records."
+  description="Definitions for terms used in U.S. genetics and genomics law and policy records."
 >
   <Breadcrumbs items={[{ label: "About", href: "/about/" }, { label: "Glossary" }]} />
   <h1>Glossary</h1>
   <p class="page-intro">
-    Plain-language definitions for terms used throughout this project.
+    Definitions for terms used throughout this database.
   </p>
 
   <Callout>
     <p>
-      <strong>Definitions vary by law.</strong> These are the terms as used by this project;
-      the linked primary source controls.
+      <strong>Definitions can change from one law to another.</strong> This glossary explains how
+      this database uses each term. Always check the linked primary source for the legal definition.
     </p>
   </Callout>
 
@@ -86,12 +86,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     </dl>
 
     <h3>Primary source</h3>
-    <p>The official bill, statute, regulation, policy, court opinion, or government record used to verify a project summary.</p>
+    <p>The official bill, statute, regulation, policy, court opinion, or government record used to check a summary.</p>
 
-    <h3>Project-authored summary</h3>
-    <p>A description written and reviewed for this project. It is separate from the official text and does not provide legal advice.</p>
+    <h3>Summary</h3>
+    <p>A description of a law or policy written after checking the linked primary sources. It is separate from the official text and does not provide legal advice.</p>
 
-    <h3>NHGRI source summary</h3>
-    <p>Archived wording retrieved from the National Human Genome Research Institute. The project preserves this text as source material and does not treat it as a current legal conclusion.</p>
+    <h3>Archived NHGRI summary</h3>
+    <p>Wording retrieved from the National Human Genome Research Institute and preserved in the database archive. It may not reflect later legal changes.</p>
   </section>
 </BaseLayout>

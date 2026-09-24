@@ -10,13 +10,13 @@ const federalRecords = (await getRecords()).filter(
 const recordsUrl = `/records/?jurisdiction=${encodeURIComponent("United States")}`;
 ---
 
-<BaseLayout title="Federal policy">
+<BaseLayout title="Federal Laws Database">
   <Breadcrumbs items={[{ label: "Federal" }]} />
-  <h1>Federal law and policy</h1>
-  <p class="page-intro">Browse {federalRecords.length.toLocaleString()} project-reviewed federal genetics and genomics policy {federalRecords.length === 1 ? "record" : "records"}.</p>
+  <h1>Federal Laws Database</h1>
+  <p class="page-intro">Explore {federalRecords.length.toLocaleString()} federal {federalRecords.length === 1 ? "law or policy" : "laws and policies"} related to genetics and genomics.</p>
   <p class="reading-width">
-    This selected collection is not a complete inventory of federal law or policy.
+    This is a selected collection, not a complete list of federal laws and policies.
   </p>
 
-  <p><a class="button-link" href={withBase(recordsUrl)}>View federal records</a></p>
+  <p><a class="button-link" href={withBase(recordsUrl)}>Search federal laws and policies</a></p>
 </BaseLayout>

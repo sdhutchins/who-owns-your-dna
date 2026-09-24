@@ -13,7 +13,7 @@ import {
   type NhgriSourceRecord,
   type Topic,
 } from "../../lib/records";
-import { formatDate, PUBLIC_SITE_URL, withBase } from "../../lib/site";
+import { PUBLIC_SITE_URL, withBase } from "../../lib/site";
 
 export async function getStaticPaths() {
   const [topics, projectRecords, nhgriRecords, manifest] = await Promise.all([
@@ -61,7 +61,6 @@ const previewNhgriRecords = sortedNhgriRecords.slice(
   Math.max(0, previewLimit - previewProjectRecords.length),
 );
 const previewCount = previewProjectRecords.length + previewNhgriRecords.length;
-const latestProjectReview = sortedProjectRecords[0]?.last_reviewed;
 const recordsUrl = `/records/?topic=${encodeURIComponent(`project:${topic.slug}`)}`;
 const permanentUrl = `${PUBLIC_SITE_URL}/topics/${topic.slug}/`;
 ---
@@ -70,12 +69,11 @@ const permanentUrl = `${PUBLIC_SITE_URL}/topics/${topic.slug}/`;
   <Breadcrumbs items={[{ label: "Topics", href: "/topics/" }, { label: topic.name }]} />
   <h1>{topic.name}</h1>
   <p class="page-intro">{topic.description}</p>
-  <p class="reading-width">A shared topic does not imply equivalent legal scope or protection.</p>
+  <p class="reading-width">Records grouped under the same topic may offer different rights and protections.</p>
 
   <div class="coverage-summary reading-width">
-    <p><strong>Project-reviewed:</strong> {projectRecords.length.toLocaleString()} {projectRecords.length === 1 ? "record" : "records"}</p>
-    <p><strong>Archived NHGRI:</strong> {nhgriRecords.length.toLocaleString()} {nhgriRecords.length === 1 ? "record" : "records"}</p>
-    <p><strong>Latest review:</strong> {latestProjectReview ? formatDate(latestProjectReview) : "No project-reviewed record"}</p>
+    <p><strong>This database:</strong> {projectRecords.length.toLocaleString()} {projectRecords.length === 1 ? "record" : "records"}</p>
+    <p><strong>NHGRI database archive:</strong> {nhgriRecords.length.toLocaleString()} {nhgriRecords.length === 1 ? "record" : "records"}</p>
   </div>
 
   <div class="page-actions">
@@ -85,13 +83,14 @@ const permanentUrl = `${PUBLIC_SITE_URL}/topics/${topic.slug}/`;
 
   <section class="section-block" aria-labelledby="topic-records">
     <h2 id="topic-records">Records about {topic.name.toLocaleLowerCase()}</h2>
-    <p>Showing {previewCount.toLocaleString()} of {recordCount.toLocaleString()}; project-reviewed records appear first.</p>
+    <p>Showing {previewCount.toLocaleString()} of {recordCount.toLocaleString()}; records from this database appear first.</p>
     <PolicyRecordTable
       projectRecords={previewProjectRecords}
       nhgriRecords={previewNhgriRecords}
       topics={topics}
       manifest={manifest}
-      label={`Selected policy records about ${topic.name.toLocaleLowerCase()}`}
+      label={`Selected laws and policies about ${topic.name.toLocaleLowerCase()}`}
+      showProvenanceDates={false}
     />
   </section>
 </BaseLayout>

@@ -15,7 +15,7 @@ import {
   type NhgriSourceRecord,
   type Topic,
 } from "../../lib/records";
-import { formatDate, PUBLIC_SITE_URL, withBase } from "../../lib/site";
+import { PUBLIC_SITE_URL, withBase } from "../../lib/site";
 
 export async function getStaticPaths() {
   const [jurisdictions, projectRecords, nhgriRecords, topics, manifest] = await Promise.all([
@@ -64,7 +64,6 @@ const previewNhgriRecords = sortedNhgriRecords.slice(
   Math.max(0, previewLimit - previewProjectRecords.length),
 );
 const previewCount = previewProjectRecords.length + previewNhgriRecords.length;
-const latestProjectReview = sortedProjectRecords[0]?.last_reviewed;
 const enactedStatuses = new Set(["approved", "enacted", "statute"]);
 const proposedStatuses = new Set(["introduced", "pending", "passed-house", "passed-senate"]);
 const recordStatuses = [
@@ -92,13 +91,12 @@ const permanentUrl = `${PUBLIC_SITE_URL}/states/${jurisdiction.slug}/`;
 <BaseLayout title={jurisdiction.name} wide>
   <Breadcrumbs items={[{ label: "States", href: "/states/" }, { label: jurisdiction.name }]} />
   <h1>{jurisdiction.name}</h1>
-  <p class="page-intro">Current site coverage for {jurisdiction.name}, not a complete account of every relevant law, policy, right, or protection.</p>
+  <p class="page-intro">Explore the {jurisdiction.name} records currently included in this collection. Coverage is not complete.</p>
 
   <div class="coverage-summary reading-width">
-    <p><strong>Project-reviewed:</strong> {projectRecords.length.toLocaleString()} {projectRecords.length === 1 ? "record" : "records"}</p>
-    <p><strong>Archived NHGRI:</strong> {nhgriRecords.length.toLocaleString()} {nhgriRecords.length === 1 ? "record" : "records"}</p>
+    <p><strong>State Laws Database:</strong> {projectRecords.length.toLocaleString()} {projectRecords.length === 1 ? "record" : "records"}</p>
+    <p><strong>NHGRI database archive:</strong> {nhgriRecords.length.toLocaleString()} {nhgriRecords.length === 1 ? "record" : "records"}</p>
     <p><strong>Status:</strong> {enactedCount.toLocaleString()} enacted or approved; {proposedCount.toLocaleString()} proposed or pending</p>
-    <p><strong>Latest review:</strong> {latestProjectReview ? formatDate(latestProjectReview) : "No project-reviewed record"}</p>
   </div>
 
   {leadingTopics.length > 0 && (
@@ -112,15 +110,16 @@ const permanentUrl = `${PUBLIC_SITE_URL}/states/${jurisdiction.slug}/`;
 
   <section class="section-block" aria-labelledby="jurisdiction-records">
     <h2 id="jurisdiction-records">Records in {jurisdiction.name}</h2>
-    <p>Showing {previewCount.toLocaleString()} of {recordCount.toLocaleString()}; project-reviewed records appear first.</p>
+    <p>Showing {previewCount.toLocaleString()} of {recordCount.toLocaleString()}; State Laws Database records appear first.</p>
     <PolicyRecordTable
       projectRecords={previewProjectRecords}
       nhgriRecords={previewNhgriRecords}
       topics={topics}
       manifest={manifest}
-      label={`Selected policy records for ${jurisdiction.name}`}
+      label={`Selected laws and policies for ${jurisdiction.name}`}
+      showProvenanceDates={false}
     />
   </section>
 
-  <p class="section-block"><a href={withBase("/federal/")}>Review federal law and policy</a></p>
+  <p class="section-block"><a href={withBase("/federal/")}>Search the Federal Laws Database</a></p>
 </BaseLayout>

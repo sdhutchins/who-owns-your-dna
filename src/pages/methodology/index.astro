@@ -6,20 +6,20 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 <BaseLayout title="Methodology">
   <Breadcrumbs items={[{ label: "About", href: "/about/" }, { label: "Methodology" }]} />
   <h1>Methodology</h1>
-  <p class="page-intro">How the project finds, checks, explains, and updates U.S. genetics and genomics law and policy records.</p>
+  <p class="page-intro">How this database identifies, checks, summarizes, and updates U.S. laws and policies related to genetics and genomics.</p>
 
   <section class="reading-width">
     <h2>How to read a record</h2>
     <p>Start with the status and review date. Then read what the law or policy requires or prohibits, followed by its important limits and exceptions. Use the linked primary source to confirm the current official text.</p>
 
     <h2>Scope and inclusion</h2>
-    <p>The project tracks U.S. federal, state, district, and territorial law and policy concerning genetic information, genomic data, biological samples, genetic testing, and related uses. Coverage is not comprehensive and expands through source review.</p>
+    <p>The database includes selected U.S. federal, state, district, and territorial laws and policies concerning genetic information, genomic data, biological samples, genetic testing, and related uses. Coverage is not comprehensive and expands as sources are checked.</p>
 
     <h3 id="inclusion-criteria">Inclusion criteria</h3>
-    <p>A record must identify the relevant government, official source, type of record, legal or policy status, and connection to a defined genetics or genomics topic. Candidate records remain outside the verified dataset until a human reviewer checks the primary source.<sup class="citation-reference"><a href="#reference-1" aria-label="Reference 1">1</a>, <a href="#reference-2" aria-label="Reference 2">2</a></sup></p>
+    <p>A record must identify the relevant government, primary source, type of record, status, and connection to a defined genetics or genomics topic. A law or policy is not added until a person checks the primary source.<sup class="citation-reference"><a href="#reference-1" aria-label="Reference 1">1</a>, <a href="#reference-2" aria-label="Reference 2">2</a></sup></p>
 
     <h3>Exclusions</h3>
-    <p>The project excludes unsupported claims, duplicate records, secondary summaries presented as legal authority, and candidate changes that have not completed review. General privacy or health laws may be excluded until a source documents how they apply to genetic information.</p>
+    <p>The database excludes unsupported claims, duplicate records, secondary summaries presented as legal authority, and changes that have not been checked. General privacy or health laws may be excluded until a source documents how they apply to genetic information.</p>
 
     <h2>Sources and review</h2>
     <h3>Source order</h3>
@@ -33,30 +33,30 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <li>Credible legal or policy secondary source</li>
       <li>News reporting when necessary for context</li>
     </ol>
-    <p>The hierarchy itself is a project rule. The supporting legal-mapping literature informed the broader practices of defining scope, retrieving legal text, and documenting how records are coded and checked.<sup class="citation-reference"><a href="#reference-1" aria-label="Reference 1">1</a>–<a href="#reference-3" aria-label="Reference 3">3</a></sup></p>
+    <p>This source order is a rule for the database. Legal-mapping literature informed the broader practices of defining scope, retrieving legal text, and documenting how records are coded and checked.<sup class="citation-reference"><a href="#reference-1" aria-label="Reference 1">1</a>–<a href="#reference-3" aria-label="Reference 3">3</a></sup></p>
 
     <h3>Review process</h3>
     <ol>
       <li>Locate an official government source.</li>
       <li>Determine the jurisdiction, record type, status, dates, and scope.</li>
-      <li>Draft a factual summary separately from plain-language interpretation.<sup class="citation-reference"><a href="#reference-4" aria-label="Reference 4">4</a></sup></li>
-      <li>Assign controlled topic tags and document uncertainty.</li>
-      <li>Run schema and controlled-vocabulary validation.</li>
+      <li>Draft a summary of the status, requirements, and limits.<sup class="citation-reference"><a href="#reference-4" aria-label="Reference 4">4</a></sup></li>
+      <li>Assign topic labels and document uncertainty.</li>
+      <li>Check the data structure and topic labels.</li>
       <li>Complete human source and summary review before publication.<sup class="citation-reference"><a href="#reference-1" aria-label="Reference 1">1</a>, <a href="#reference-2" aria-label="Reference 2">2</a>, <a href="#reference-4" aria-label="Reference 4">4</a></sup></li>
     </ol>
 
-    <h2 id="nhgri-provenance">NHGRI archive</h2>
+    <h2 id="nhgri-provenance">NHGRI database archive</h2>
     <p>The combined directory includes the complete NHGRI Genome Statute and Legislation Database. Records retain their original state, link, topic, status, summary, and retrieval timestamp. This database uses NHGRI's topic vocabulary, with stable topic slugs for search and permanent links. NHGRI last updated its source page on February 8, 2024; current decisions should use the linked primary source.</p>
 
     <h2>Status labels</h2>
     <p>Records use the NHGRI labels Approved, Died, Enacted, Passed House, Passed Senate, Statute, Pending, and Introduced. Record type remains separate.</p>
 
     <h2>Method evidence</h2>
-    <p>A targeted PubMed Central search through Paperclip on September 2, 2026, informed the method. It covered legal epidemiology, policy surveillance, legal mapping, coding, quality control, search reporting, and plain-language summaries.<sup class="citation-reference"><a href="#reference-5" aria-label="Reference 5">5</a></sup> This was background research, not a systematic or scoping review, and the project does not claim adherence to PRISMA-S.</p>
+    <p>A targeted PubMed Central search through Paperclip on September 2, 2026, informed the method. It covered legal epidemiology, policy surveillance, legal mapping, coding, quality control, search reporting, and summaries.<sup class="citation-reference"><a href="#reference-5" aria-label="Reference 5">5</a></sup> This was background research, not a systematic or scoping review, and this database does not claim adherence to PRISMA-S.</p>
 
     <h2>Maintenance and limits</h2>
     <h3>Uncertainty</h3>
-    <p>“No specific law identified” describes a dataset finding, not a definitive conclusion that no law exists. Legal coverage can depend on definitions, exceptions, effective dates, preemption, enforcement, and the facts of a particular situation.</p>
+    <p>“No specific law identified” describes a database result, not a definitive conclusion that no law exists. Legal coverage can depend on definitions, exceptions, effective dates, preemption, enforcement, and the facts of a particular situation.</p>
 
     <h3>Corrections and versions</h3>
     <p>Corrections create a record-history entry and increment the record version when the substantive public record changes. GitHub releases provide stable snapshot identifiers and checksum-verified data files.</p>

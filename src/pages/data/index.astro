@@ -15,7 +15,7 @@ const latestProjectReview = records[0]?.last_reviewed;
 <BaseLayout title="Data">
   <Breadcrumbs items={[{ label: "About", href: "/about/" }, { label: "Data" }]} />
   <h1>Open policy data</h1>
-  <p class="page-intro">Download project-reviewed records and the archived NHGRI dataset.</p>
+  <p class="page-intro">Download this database or the archived NHGRI Genome Statute and Legislation Database.</p>
 
   <section class="data-catalog" aria-labelledby="available-data">
     <h2 id="available-data">Available data</h2>
@@ -32,8 +32,8 @@ const latestProjectReview = records[0]?.last_reviewed;
         <tbody>
           <tr>
             <th scope="row" data-label="Dataset">
-              Project-reviewed records
-              <span>Primary-source reviewed records maintained by this project.</span>
+              Who Owns Your DNA? database
+              <span>Laws and policies checked against linked primary sources.</span>
             </th>
             <td data-label="Records">{records.length.toLocaleString()}</td>
             <td data-label="Latest review">
@@ -58,7 +58,7 @@ const latestProjectReview = records[0]?.last_reviewed;
           </tr>
           <tr>
             <th scope="row" data-label="Dataset">
-              NHGRI source archive
+              NHGRI database archive
               <span>Records preserved from the NHGRI Genome Statute and Legislation Database.</span>
             </th>
             <td data-label="Records">{nhgriManifest.record_count.toLocaleString()}</td>
@@ -91,7 +91,7 @@ const latestProjectReview = records[0]?.last_reviewed;
         </tbody>
       </table>
     </div>
-    <p class="metadata">Downloads are generated from source data. Project records are maintained as YAML in the repository.</p>
+    <p class="metadata">Downloads are generated from source data. Database records are maintained as YAML in the repository.</p>
   </section>
 
   <section class="section-block reading-width">
@@ -100,13 +100,13 @@ const latestProjectReview = records[0]?.last_reviewed;
       <li><a href={`${REPOSITORY_URL}/releases`}>Browse versioned data releases</a></li>
       <li><a href={REPOSITORY_URL}>View the source repository</a></li>
       <li><a href={withBase("/cite/")}>Read the citation guidance</a></li>
-      <li><a href={withBase("/sources/nhgri/")}>Search the NHGRI source archive</a></li>
+      <li><a href={withBase("/sources/nhgri/")}>Search the NHGRI database archive</a></li>
     </ul>
   </section>
 
   <section class="section-block reading-width">
     <h2>What the records contain</h2>
-    <p>Project records include identifiers, jurisdiction, type, status, review and version details, {topics.length} controlled topics, summaries, sources, and history. The build validates each source file.</p>
-    <p>Archived NHGRI records retain their original wording and a provenance manifest with source, retrieval date, and checksums.</p>
+    <p>This database includes identifiers, jurisdiction, type, status, review and version details, {topics.length} topics, summaries, sources, and history. The build checks each source file.</p>
+    <p>Archived NHGRI records retain their original wording and archive details, including the source, retrieval date, and checksums.</p>
   </section>
 </BaseLayout>
