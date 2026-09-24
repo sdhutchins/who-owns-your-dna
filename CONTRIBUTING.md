@@ -29,6 +29,12 @@ Include an official government source whenever one is available. Do not include 
 
 GitHub Actions runs the same validation on pull requests. A passing check confirms that the record is structurally valid. It does not replace human source, legal-status, scope, or summary review.
 
+By contributing project-authored policy data, contributors agree that the data
+may be distributed under [CC0 1.0 Universal](DATA-LICENSE.md). Software
+contributions are distributed under the [MIT License](LICENSE). Contributors
+must have the right to submit their work and must preserve the provenance and
+terms of third-party material.
+
 ## Required local checks
 
 ```bash

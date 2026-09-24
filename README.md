@@ -21,6 +21,7 @@ The site provides informational summaries. It does not provide legal advice.
 - [Repository Structure](#repository-structure)
 - [Contributing](#contributing)
 - [Citation](#citation)
+- [Licensing](#licensing)
 - [Deployment](#deployment)
 
 ## Project Background
@@ -176,6 +177,15 @@ research, reporting, analysis, or other published work. Identify the dataset
 version or access date whenever possible. The website provides [suggested
 citation formats](https://whoownsyourdna.org/cite/).
 
+## Licensing
+
+Project-authored policy data and its generated CSV and JSON exports are
+dedicated to the public domain under [CC0 1.0 Universal](DATA-LICENSE.md).
+Citation is appreciated but is not a condition of reuse.
+
+Repository software is available under the [MIT License](LICENSE). Referenced
+and archived third-party materials retain their original rights and terms. See
+the [data provenance and third-party notice](NOTICE.md) for details.
 
 ## Deployment
 
