@@ -1,0 +1,78 @@
+id: ms-hb-377-2026
+jurisdiction: Mississippi
+jurisdiction_code: MS
+jurisdiction_type: state
+record_type: legislation
+title: Missing- and unidentified-person identification procedures
+subtitle: DNA databases and forensic genetic genealogy requirements
+identifier: HB 377 (2026)
+bill_number: HB 377
+session: 2026 Regular Session
+statute_citation: 2026 Miss. Laws ch. 445
+status: enacted
+introduced_date: 2026-01-09
+signed_date: 2026-04-08
+effective_date: 2026-07-01
+last_action_date: 2026-04-08
+last_reviewed: 2026-09-24
+record_version: "1.0"
+verification_status: verified-primary
+topics:
+  - genetic-data-and-law-enforcement
+summary: >-
+  Mississippi enacted HB 377 in 2026 to establish procedures for missing- and
+  unidentified-person investigations. The law governs the collection and
+  submission of specified DNA information and requires forensic genetic
+  genealogy testing of unidentified human remains in state custody after a
+  specified period.
+legal_effects: >-
+  Law enforcement agencies must obtain voluntary DNA samples from appropriate
+  family members when carrying out the law's missing-person procedures and
+  submit resulting profiles through the specified state and federal systems.
+  The State Medical Examiner must use forensic genetic genealogy testing after
+  possessing unidentified human remains for 45 days. The act also requires
+  specified missing- and unidentified-person information to be entered into
+  the National Missing and Unidentified Persons System.
+plain_language: >-
+  The law directs Mississippi authorities to use family-reference DNA,
+  forensic DNA databases, and genetic genealogy to help identify missing people
+  and unidentified remains. It sets deadlines for entering information and for
+  testing remains held by the State Medical Examiner.
+limitations: >-
+  The law concerns missing- and unidentified-person investigations rather than
+  general law-enforcement access to genetic data. It describes family DNA
+  samples as voluntary and refers to genealogy databases consented for law-enforcement
+  use. The enacted text does not establish a general destruction or retention
+  deadline for the family-reference samples collected under these procedures.
+primary_sources:
+  - title: HB 377 final bill text
+    url: https://billstatus.ls.state.ms.us/documents/2026/html/HB/0300-0399/HB0377SG.htm
+    publisher: Mississippi Legislature
+    accessed_date: 2026-09-24
+  - title: HB 377 legislative history
+    url: https://billstatus.ls.state.ms.us/2026/pdf/history/HB/HB0377.xml
+    publisher: Mississippi Legislature
+    accessed_date: 2026-09-24
+secondary_sources: []
+history:
+  - date: 2026-01-09
+    event: Bill introduced and referred to the House Judiciary B Committee.
+    source: Mississippi Legislature
+  - date: 2026-02-12
+    event: House adopted a committee substitute and passed the bill.
+    source: Mississippi Legislature
+  - date: 2026-03-11
+    event: Senate passed the bill as amended.
+    source: Mississippi Legislature
+  - date: 2026-03-31
+    event: House and Senate adopted the conference report.
+    source: Mississippi Legislature
+  - date: 2026-04-08
+    event: Governor approved the bill as Chapter 445.
+    source: Mississippi Legislature
+  - date: 2026-07-01
+    event: Act became effective.
+    source: Mississippi Legislature
+  - date: 2026-09-24
+    event: Record created from the final bill text and legislative history.
+    source: Project review

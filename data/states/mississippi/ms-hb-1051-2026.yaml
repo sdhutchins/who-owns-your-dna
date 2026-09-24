@@ -1,0 +1,62 @@
+id: ms-hb-1051-2026
+jurisdiction: Mississippi
+jurisdiction_code: MS
+jurisdiction_type: state
+record_type: legislation
+title: Mississippi Consumer Privacy Protection Act
+subtitle: Proposed consumer protections covering identifying genetic data
+identifier: HB 1051 (2026)
+bill_number: HB 1051
+session: 2026 Regular Session
+status: died
+introduced_date: 2026-01-16
+last_action_date: 2026-02-03
+last_reviewed: 2026-09-24
+record_version: "1.0"
+verification_status: verified-primary
+topics:
+  - consumer-personal-data-privacy
+summary: >-
+  Mississippi HB 1051 did not become law. It would have established a
+  comprehensive consumer-privacy framework that classified processing genetic
+  data for the purpose of uniquely identifying an individual as sensitive-data
+  processing.
+legal_effects: >-
+  Covered controllers would have needed consent before processing sensitive
+  data for a nonexempt purpose. The bill also would have provided consumer
+  rights involving access, correction, deletion, data portability, targeted
+  advertising, data sales, and specified profiling. The Attorney General would
+  have had exclusive enforcement authority after a 60-day opportunity to cure.
+plain_language: >-
+  The proposal would have required qualifying businesses to obtain consent
+  before using genetic data to identify a consumer. Because the bill died in
+  committee, it created no new consumer rights or business obligations.
+limitations: >-
+  The proposal would have applied only to businesses meeting its revenue and
+  data-processing thresholds. It excluded individuals acting in employment or
+  commercial contexts and contained exemptions for insurance entities,
+  HIPAA-covered entities and business associates, nonprofit organizations,
+  government agencies, regulated research, and several types of federally
+  regulated information. Its sensitive-data definition covered genetic data
+  when processed to uniquely identify an individual, not every use of genetic
+  data.
+primary_sources:
+  - title: HB 1051 introduced bill
+    url: https://billstatus.ls.state.ms.us/documents/2026/html/HB/1000-1099/HB1051IN.htm
+    publisher: Mississippi Legislature
+    accessed_date: 2026-09-24
+  - title: HB 1051 legislative history
+    url: https://billstatus.ls.state.ms.us/2026/pdf/history/HB/HB1051.xml
+    publisher: Mississippi Legislature
+    accessed_date: 2026-09-24
+secondary_sources: []
+history:
+  - date: 2026-01-16
+    event: Bill introduced and referred to the House Judiciary A Committee.
+    source: Mississippi Legislature
+  - date: 2026-02-03
+    event: Bill died in committee.
+    source: Mississippi Legislature
+  - date: 2026-09-24
+    event: Record created from the introduced bill and legislative history.
+    source: Project review
